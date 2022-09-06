@@ -58,6 +58,9 @@ public class Hero : MonoBehaviour
             //Wenn nicht. Beweg dich dort hin
             rb.velocity = move;
             Debug.Log(hit.collider.gameObject.name);
+        } else
+        {
+            rb.velocity = move;
         }
     }
     void OnCollisionEnter2D(Collision2D collision2D)
