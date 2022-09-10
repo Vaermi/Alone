@@ -8,6 +8,7 @@ public class Hero : MonoBehaviour
     private Rigidbody2D rb;
     private Tilemap tm;
     public LayerMask layerMask;
+    public BoundsInt area;
 
     void Start()
     {
@@ -28,6 +29,8 @@ public class Hero : MonoBehaviour
 
         //Bestimmen in welche Richtung der Spieler gehen will
         Vector3 move = new Vector3();
+
+        //var wall = collider.gameObject.name.contains("")
 
         if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow) || Hinput.gamepad[0].leftStick.right)
         {
@@ -57,7 +60,17 @@ public class Hero : MonoBehaviour
         {
             //Wenn nicht. Beweg dich dort hin
             rb.velocity = move;
+            Debug.Log(hit.collider.name);
             Debug.Log(hit.collider.gameObject.name);
+            Tilemap tilemap = hit.collider.GetComponent<Tilemap>();
+            Debug.Log("Tilemap:");
+            Debug.Log(tilemap);
+            TileBase[] tileArray = tilemap.GetTilesBlock(area);
+            for (int index = 0; index < tileArray.Length; index++)
+            {
+                Debug.Log(tileArray[index]);
+                Debug.Log(tileArray[index].name);
+            }
         } else
         {
             rb.velocity = move;
