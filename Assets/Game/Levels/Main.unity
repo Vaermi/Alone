@@ -1848,8 +1848,9 @@ GameObject:
   - component: {fileID: 1581232139}
   - component: {fileID: 1581232138}
   - component: {fileID: 1581232137}
-  - component: {fileID: 1581232141}
+  - component: {fileID: 1581232143}
   - component: {fileID: 1581232142}
+  - component: {fileID: 1581232141}
   m_Layer: 6
   m_Name: Hero
   m_TagString: Untagged
@@ -1869,9 +1870,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 723965f620521d64a839567deff5e6da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  layerMask:
-    serializedVersion: 2
-    m_Bits: 55
+  move: {x: 0, y: 0, z: 0}
 --- !u!212 &1581232138
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1932,7 +1931,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1581232136}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.6, y: -0.4, z: 0}
+  m_LocalPosition: {x: -2, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1986,6 +1985,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &1581232143
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1581232136}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33aa4860f8f1ce6459d9770bda99effb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hero: {fileID: 1581232137}
 --- !u!1 &1621608410
 GameObject:
   m_ObjectHideFlags: 0
