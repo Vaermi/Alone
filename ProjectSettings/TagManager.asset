@@ -3,12 +3,13 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Collider
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Collider
   - Water
   - UI
   - 
@@ -40,4 +41,22 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Water
+    uniqueID: 3318400257
+    locked: 0
+  - name: Underground
+    uniqueID: 179974051
+    locked: 0
+  - name: Mountain
+    uniqueID: 3342025619
+    locked: 0
+  - name: Event
+    uniqueID: 3855725197
+    locked: 0
+  - name: Collider
+    uniqueID: 2043052369
+    locked: 0
+  - name: Hero
+    uniqueID: 3527292533
     locked: 0
