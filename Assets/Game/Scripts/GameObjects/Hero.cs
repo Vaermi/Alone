@@ -8,31 +8,15 @@ using UnityEngine.Tilemaps;
 /// </summary>
 public class Hero : TheGameObject
 {
-    public string heroName = "Doris";
-    int health;
-    int maxHealth;
-    int sanity;
-    int maxSanity;
-    int attack;
-    int maxAttack;
+    public string heroName;
+    public int health = 50;
+    int maxHealth = 100;
+    public int sanity = 0;
+    int maxSanity = 100;
+    int attack = 250;
+    int maxAttack = 1000;
 
-    public Hero()
-    {
-
-    }
-    public Hero(string name)
-    {
-        this.heroName = name;
-    }
-   
-    public Hero(string name, int health, int sanity, int attack)
-    {
-        this.heroName = name;
-        this.health = health;
-        this.sanity = sanity;
-        this.attack = attack;
-    }
-
+    
     public Hero(string name, int health,int maxHealth, int sanity,int maxSanity, int attack, int maxAttack)
     {
         this.heroName = name;
