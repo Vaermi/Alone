@@ -6,29 +6,28 @@ using UnityEngine;
 public class PanelPlayer : MonoBehaviour
 {
     public Hero hero;
-    private TextMeshProUGUI tm;
+    public TextMeshProUGUI textHeroName;
+    public TextMeshProUGUI textHealth;
+    public TextMeshProUGUI textSanity;
+    public TextMeshProUGUI textInventory;
 
     private void Awake()
     {
         //TODO heroName per User Auswahl befüllen lassen
-        hero.heroName = "Doris";
-        hero.health = 80;
-        hero.sanity = 0;
-        string playerName = hero.heroName;
-        int playerHealth = hero.health;
-        int playerSanity = hero.sanity;
-        tm = GetComponent<TextMeshProUGUI>();
-        tm.text = playerName +"  " + "Health: " + playerHealth + "  " + "Sanity: " + playerSanity + "  " + "INV";
-    }
-    // Start is called before the first frame update
-    void Start()
-    {
         
-    }
+        string playerName = hero.HeroName;
+        textHeroName.text = $"{playerName} ";
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        int playerHealth = hero.Health;
+        textHealth.text = $"Health: {playerHealth}/100";
+
+        int playerSanity = hero.Sanity;
+        textSanity.text = $"Sanity: {playerSanity}/100";
+
+        //TODO Placeholder für Inventory Object
+        int playerInventory = hero.Inventory;
+        textInventory.text = $"Inventory: {playerInventory}";
+
     }
+    
 }
