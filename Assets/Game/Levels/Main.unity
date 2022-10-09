@@ -1719,7 +1719,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ee93ec289a4aee42aa31c00d93e831f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  panel: {fileID: 0}
 --- !u!50 &683523601
 Rigidbody2D:
   serializedVersion: 4
@@ -8149,6 +8148,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   move: {x: 0, y: 0, z: 0}
+  questObjects: {fileID: 683523600}
+  panel: {fileID: 174112830}
   HeroName: Doris
   Health: 50
   Sanity: 0
