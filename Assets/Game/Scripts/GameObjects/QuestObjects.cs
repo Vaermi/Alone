@@ -4,6 +4,28 @@ using UnityEngine;
 
 public class QuestObjects : MonoBehaviour
 {
-    // Start is called before the first frame update
+   
     int questId;
+    string questText;
+
+    public string QuestText
+    {
+        get
+        {
+            return questText;
+        }
+        set
+        {
+            questText = value;
+        }
+    }
+
+    public int QuestId 
+    { 
+        get 
+        { 
+            return questId; 
+        }
+    }
+    
 }

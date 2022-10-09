@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class PanelPlayer : MonoBehaviour
+public class PlayerPanel : MonoBehaviour
 {
     public Hero hero;
     public TextMeshProUGUI textHeroName;
