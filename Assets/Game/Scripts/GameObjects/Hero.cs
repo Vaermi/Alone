@@ -1,35 +1,38 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+
 
 /// <summary>
 /// Helden Spezifische Funktionen
 /// </summary>
 public class Hero : TheGameObject
 {
-    public string heroName;
-    public int health = 50;
-    int maxHealth = 100;
-    public int sanity = 0;
+    public QuestObjects questObjects;
+    public QuestPanel panel;
+
+    public string HeroName = "Doris";
+    public int Health = 50;
+    public int Sanity = 0;
+    public int Inventory = 0;       //Counter für Inventory/Placeholder
+    int maxHealth = 100;    
     int maxSanity = 100;
     int attack = 250;
     int maxAttack = 1000;
 
-    
-    public Hero(string name, int health,int maxHealth, int sanity,int maxSanity, int attack, int maxAttack)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        this.heroName = name;
-        this.health = health;
-        this.maxHealth = maxHealth;
-        this.sanity = sanity;
-        this.maxSanity = maxSanity;
-        this.attack = attack;
-        this.maxAttack = maxAttack;
+        Debug.Log("Trigger");
+        panel.SetQuestWindowActive();
+        questObjects.SwitchStatusQuestObjects();
+
     }
 
 
-    
+
+
 
 
 }
