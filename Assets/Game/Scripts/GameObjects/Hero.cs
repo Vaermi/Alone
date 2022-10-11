@@ -26,6 +26,8 @@ public class Hero : TheGameObject
     {
         Debug.Log("Trigger");
         panel.SetQuestWindowActive();
+        questObjects.SwitchStatusQuestObjects();
+
     }
 
 

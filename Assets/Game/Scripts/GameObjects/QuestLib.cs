@@ -2,14 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
+using UnityEditor.U2D.Path.GUIFramework;
 using UnityEngine;
-
+using UnityEngine.UIElements;
+using UnityEngine.XR;
 
 public class QuestLib : MonoBehaviour {
     
     public TextMeshProUGUI questText01;
     //public Hero hero;
-    //public QuestPanel panel;
+    public QuestPanel panel;
     public QuestObjects questObjects;
 
     void Start()
@@ -26,17 +28,26 @@ public class QuestLib : MonoBehaviour {
                 QuestObjects questObject01 = gameObject.AddComponent<QuestObjects>();
                 Debug.Log("Neues QuestObject erstellen" + questObject01);
 
-
                 questObject01.QuestText = "Du erwachst alleine in einem dunklen Wald. Wie bist du hierher gekommen? Neben dir liegt eine kryptische Nachricht:" +
-                    "\"Suche mich bei den Felsen. -V.\"";
+                    "\"Suche mich bei den Felsen. -V.\"\n\n - Weiter mit Leertaste - ";
 
                 questText01.text = questObject01.QuestText;
                 Debug.Log("Quest ausgeben" + quest01);
+
+                
+            } else if(questText01 == null)
+            {
+                Debug.Log("Keine Quest aktiv");
             }
         }
-        
-
     }
-   // SphereCollider sc = gameObject.AddComponent(typeof(SphereCollider)) as SphereCollider;
+
+    private void Update()
+    {
+        if (panel != null && gameObject.activeSelf && Input.GetKey(KeyCode.Space))
+        {
+            panel.DeactivateQuestWindow();
+        }
+    }
 
 }

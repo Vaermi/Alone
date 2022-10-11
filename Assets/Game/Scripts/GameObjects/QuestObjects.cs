@@ -7,6 +7,7 @@ public class QuestObjects : MonoBehaviour
    
     int questId;
     string questText;
+    private SpriteRenderer spriteRenderer;
 
     public string QuestText
     {
@@ -26,6 +27,14 @@ public class QuestObjects : MonoBehaviour
         { 
             return questId; 
         }
+    }
+
+    public void SwitchStatusQuestObjects()
+    {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        Debug.Log(spriteRenderer);
+        spriteRenderer.enabled = !spriteRenderer.enabled;
+        Debug.Log("Switch Status");
     }
     
 }

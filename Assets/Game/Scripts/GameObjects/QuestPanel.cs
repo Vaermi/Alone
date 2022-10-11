@@ -19,12 +19,13 @@ public class QuestPanel : MonoBehaviour
     public void SetQuestWindowActive()
     {
         gameObject.SetActive(true);
-        System.Console.WriteLine("Questtext Activatet");
+        Debug.Log("Questtext Activatet");
     }
 
     public void DeactivateQuestWindow() 
     { 
-        gameObject.SetActive(false); 
+        gameObject.SetActive(false);
+        Debug.Log("Questtext Deactivatet");
     }
 }
     
