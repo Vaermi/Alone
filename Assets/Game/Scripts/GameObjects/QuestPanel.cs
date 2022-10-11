@@ -12,7 +12,7 @@ public class QuestPanel : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        gameObject.SetActive(false);
+        DeactivateQuestWindow();
         
     }
 
@@ -20,6 +20,11 @@ public class QuestPanel : MonoBehaviour
     {
         gameObject.SetActive(true);
         System.Console.WriteLine("Questtext Activatet");
+    }
+
+    public void DeactivateQuestWindow() 
+    { 
+        gameObject.SetActive(false); 
     }
 }
     
