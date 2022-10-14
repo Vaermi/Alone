@@ -21,7 +21,7 @@ public class PlayerPanel : MonoBehaviour
         int playerHealth = hero.Health;
         textHealth.text = $"Health: {playerHealth}/100";
 
-        int playerSanity = hero.Sanity;
+        int playerSanity = hero.Insanity;
         textSanity.text = $"Sanity: {playerSanity}/100";
 
         //TODO Placeholder für Inventory Object

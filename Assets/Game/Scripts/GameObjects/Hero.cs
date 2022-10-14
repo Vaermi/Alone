@@ -40,7 +40,7 @@ public class Hero : TheGameObject
         if(AttackSpeed > enemy.AttackSpeed)
         {
             Debug.Log("Du beginnst...");
-            while(Health != 0 || enemy.Health != 0)
+            while(Health != 0 && enemy.Health != 0)
             {
                 int counter = 0;
 
@@ -62,7 +62,7 @@ public class Hero : TheGameObject
         } else
         {
             Debug.Log("Enemy beginnt...");
-            while (Health != 0 || enemy.Health != 0)
+            while (Health != 0 && enemy.Health != 0)
             {
                 int counter = 0;
 
