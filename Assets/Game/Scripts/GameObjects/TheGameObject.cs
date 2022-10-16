@@ -17,12 +17,13 @@ public class TheGameObject : MonoBehaviour
         return Mathf.Ceil(f / pixelFrac) * pixelFrac;
     }
 
-    // Prüft ob eine Kollision des BoxColliders2D dieses Spielobjekts und anderen 2D-Kollidern stattfindet
+    
     private BoxCollider2D boxCollider;
     private Collider2D[] colliders;
 
     private void Awake()
     {
+        // Prüft ob eine Kollision des BoxColliders2D dieses Spielobjekts und anderen 2D-Kollidern stattfindet
         boxCollider = GetComponent<BoxCollider2D>();
         colliders = new Collider2D[10];
     }
@@ -33,10 +34,8 @@ public class TheGameObject : MonoBehaviour
 
 
 
-    /// <summary>
-    /// Bewegung, die die Figur in diesem Frame vollziehen soll
-    /// 1 = nach rechts/oben, -1 = nach links/unten
-    /// </summary>
+    //Bewegung, die die Figur in diesem Frame vollziehen soll
+    //1 = nach rechts/oben, -1 = nach links/unten
 
     public Vector3 move = new Vector3();
     private void LateUpdate()
@@ -44,11 +43,7 @@ public class TheGameObject : MonoBehaviour
         // Anwenden der in move gesetzten Bewegung:
         float step = roundToPixelGrid(1f * Time.deltaTime);
         Vector3 oldPos = transform.position;
-        //move.x = move.x * 0.2f;
-        //move.y = move.y * 0.2f;
         transform.position += move * step;
-        oldPos.x -= 0.1f;
-        oldPos.y -= 0.1f;
         if (isColliding()) transform.position = oldPos;
         move = Vector3.zero;
     }

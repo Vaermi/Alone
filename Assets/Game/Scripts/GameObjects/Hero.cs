@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -12,16 +14,20 @@ public class Hero : TheGameObject
 {
     public QuestObjects questObjects;
     public QuestPanel panel;
+    private Enemy enemy;
 
     public string HeroName = "Doris";
     public int Health = 50;
-    public int Sanity = 0;
+    public int Insanity = 0;
     public int Inventory = 0;       //Counter für Inventory/Placeholder
-    int maxHealth = 100;    
-    int maxSanity = 100;
-    int attack = 250;
-    int maxAttack = 1000;
+    public int Defence = 20;
+    public int Attack = 5;
+    public int AttackSpeed = 3;
+    public int DefaultDice = 10;
 
+
+
+    //Methode um Quests auszulösen, sobald der Hero den Kollider berührt
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Debug.Log("Trigger");
@@ -30,8 +36,10 @@ public class Hero : TheGameObject
 
     }
 
+    
 
 
+    
 
 
 

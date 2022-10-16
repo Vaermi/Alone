@@ -7,16 +7,21 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEngine.XR;
 
+/// <summary>
+/// QuestLib ist eine Sammlung von Quests mit Verweis auf die Questobjects
+/// </summary>
+
 public class QuestLib : MonoBehaviour {
     
     public TextMeshProUGUI questText01;
-    //public Hero hero;
     public QuestPanel panel;
     public QuestObjects questObjects;
 
     void Start()
     {
-    //Quest 1
+
+    //TODO mit Datenbank verbinden - Quest 1
+    //TODO in Methode auslagern
 
         if(gameObject.activeSelf)
         {
@@ -41,6 +46,8 @@ public class QuestLib : MonoBehaviour {
             }
         }
     }
+
+
 
     private void Update()
     {

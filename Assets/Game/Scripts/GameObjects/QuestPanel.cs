@@ -4,24 +4,26 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Das QuestPanel steuert die Visuelle Anzeige der Quests.
+/// </summary>
+
 public class QuestPanel : MonoBehaviour
 {
     public Hero hero;
     public QuestObjects questObjects;
     
-    // Start is called before the first frame update
-    void Start()
-    {
-        DeactivateQuestWindow();
-        
-    }
+    
 
+    //Methode um das Questfenster einzublenden
     public void SetQuestWindowActive()
     {
         gameObject.SetActive(true);
         Debug.Log("Questtext Activatet");
     }
 
+
+    //Methode um das Questfenster auszublenden
     public void DeactivateQuestWindow() 
     { 
         gameObject.SetActive(false);
