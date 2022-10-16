@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Enemy-Spezifische Funktionen
+/// </summary>
 public class Enemy : TheGameObject
 {
     public string EnemyName;
