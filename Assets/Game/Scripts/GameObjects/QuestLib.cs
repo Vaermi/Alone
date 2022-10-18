@@ -1,11 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
-using UnityEditor.U2D.Path.GUIFramework;
 using UnityEngine;
-using UnityEngine.UIElements;
-using UnityEngine.XR;
 
 /// <summary>
 /// QuestLib ist eine Sammlung von Quests mit Verweis auf die Questobjects
