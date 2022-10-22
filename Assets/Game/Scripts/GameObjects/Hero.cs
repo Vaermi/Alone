@@ -36,19 +36,6 @@ public class Hero : TheGameObject
 
     }
 
-    //Methode um den Spieler einen Namen für den Hero erstellen zu lassen
-    public void CreateHeroName()
-    {
-        Console.WriteLine("Gib einen Namen für deinen Helden ein:");
-        HeroName = Console.ReadLine();
-        Console.WriteLine($"Dein Name ist: {HeroName}");
-    }
-
     
-
-
-    
-
-
 
 }
