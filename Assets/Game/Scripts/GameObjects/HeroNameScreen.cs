@@ -15,6 +15,7 @@ public class HeroNameScreen : MonoBehaviour
         if (hero.HeroName == "")
         {
             CreateHeroName();
+            
         }
 
 
@@ -23,8 +24,8 @@ public class HeroNameScreen : MonoBehaviour
     //Methode um den Spieler einen Namen für den Hero erstellen zu lassen
     public void CreateHeroName()
     {
-        //TODO lese Name vom Hero Screen aus
         hero.HeroName = userInput.text;
+        FirebaseDb.SaveHeroNameInDb(hero.HeroName);
     }
 
 

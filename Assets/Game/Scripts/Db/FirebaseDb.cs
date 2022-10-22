@@ -12,12 +12,12 @@ public class FirebaseDb : MonoBehaviour
 
     //TODO Spielername hinzufügen
     
-    public static void SaveHeroNameInDb(string heroName)
+    public static void SaveHeroNameInDb(string name)
     {
         DocumentReference docRef = db.Collection("Player").Document("HeroName");
         Dictionary<string, object> heroname = new Dictionary<string, object>
         {
-            {"name", heroName}
+            {"name", name}
         };
         docRef.SetAsync(heroname).ContinueWithOnMainThread(task =>
         {

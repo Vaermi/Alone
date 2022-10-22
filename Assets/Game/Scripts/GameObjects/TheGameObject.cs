@@ -29,7 +29,11 @@ public class TheGameObject : MonoBehaviour
     }
     protected bool isColliding()
     {
-        return boxCollider.OverlapCollider(new ContactFilter2D(), colliders) > 0;
+        if(boxCollider != null)
+        {
+            return boxCollider.OverlapCollider(new ContactFilter2D(), colliders) > 0;
+        }
+        return boxCollider;
     }
 
 
