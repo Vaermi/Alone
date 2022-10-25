@@ -274,7 +274,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &1995265155
@@ -304,3 +304,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 723965f620521d64a839567deff5e6da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  move: {x: 0, y: 0, z: 0}
+  questObjects: {fileID: 0}
+  panel: {fileID: 0}
+  HeroName: 
+  Health: 50
+  Insanity: 0
+  Inventory: 0
+  Defence: 20
+  Attack: 5
+  AttackSpeed: 3
+  DefaultDice: 10
