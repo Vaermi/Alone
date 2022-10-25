@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "139317059733",
+    "project_id": "alone-b5d9a",
+    "storage_bucket": "alone-b5d9a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:139317059733:android:2e4a174cca9c993dec7b9c",
+        "android_client_info": {
+          "package_name": "com.Vaermi.Alone"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "139317059733-5devon6p14fjmaqftvsgk19g9e2iepv6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBYvWAqOPIjnMCq-gSAY-AsMOiLjlweVMA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "139317059733-5devon6p14fjmaqftvsgk19g9e2iepv6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

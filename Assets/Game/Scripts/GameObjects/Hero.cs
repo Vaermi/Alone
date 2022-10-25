@@ -16,7 +16,7 @@ public class Hero : TheGameObject
     public QuestPanel panel;
     private Enemy enemy;
 
-    public string HeroName = "Doris";
+    public string HeroName = "";
     public int Health = 50;
     public int Insanity = 0;
     public int Inventory = 0;       //Counter für Inventory/Placeholder
@@ -37,10 +37,5 @@ public class Hero : TheGameObject
     }
 
     
-
-
-    
-
-
 
 }

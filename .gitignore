@@ -63,3 +63,9 @@ sysinfo.txt
 
 # Crashlytics generated file
 crashlytics-build.properties
+
+# Android Konfiguration for Firebase
+/[Aa]ssets/google-services.json
+/[Aa]ssets/GoogleService-Info.plist
+/[Aa]ssets/google-services.json.meta
+/[Aa]ssets/GoogleService-Info.plist.meta
