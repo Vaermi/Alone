@@ -1,12 +1,5 @@
-using Assets.Game.Scripts.Db;
-using Firebase.Firestore;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using Unity.VisualScripting;
+using Assets.Game.Scripts.GameObjects;
 using UnityEngine;
-using UnityEngine.Tilemaps;
 
 
 /// <summary>
@@ -16,10 +9,10 @@ public class Hero : TheGameObject
 {
     public QuestObjects questObjects;
     public QuestPanel panel;
-    private Enemy enemy;
-    private FirebaseService testdb;
+    
+    
 
-    public string HeroName = "";
+    public string HeroName = HeroService.Instance.HeroName;
     public int Health = 50;
     public int Insanity = 0;
     public int Inventory = 0;       //Counter für Inventory/Placeholder
@@ -39,12 +32,6 @@ public class Hero : TheGameObject
 
     }
 
-    private void Start()
-    {
-        /*Debug.Log("Db in Hero");
-        testdb.SaveHeroNameInDb("Linz");
-        FirebaseFirestore db = FirebaseFirestore.DefaultInstance;
-        Debug.Log(db);*/
-    }
+    
 
 }

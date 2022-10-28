@@ -1,4 +1,5 @@
 using Assets.Game.Scripts.Db;
+using Assets.Game.Scripts.GameObjects;
 using Firebase.Firestore;
 using System.Collections;
 using System.Collections.Generic;
@@ -7,37 +8,30 @@ using UnityEngine;
 
 public class HeroNameScreen : MonoBehaviour
 {
-    //public TextMeshProUGUI textQuestion;
-    //public TextMeshProUGUI userInput;
-    public Hero hero;
+    public TextMeshProUGUI textQuestion;
+    public TextMeshProUGUI userInput;
 
 
-    private void Start()
+    public void Start()
     {
         //db = FirebaseService.Instance;
-        //textQuestion = GetComponent<TextMeshProUGUI>();
-        //string questionHeroName = textQuestion.text;
-        //questionHeroName = "Gib einen Namen für deinen Helden ein: ";
+        textQuestion = GetComponent<TextMeshProUGUI>();
+        string questionHeroName = "Choose a name for your hero: ";
+        textQuestion.text = questionHeroName;
         Debug.Log("Start");
        
-
-        CreateHeroName();
-
-
     }
 
     //Methode um den Spieler einen Namen für den Hero erstellen zu lassen
     public void CreateHeroName()
     {
-        if (hero != null)
+        if (HeroService.Instance.HeroName is null)
         {
-            //userInput = GetComponent<TextMeshProUGUI>();
-            //string userInputText = userInput.text;
-            //userInputText = hero.HeroName;
-            //hero.HeroName = "Blabla";
-            string userInputText = "Das ist ein Test";
-            if (userInputText != null) FirebaseService.Instance.SaveHeroNameInDbAsync(userInputText);
-
+            userInput = GetComponent<TextMeshProUGUI>();
+            string userInputText = userInput.text;
+            Debug.Log(userInputText);
+            if(userInputText != null) HeroService.Instance.HeroName = userInputText;
+            FirebaseService.Instance.SaveHeroNameInDbAsync(HeroService.Instance.HeroName);
 
         }
     }
