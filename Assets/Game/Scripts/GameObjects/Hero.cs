@@ -1,3 +1,5 @@
+using Assets.Game.Scripts.Db;
+using Firebase.Firestore;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -15,6 +17,7 @@ public class Hero : TheGameObject
     public QuestObjects questObjects;
     public QuestPanel panel;
     private Enemy enemy;
+    private FirebaseService testdb;
 
     public string HeroName = "";
     public int Health = 50;
@@ -36,6 +39,12 @@ public class Hero : TheGameObject
 
     }
 
-    
+    private void Start()
+    {
+        /*Debug.Log("Db in Hero");
+        testdb.SaveHeroNameInDb("Linz");
+        FirebaseFirestore db = FirebaseFirestore.DefaultInstance;
+        Debug.Log(db);*/
+    }
 
 }
