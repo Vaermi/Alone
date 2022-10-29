@@ -134,7 +134,6 @@ GameObject:
   - component: {fileID: 180674643}
   - component: {fileID: 180674645}
   - component: {fileID: 180674644}
-  - component: {fileID: 180674646}
   m_Layer: 5
   m_Name: Input
   m_TagString: Untagged
@@ -259,20 +258,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 180674642}
   m_CullTransparentMesh: 1
---- !u!114 &180674646
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 180674642}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 95cc4845ea4c3ed4aaf7b946d935ab28, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  textQuestion: {fileID: 0}
-  userInput: {fileID: 180674644}
 --- !u!1 &235696554
 GameObject:
   m_ObjectHideFlags: 0
@@ -692,7 +677,6 @@ GameObject:
   - component: {fileID: 656331327}
   - component: {fileID: 656331329}
   - component: {fileID: 656331328}
-  - component: {fileID: 656331330}
   m_Layer: 5
   m_Name: Question
   m_TagString: Untagged
@@ -817,20 +801,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 656331326}
   m_CullTransparentMesh: 1
---- !u!114 &656331330
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 656331326}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 95cc4845ea4c3ed4aaf7b946d935ab28, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  textQuestion: {fileID: 656331328}
-  userInput: {fileID: 0}
 --- !u!1 &890462204
 GameObject:
   m_ObjectHideFlags: 0
@@ -987,7 +957,6 @@ GameObject:
   - component: {fileID: 1294496848}
   - component: {fileID: 1294496847}
   - component: {fileID: 1294496846}
-  - component: {fileID: 1294496849}
   m_Layer: 5
   m_Name: Next_Button
   m_TagString: Untagged
@@ -1060,10 +1029,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UnityEngine.Object, UnityEngine
-        m_MethodName: 
-        m_Mode: 5
+      - m_Target: {fileID: 1840655269}
+        m_TargetAssemblyTypeName: HeroNameScreen, Assembly-CSharp
+        m_MethodName: CreateHeroName
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1071,7 +1040,7 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: SetActive() = true
           m_BoolArgument: 0
-        m_CallState: 0
+        m_CallState: 1
 --- !u!114 &1294496847
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1110,20 +1079,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1294496844}
   m_CullTransparentMesh: 1
---- !u!114 &1294496849
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1294496844}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3b296831c96cd1f438e48ac806e5c059, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  button: {fileID: 1294496846}
-  heroName: {fileID: 180674646}
 --- !u!1 &1432533832
 GameObject:
   m_ObjectHideFlags: 0
@@ -1433,6 +1388,7 @@ GameObject:
   - component: {fileID: 1840655267}
   - component: {fileID: 1840655266}
   - component: {fileID: 1840655265}
+  - component: {fileID: 1840655269}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -1527,6 +1483,20 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1840655269
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1840655264}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95cc4845ea4c3ed4aaf7b946d935ab28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textQuestion: {fileID: 656331328}
+  userInput: {fileID: 180674644}
 --- !u!1 &1942492395
 GameObject:
   m_ObjectHideFlags: 0

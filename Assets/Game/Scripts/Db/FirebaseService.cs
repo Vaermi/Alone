@@ -60,25 +60,78 @@ namespace Assets.Game.Scripts.Db
 
 
         //TODO Neuen Spielstand erstellen
+        public void SaveGame()
+        {
+
+        }
 
         //READ
 
-        //TODO Spielername lesen
+        // Methode um den Spielernamen aus der Datenbank abzufragen
+        public async Task<string> GetHeroNameAsync()
+        {
+            Task t = EstablishConnectionAsync();
+            DocumentReference docRef = db.Collection("Player").Document("HeroName");
+            var snapshot = await docRef.GetSnapshotAsync();
+            return snapshot.GetValue<string>("name");
+        }
         //TODO Quest abrufen
+        public void GetQuest()
+        {
+
+        }
+
         //TODO Spielerposition abrufen
+        public string? GetPlayerPosition()
+        {
+            return null;
+        }
+
         //TODO Spielerwerte abrufen
+        public void GetPlayerAttributes()
+        {
+
+        }
+
         //TODO Spielstand laden
+        public void GetSaveGame()
+        {
+
+        }
 
         //UPDATE
 
         //TODO Questfortschritt speichern
+        public void UpdateQuestProgress()
+        {
+
+        }
+
         //TODO Spielerposition speichern
-        //TODO Spielerwerte speichern
+
+        public void UpdatePlayerPosition()
+        {
+
+        }
+
+        //TODO Spielerwerte speichern 
+        public void UpdatePlayerAttributes()
+        {
+
+        }
+
         //TODO Spielstand speichern
+        public void UpdateSaveGame()
+        {
+
+        }
 
         //DELETE
 
         //TODO Spielstand löschen
+        public void DeleteSaveGame()
+        {
 
+        }
     }
 }

@@ -1,6 +1,7 @@
 using Assets.Game.Scripts.GameObjects;
+using Assets.Game.Scripts.Db;
 using UnityEngine;
-
+using System.Threading.Tasks;
 
 /// <summary>
 /// Helden Spezifische Funktionen
@@ -21,6 +22,10 @@ public class Hero : TheGameObject
     public int AttackSpeed = 3;
     public int DefaultDice = 10;
 
+    private async void Start()
+    {
+        await HeroService.Instance.Init();
+    }
 
 
     //Methode um Quests auszulösen, sobald der Hero den Kollider berührt
@@ -33,5 +38,6 @@ public class Hero : TheGameObject
     }
 
     
+
 
 }

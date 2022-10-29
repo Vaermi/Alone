@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Assets.Game.Scripts.Db;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,6 +25,12 @@ namespace Assets.Game.Scripts.GameObjects
                 if (instance == null) instance = new HeroService();
                 return instance; 
             } 
+        }
+
+        //Methode zum Abfragen vom Hero Namen
+        public async Task Init()
+        {
+            HeroName = await FirebaseService.Instance.GetHeroNameAsync();
         }
 
 

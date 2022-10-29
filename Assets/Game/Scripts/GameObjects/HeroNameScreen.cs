@@ -3,6 +3,7 @@ using Assets.Game.Scripts.GameObjects;
 using Firebase.Firestore;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 
@@ -12,13 +13,13 @@ public class HeroNameScreen : MonoBehaviour
     public TextMeshProUGUI userInput;
 
 
-    public void Start()
+    public async void Start()
     {
         //db = FirebaseService.Instance;
-        textQuestion = GetComponent<TextMeshProUGUI>();
         string questionHeroName = "Choose a name for your hero: ";
         textQuestion.text = questionHeroName;
         Debug.Log("Start");
+              
        
     }
 
@@ -27,7 +28,6 @@ public class HeroNameScreen : MonoBehaviour
     {
         if (HeroService.Instance.HeroName is null)
         {
-            userInput = GetComponent<TextMeshProUGUI>();
             string userInputText = userInput.text;
             Debug.Log(userInputText);
             if(userInputText != null) HeroService.Instance.HeroName = userInputText;
@@ -35,6 +35,8 @@ public class HeroNameScreen : MonoBehaviour
 
         }
     }
+
+    
 
     
 
