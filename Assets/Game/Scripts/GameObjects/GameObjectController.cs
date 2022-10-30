@@ -6,7 +6,7 @@ using UnityEngine;
 /// Oberste Klasse für Spielobjekte im Game
 /// Enthält Allgemeine Funktionen die für die meisten Szenenobjekte potenziell nützlich sind
 /// </summary>
-public class TheGameObject : MonoBehaviour
+public class GameObjectController : MonoBehaviour
 {
     // Größe eines Pixel-Art Pixels in Unity-Einheiten
     private static float pixelFrac = 1f / 16f;

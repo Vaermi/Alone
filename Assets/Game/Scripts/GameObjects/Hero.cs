@@ -2,11 +2,12 @@ using Assets.Game.Scripts.GameObjects;
 using Assets.Game.Scripts.Db;
 using UnityEngine;
 using System.Threading.Tasks;
+using Unity.VisualScripting;
 
 /// <summary>
 /// Helden Spezifische Funktionen
 /// </summary>
-public class Hero : TheGameObject
+public class Hero : GameObjectController
 {
     public QuestObjects questObjects;
     public QuestPanel panel;
@@ -14,14 +15,16 @@ public class Hero : TheGameObject
     
 
     public string HeroName = HeroService.Instance.HeroName;
-    public int Health = 50;
-    public int Insanity = 0;
-    public int Inventory = 0;       //Counter für Inventory/Placeholder
-    public int Defence = 20;
-    public int Attack = 5;
-    public int AttackSpeed = 3;
-    public int DefaultDice = 10;
+    public int Health = HeroService.Instance.Health;
+    public int Insanity = HeroService.Instance.Insanity;
+    public int Defence = HeroService.Instance.Defence;
+    public int Attack = HeroService.Instance.Attack;
+    public int AttackSpeed = HeroService.Instance.AttackSpeed;
+    public int DefaultDice = HeroService.Instance.DefaultDice;
+    public Vector3 Pos = SaveGameData.Pos;
 
+
+    // TODO Init() bekommt später der Scene-Controller
     private async void Start()
     {
         await HeroService.Instance.Init();
@@ -36,6 +39,14 @@ public class Hero : TheGameObject
         questObjects.SwitchStatusQuestObjects();
 
     }
+
+    // TODO Methode um Health zu verringern
+    // TODO Methode um Health zu erhöhen
+    // TODO Methode um Insanity zu verringern
+    // TODO Methode um Insanity zu erhöhen
+    // TODO Methode um PlayerPosition zu speichern
+    // TODO Methode um XP zu erhöhen
+    // TODO Methode die GameOver prüft und GameOverScreen einblendet 
 
     
 

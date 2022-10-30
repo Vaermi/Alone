@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 
-public class HeroNameScreen : MonoBehaviour
+public class NameScreenController : MonoBehaviour
 {
     public TextMeshProUGUI textQuestion;
     public TextMeshProUGUI userInput;
@@ -31,9 +31,9 @@ public class HeroNameScreen : MonoBehaviour
             string userInputText = userInput.text;
             Debug.Log(userInputText);
             if(userInputText != null) HeroService.Instance.HeroName = userInputText;
-            FirebaseService.Instance.SaveHeroNameInDbAsync(HeroService.Instance.HeroName);
-
+            FirebaseService.Instance.SetHeroNameAsync(HeroService.Instance.HeroName);
         }
+            
     }
 
     

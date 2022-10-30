@@ -8,31 +8,13 @@ using UnityEngine;
 
 public class QuestObjects : MonoBehaviour
 {
-   
-    int questId;
-    string questText;
     private SpriteRenderer spriteRenderer;
 
-    public string QuestText
-    {
-        get
-        {
-            return questText;
-        }
-        set
-        {
-            questText = value;
-        }
-    }
+    private int questId;
+    public int QuestId { get { return questId; } }
 
-    public int QuestId 
-    { 
-        get 
-        { 
-            return questId; 
-        }
-    }
-
+    private string questText;
+    public string QuestText { get { return questText; } }
 
     //Methode um den Renderer von QuestObjects zu aktivieren oder deaktivieren.
     //Macht sie sichtbar/unsichtbar in der Spielwelt, bleiben aber immer vorhanden.

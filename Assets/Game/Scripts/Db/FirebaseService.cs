@@ -41,7 +41,7 @@ namespace Assets.Game.Scripts.Db
         //CREATE
 
         //TODO Spielername hinzufügen
-        public async void SaveHeroNameInDbAsync(string name)
+        public async void SetHeroNameAsync(string name)
         {
             Task t = EstablishConnectionAsync();
             Dictionary<string, object> heroname = new Dictionary<string, object>
@@ -60,8 +60,17 @@ namespace Assets.Game.Scripts.Db
 
 
         //TODO Neuen Spielstand erstellen
-        public void SaveGame()
+        public async void SetSaveGameAsync(string name)
         {
+            Task t = EstablishConnectionAsync();
+            Dictionary<string, object> savefile = new Dictionary<string, object>
+        {
+            {"name", name}
+        };
+            await t;
+            DocumentReference docRef = db.Collection("SaveGame").Document("SaveFile");
+            await docRef.SetAsync(savefile);
+
 
         }
 
@@ -76,9 +85,12 @@ namespace Assets.Game.Scripts.Db
             return snapshot.GetValue<string>("name");
         }
         //TODO Quest abrufen
-        public void GetQuest()
+        public async Task<string> GetQuestWithIdAsync(string id)
         {
-
+            Task t = EstablishConnectionAsync();
+            DocumentReference docRef = db.Collection("Quest").Document(id);
+            var snapshot = await docRef.GetSnapshotAsync();
+            return snapshot.GetValue<string>(id);
         }
 
         //TODO Spielerposition abrufen

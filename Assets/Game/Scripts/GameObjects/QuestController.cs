@@ -1,3 +1,5 @@
+using Assets.Game.Scripts.Db;
+using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 
@@ -5,13 +7,15 @@ using UnityEngine;
 /// QuestLib ist eine Sammlung von Quests mit Verweis auf die Questobjects
 /// </summary>
 
-public class QuestLib : MonoBehaviour {
+public class QuestController : MonoBehaviour {
     
     public TextMeshProUGUI questText01;
     public QuestPanel panel;
     public QuestObjects questObjects;
 
-    void Start()
+    private string questId01 = "quest01";
+
+    async void Start()
     {
 
     //TODO mit Datenbank verbinden - Quest 1
@@ -26,11 +30,9 @@ public class QuestLib : MonoBehaviour {
                 Debug.Log("Standard Textfeld anzeigen lassen" + quest01);
                 QuestObjects questObject01 = gameObject.AddComponent<QuestObjects>();
                 Debug.Log("Neues QuestObject erstellen" + questObject01);
-
-                questObject01.QuestText = "Du erwachst alleine in einem dunklen Wald. Wie bist du hierher gekommen? Neben dir liegt eine kryptische Nachricht:" +
-                    "\"Suche mich bei den Felsen. -V.\"\n\n - Weiter mit Leertaste - ";
-
-                questText01.text = questObject01.QuestText;
+                await GetQuestWithID(questId01);
+                string text = GetQuestWithID(questId01).Result;
+                questText01.text = text;
                 Debug.Log("Quest ausgeben" + quest01);
 
                 
@@ -49,6 +51,11 @@ public class QuestLib : MonoBehaviour {
         {
             panel.DeactivateQuestWindow();
         }
+    }
+
+    private async Task<string> GetQuestWithID(string id)
+    {
+        return await FirebaseService.Instance.GetQuestWithIdAsync(id);
     }
 
 }

@@ -29,7 +29,7 @@ public class PlayerPanel : MonoBehaviour
         textSanity.text = $"Sanity: {playerSanity}/100";
 
         //TODO Placeholder für Inventory Object
-        int playerInventory = hero.Inventory;
+        int playerInventory = Inventory.Instance.InventoryCount;
         textInventory.text = $"Inventory: {playerInventory}";
 
     }

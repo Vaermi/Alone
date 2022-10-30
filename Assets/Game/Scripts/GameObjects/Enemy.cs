@@ -5,7 +5,7 @@ using UnityEngine;
 /// <summary>
 /// Enemy-Spezifische Funktionen
 /// </summary>
-public class Enemy : TheGameObject
+public class Enemy : GameObjectController
 {
     public string EnemyName;
     public int Health;
