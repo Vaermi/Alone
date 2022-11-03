@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -31,6 +32,11 @@ namespace Assets.Game.Scripts.GameObjects
         private int defaultDice = 10;
         public int DefaultDice { get { return defaultDice; } set { defaultDice = value; } }
 
+        private int experience = 0;
+        public int Experience { get { return experience; } set { value = experience; } }
+
+       
+
 
 
         private HeroService() { }
@@ -45,11 +51,75 @@ namespace Assets.Game.Scripts.GameObjects
             } 
         }
 
-        //Methode zum Abfragen vom Hero Namen
+        //Methode zum Abfragen vom Hero Namen zu Beginn
         public async Task Init()
         {
             HeroName = await FirebaseService.Instance.GetHeroNameAsync();
         }
+
+
+        
+        public void ReduceHeroHealth(float heroDmgInput)
+        {
+            HeroService.Instance.Health -= (int)heroDmgInput;
+        }
+
+        // TODO Methode um Health zu erhöhen zb durch Zauber
+        public void IncreaseHeroHealth()
+        {
+
+        }
+
+       
+        public void ReduceInsanity()
+        {
+            int number = RandomizeInsanityNumber();
+            HeroService.Instance.Insanity -= number;
+        }
+
+       
+        public void IncreaseInsanity()
+        {
+            int number = RandomizeInsanityNumber();
+            HeroService.Instance.Insanity += number;
+        }
+
+        public int RandomizeInsanityNumber()
+        {
+            Random rnd = new Random();
+            int number = rnd.Next(0, 20);
+            return number;
+        }
+
+        // TODO Methode um PlayerPosition zu speichern
+        public void CurrentPlayerPosition()
+        {
+
+        }
+
+       
+        public void IncreaseExperience()
+        {
+            HeroService.Instance.Experience += 10;
+        }
+
+        // TODO Methode die GameOver prüft und GameOverScreen einblendet 
+        public void IsDead()
+        {
+
+        }
+
+        
+        public void UseHealPotion()
+        {
+            if (Inventory.Instance.HealPotion > 0)
+            {
+                HeroService.Instance.Health += 30;
+                --Inventory.Instance.HealPotion;
+            }
+        }
+
+
 
 
     }

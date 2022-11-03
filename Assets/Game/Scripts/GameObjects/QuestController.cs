@@ -13,7 +13,7 @@ public class QuestController : MonoBehaviour {
     public QuestPanel panel;
     public QuestObjects questObjects;
 
-    private string questId01 = "quest01";
+    private string questId01 = "OLdU9m2J33gP89Tt8mH2";
 
     async void Start()
     {
@@ -30,8 +30,7 @@ public class QuestController : MonoBehaviour {
                 Debug.Log("Standard Textfeld anzeigen lassen" + quest01);
                 QuestObjects questObject01 = gameObject.AddComponent<QuestObjects>();
                 Debug.Log("Neues QuestObject erstellen" + questObject01);
-                await GetQuestWithID(questId01);
-                string text = GetQuestWithID(questId01).Result;
+                string text = await GetQuestWithID(questId01);
                 questText01.text = text;
                 Debug.Log("Quest ausgeben" + quest01);
 

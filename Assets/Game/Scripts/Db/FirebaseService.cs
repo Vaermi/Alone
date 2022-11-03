@@ -84,13 +84,13 @@ namespace Assets.Game.Scripts.Db
             var snapshot = await docRef.GetSnapshotAsync();
             return snapshot.GetValue<string>("name");
         }
-        //TODO Quest abrufen
+        //TODO Quest abrufen anhand der QuestNr
         public async Task<string> GetQuestWithIdAsync(string id)
         {
             Task t = EstablishConnectionAsync();
             DocumentReference docRef = db.Collection("Quest").Document(id);
             var snapshot = await docRef.GetSnapshotAsync();
-            return snapshot.GetValue<string>(id);
+            return snapshot.GetValue<string>("text");
         }
 
         //TODO Spielerposition abrufen

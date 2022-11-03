@@ -40,15 +40,6 @@ public class Hero : GameObjectController
 
     }
 
-    // TODO Methode um Health zu verringern
-    // TODO Methode um Health zu erhöhen
-    // TODO Methode um Insanity zu verringern
-    // TODO Methode um Insanity zu erhöhen
-    // TODO Methode um PlayerPosition zu speichern
-    // TODO Methode um XP zu erhöhen
-    // TODO Methode die GameOver prüft und GameOverScreen einblendet 
-
     
-
 
 }

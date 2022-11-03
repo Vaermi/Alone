@@ -1,3 +1,4 @@
+using Assets.Game.Scripts.GameObjects;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -11,14 +12,14 @@ public class Fight : MonoBehaviour
 
 
     //Fight-Methode wenn der Hero die erste Runde beginnt
-    public void FightHeroFirst(Hero attacker, Enemy defender)
+    public void HeroFirstTurn(Hero attacker, Enemy defender)
     {
 
         Console.WriteLine("Du beginnst...");
 
         int counter = 0;
 
-        while (hero.Health != 0 && enemy.Health != 0)
+        while (hero.Health > 0 && enemy.Health > 0)
         {
 
             Console.WriteLine($"Runde {counter}");
@@ -29,43 +30,45 @@ public class Fight : MonoBehaviour
 
             counter++;
 
-            if (enemy.Health <= 0) Console.WriteLine("Du hast gewonnen!");
+            if (enemy.Health <= 0) Console.WriteLine("YOU WIN!");
 
 
             Console.WriteLine($"Runde {counter}");
 
             float enemyDmgOutput = enemy.Attack * enemy.DefaultDice;
             float heroDmgInput = enemyDmgOutput - hero.Defence;
-            hero.Health -= (int)heroDmgInput;
+            HeroService.Instance.ReduceHeroHealth(heroDmgInput);
 
             counter++;
 
-            if (hero.Health <= 0) Console.WriteLine($"Du bist tot.\n GAME OVER");
+            if (hero.Health <= 0) Console.WriteLine($"You are dead.\n GAME OVER");
+            //TODO GAME OVER SCREEN
         }
     }
 
 
 
     //Fight-Methode wenn der Enemy die erste Runde beginnt
-    public void FightEnemyFirst(Enemy attacker, Hero defender)
+    public void EnemyFirstTurn(Enemy attacker, Hero defender)
     {
 
         Console.WriteLine("Enemy beginnt...");
 
         int counter = 0;
 
-        while (hero.Health != 0 && enemy.Health != 0)
+        while (hero.Health > 0 && enemy.Health > 0)
         {
             
             Console.WriteLine($"Runde {counter}");
 
             float enemyDmgOutput = enemy.Attack * enemy.DefaultDice;
             float heroDmgInput = enemyDmgOutput - hero.Defence;
-            hero.Health -= (int)heroDmgInput;
+            HeroService.Instance.ReduceHeroHealth(heroDmgInput);
 
             counter++;
 
-            if (hero.Health <= 0) Console.WriteLine($"Du bist tot.\n GAME OVER");
+            if (hero.Health <= 0) Console.WriteLine($"You are dead.\n GAME OVER");
+            //TODO GAME OVER SCREEN
 
 
             Console.WriteLine($"Runde {counter}");
@@ -76,7 +79,7 @@ public class Fight : MonoBehaviour
 
             counter++;
 
-            if (enemy.Health <= 0) Console.WriteLine("Du hast gewonnen!");
+            if (enemy.Health <= 0) Console.WriteLine("YOU WIN!");
         }
     }
 }
