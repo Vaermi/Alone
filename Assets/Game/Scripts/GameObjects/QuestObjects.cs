@@ -9,15 +9,10 @@ using UnityEngine;
 public class QuestObjects : MonoBehaviour
 {
     private SpriteRenderer spriteRenderer;
+    public int QuestId { get; set; }
+    public string QuestText { get; set; }
 
-    private int questId;
-    public int QuestId { get { return questId; } }
 
-    private string questText;
-    public string QuestText { get { return questText; } }
-
-    //Methode um den Renderer von QuestObjects zu aktivieren oder deaktivieren.
-    //Macht sie sichtbar/unsichtbar in der Spielwelt, bleiben aber immer vorhanden.
     public void SwitchStatusQuestObjects()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -25,5 +20,5 @@ public class QuestObjects : MonoBehaviour
         spriteRenderer.enabled = !spriteRenderer.enabled;
         Debug.Log("Switch Status");
     }
-    
+
 }

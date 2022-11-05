@@ -1,8 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UI;
 
 /// <summary>
 /// Das QuestPanel steuert die Visuelle Anzeige der Quests.
@@ -10,12 +6,6 @@ using UnityEngine.UI;
 
 public class QuestPanel : MonoBehaviour
 {
-    public Hero hero;
-    public QuestObjects questObjects;
-    
-    
-
-    //Methode um das Questfenster einzublenden
     public void SetQuestWindowActive()
     {
         gameObject.SetActive(true);
@@ -23,12 +13,11 @@ public class QuestPanel : MonoBehaviour
     }
 
 
-    //Methode um das Questfenster auszublenden
-    public void DeactivateQuestWindow() 
-    { 
+    public void DeactivateQuestWindow()
+    {
         gameObject.SetActive(false);
         Debug.Log("Questtext Deactivatet");
     }
 }
-    
+
 

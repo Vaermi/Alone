@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -9,29 +7,21 @@ using UnityEngine;
 
 public class PlayerPanel : MonoBehaviour
 {
-    public Hero hero;
     public TextMeshProUGUI textHeroName;
     public TextMeshProUGUI textHealth;
     public TextMeshProUGUI textSanity;
     public TextMeshProUGUI textInventory;
+    private Hero hero;
+
 
     private void Awake()
     {
-        //TODO heroName per User Auswahl befüllen lassen
-        
-        string playerName = hero.HeroName;
-        textHeroName.text = $"{playerName} ";
-
-        int playerHealth = hero.Health;
-        textHealth.text = $"Health: {playerHealth}/100";
-
-        int playerSanity = hero.Insanity;
-        textSanity.text = $"Sanity: {playerSanity}/100";
-
+        string heroName = hero.GetHeroName();
+        textHeroName.text = $"{heroName}";
+        textHealth.text = $"Health: {hero.GetHealth()}/100";
+        textSanity.text = $"Sanity: {hero.GetInsanity()}/100";
         //TODO Placeholder für Inventory Object
-        int playerInventory = Inventory.Instance.InventoryCount;
-        textInventory.text = $"Inventory: {playerInventory}";
-
+        textInventory.text = $"Inventory: {Inventory.Instance.InventoryCount}";
     }
-    
+
 }

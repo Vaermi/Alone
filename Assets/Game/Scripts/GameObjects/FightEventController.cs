@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using Assets.Game.Scripts.GameObjects;
 using UnityEngine;
 
 /// <summary>
@@ -9,26 +8,24 @@ using UnityEngine;
 
 public class FightEventController : Fight
 {
-    private Hero hero;
+    private HeroService heroService;
     private Enemy enemy;
-    private Fight fight;
 
     private void Start()
     {
-        float heroDice = Random.Range(0, hero.DefaultDice);
+        float heroDice = Random.Range(0, heroService.DefaultDice);
         float enemyDice = Random.Range(0, enemy.DefaultDice);
 
-        if (hero.AttackSpeed > enemy.AttackSpeed)
+        // TODO Eventuell Startbedingung überarbeiten
+
+        if (heroService.AttackSpeed > enemy.AttackSpeed)
         {
-            HeroFirstTurn(hero, enemy);
+            HeroFirstTurn();
         }
-        else if (enemy.AttackSpeed > hero.AttackSpeed)
+        else
         {
-            EnemyFirstTurn(enemy, hero);
+            EnemyFirstTurn();
         }
-        // TODO bei gleichem AttackSpeed
     }
 
-
-    
 }

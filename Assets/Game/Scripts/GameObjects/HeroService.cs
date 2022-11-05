@@ -1,54 +1,30 @@
 ﻿using Assets.Game.Scripts.Db;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Numerics;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Assets.Game.Scripts.GameObjects
 {
     public class HeroService
     {
-
-        private string heroName;
-        public string HeroName { get { return heroName; } set { heroName = value; } }
-
-        private int health = 50;
-        public int Health { get { return health; } set { health = value; } }
-
-        private int insanity = 0;
-        public int Insanity { get { return insanity; } set { insanity = value; } }
-
-        private int defence = 20;
-        public int Defence { get { return defence; } set { defence = value; } }
-
-        private int attack = 5;
-        public int Attack { get { return attack; } set { attack = value; } }
-
-        private int attackSpeed = 3;
-        public int AttackSpeed { get { return attackSpeed; } set { attackSpeed = value; } }
-
-        private int defaultDice = 10;
-        public int DefaultDice { get { return defaultDice; } set { defaultDice = value; } }
-
-        private int experience = 0;
-        public int Experience { get { return experience; } set { value = experience; } }
-
-       
-
+        public string HeroName { get; private set; }
+        public int Level { get; private set; } = 1;
+        public float Health { get; private set; } = 100.00f;
+        public int Insanity { get; private set; } = 0;
+        public int Defence { get; private set; } = 20;
+        public int Attack { get; private set; } = 5;
+        public int AttackSpeed { get; private set; } = 3;
+        public int DefaultDice { get; private set; } = 10;
+        public int Experience { get; private set; } = 0;
 
 
         private HeroService() { }
-
         private static HeroService instance;
-
-        public static HeroService Instance 
-        { get 
-            { 
+        public static HeroService Instance
+        {
+            get
+            {
                 if (instance == null) instance = new HeroService();
-                return instance; 
-            } 
+                return instance;
+            }
         }
 
         //Methode zum Abfragen vom Hero Namen zu Beginn
@@ -58,37 +34,29 @@ namespace Assets.Game.Scripts.GameObjects
         }
 
 
-        
-        public void ReduceHeroHealth(float heroDmgInput)
+        public void SetHeroName(string name)
         {
-            HeroService.Instance.Health -= (int)heroDmgInput;
+            HeroName = name;
         }
 
-        // TODO Methode um Health zu erhöhen zb durch Zauber
-        public void IncreaseHeroHealth()
-        {
 
-        }
-
-       
         public void ReduceInsanity()
         {
             int number = RandomizeInsanityNumber();
-            HeroService.Instance.Insanity -= number;
+            Insanity -= number;
         }
 
-       
+
         public void IncreaseInsanity()
         {
             int number = RandomizeInsanityNumber();
-            HeroService.Instance.Insanity += number;
+            Insanity += number;
         }
+
 
         public int RandomizeInsanityNumber()
         {
-            Random rnd = new Random();
-            int number = rnd.Next(0, 20);
-            return number;
+            return UnityEngine.Random.Range(0, 20);
         }
 
         // TODO Methode um PlayerPosition zu speichern
@@ -97,29 +65,51 @@ namespace Assets.Game.Scripts.GameObjects
 
         }
 
-       
-        public void IncreaseExperience()
-        {
-            HeroService.Instance.Experience += 10;
-        }
-
         // TODO Methode die GameOver prüft und GameOverScreen einblendet 
         public void IsDead()
         {
 
         }
 
-        
+
         public void UseHealPotion()
         {
             if (Inventory.Instance.HealPotion > 0)
             {
-                HeroService.Instance.Health += 30;
-                --Inventory.Instance.HealPotion;
+                Health += 30;
+                Inventory.Instance.RemoveHealPotionFromInventory();
             }
         }
 
+        public void ReduceHeroHealth(float heroDmgInput)
+        {
+            Health -= heroDmgInput;
+        }
 
+        // TODO Methode um Health zu erhöhen zb durch Zauber
+        public void IncreaseHeroHealth()
+        {
+
+
+        }
+
+
+        public void IncreaseExperience()
+        {
+            Experience += 10;
+        }
+
+        // TODO Methode die ein Levelup prüft
+        public void CheckExperiencePoints()
+        {
+
+        }
+
+        // TODO Methode die ein Level aufstuft
+        public void GetLevelUp()
+        {
+
+        }
 
 
     }

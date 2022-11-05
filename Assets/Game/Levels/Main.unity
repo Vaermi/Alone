@@ -22499,9 +22499,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4016a0b8da451904eb3bdacf33002ccb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  questText01: {fileID: 0}
-  panel: {fileID: 0}
-  questObjects: {fileID: 0}
+  QuestText: {fileID: 0}
+  Panel: {fileID: 0}
+  QuestObj: {fileID: 0}
 --- !u!1001 &2810956423761107129
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -22509,10 +22509,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 771401360}
     m_Modifications:
-    - target: {fileID: 2810956423680087840, guid: 19eceed57fe1b6c4c9db4084c7343b71, type: 3}
-      propertyPath: hero
-      value: 
-      objectReference: {fileID: 1581232137}
     - target: {fileID: 2810956423680087852, guid: 19eceed57fe1b6c4c9db4084c7343b71, type: 3}
       propertyPath: m_Name
       value: PlayerPanel
@@ -22756,9 +22752,17 @@ PrefabInstance:
       value: QuestEventPanel
       objectReference: {fileID: 0}
     - target: {fileID: 7570570878004801813, guid: 3a9f03f470ab72640bac27f7bdef8ffa, type: 3}
+      propertyPath: Hero
+      value: 
+      objectReference: {fileID: 1581232137}
+    - target: {fileID: 7570570878004801813, guid: 3a9f03f470ab72640bac27f7bdef8ffa, type: 3}
       propertyPath: hero
       value: 
       objectReference: {fileID: 1581232137}
+    - target: {fileID: 7570570878004801813, guid: 3a9f03f470ab72640bac27f7bdef8ffa, type: 3}
+      propertyPath: QuestObj
+      value: 
+      objectReference: {fileID: 683523600}
     - target: {fileID: 7570570878004801813, guid: 3a9f03f470ab72640bac27f7bdef8ffa, type: 3}
       propertyPath: questObjects
       value: 
@@ -22785,9 +22789,17 @@ PrefabInstance:
       value: Hero
       objectReference: {fileID: 0}
     - target: {fileID: 8385332514341720293, guid: a287505372bed3d4ab57279cfe982181, type: 3}
+      propertyPath: Panel
+      value: 
+      objectReference: {fileID: 174112830}
+    - target: {fileID: 8385332514341720293, guid: a287505372bed3d4ab57279cfe982181, type: 3}
       propertyPath: panel
       value: 
       objectReference: {fileID: 174112830}
+    - target: {fileID: 8385332514341720293, guid: a287505372bed3d4ab57279cfe982181, type: 3}
+      propertyPath: QuestObj
+      value: 
+      objectReference: {fileID: 683523600}
     - target: {fileID: 8385332514341720293, guid: a287505372bed3d4ab57279cfe982181, type: 3}
       propertyPath: questObjects
       value: 

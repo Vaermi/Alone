@@ -1,28 +1,25 @@
 using Assets.Game.Scripts.GameObjects;
-using Assets.Game.Scripts.Db;
 using UnityEngine;
-using System.Threading.Tasks;
-using Unity.VisualScripting;
 
 /// <summary>
 /// Helden Spezifische Funktionen
 /// </summary>
 public class Hero : GameObjectController
 {
-    public QuestObjects questObjects;
-    public QuestPanel panel;
-    
-    
+    public QuestObjects QuestObj;
+    public QuestPanel Panel;
 
-    public string HeroName = HeroService.Instance.HeroName;
-    public int Health = HeroService.Instance.Health;
-    public int Insanity = HeroService.Instance.Insanity;
-    public int Defence = HeroService.Instance.Defence;
-    public int Attack = HeroService.Instance.Attack;
-    public int AttackSpeed = HeroService.Instance.AttackSpeed;
-    public int DefaultDice = HeroService.Instance.DefaultDice;
-    public Vector3 Pos = SaveGameData.Pos;
-
+    [SerializeField]
+    private string heroName = HeroService.Instance.HeroName;
+    [SerializeField]
+    private float health = HeroService.Instance.Health;
+    [SerializeField]
+    private int insanity = HeroService.Instance.Insanity;
+    private int defence = HeroService.Instance.Defence;
+    private int attack = HeroService.Instance.Attack;
+    private int attackSpeed = HeroService.Instance.AttackSpeed;
+    private int defaultDice = HeroService.Instance.DefaultDice;
+    private Vector3 pos = SaveGameData.Pos;
 
     // TODO Init() bekommt später der Scene-Controller
     private async void Start()
@@ -31,15 +28,33 @@ public class Hero : GameObjectController
     }
 
 
-    //Methode um Quests auszulösen, sobald der Hero den Kollider berührt
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Debug.Log("Trigger");
-        panel.SetQuestWindowActive();
-        questObjects.SwitchStatusQuestObjects();
-
+        Panel.SetQuestWindowActive();
+        QuestObj.SwitchStatusQuestObjects();
     }
 
-    
+
+    public string GetHeroName()
+    {
+        if (heroName != string.Empty)
+        {
+            Debug.Log("Player found");
+        }
+        return heroName;
+    }
+
+
+    public float GetHealth()
+    {
+        return health;
+    }
+
+
+    public int GetInsanity()
+    {
+        return insanity;
+    }
 
 }

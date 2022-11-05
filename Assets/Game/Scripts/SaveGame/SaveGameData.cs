@@ -1,28 +1,23 @@
 using Assets.Game.Scripts.Db;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
+using Assets.Game.Scripts.GameObjects;
 using UnityEngine;
 
 /// <summary>
 /// Basis-Klasse für die Spielspeicherung
 /// </summary>
 
-public class SaveGameData : MonoBehaviour {
-
-    public Camera Camera;
-
-    private static Vector3 pos;
-    public static Vector3 Pos { get { return pos; } set { pos = value; } }
+public class SaveGameData : MonoBehaviour
+{
+    public static Vector3 Pos { get; set; }
 
     public int CurrentInventory = Inventory.Instance.CurrentInventory;
     public int InventoryCount = Inventory.Instance.InventoryCount;
 
-
-    private void FixedUpdate()
+    private async void Awake()
     {
-        pos = transform.position;
+        await HeroService.Instance.Init();
     }
+
 
     private void Start()
     {
@@ -30,7 +25,10 @@ public class SaveGameData : MonoBehaviour {
     }
 
 
-
+    private void FixedUpdate()
+    {
+        Pos = transform.position;
+    }
 
 
     public void SetSaveGame(string name)

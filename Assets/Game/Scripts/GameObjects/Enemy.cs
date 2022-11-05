@@ -1,42 +1,36 @@
 using Assets.Game.Scripts.GameObjects;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 /// <summary>
 /// Enemy-Spezifische Funktionen
 /// </summary>
 public class Enemy : GameObjectController
 {
-    private string enemyName;
-    public string EnemyName { get { return enemyName; } }
-
-    private int health;
-    public int Health { get { return health; } set { value = health; } }
-
-    private int defence;
-    public int Defence { get { return defence; } }
-
-    private int attack;
-    public int Attack { get { return attack; } }
-
-    private int attackSpeed;
-    public int AttackSpeed { get { return attackSpeed; } }
-
-    private int defaultDice = 12;
-    public int DefaultDice { get { return defaultDice; } }
+    public string EnemyName { get; private set; }
+    public float Health { get; private set; }
+    public int Defence { get; private set; }
+    public int Attack { get; private set; }
+    public int AttackSpeed { get; private set; }
+    public int DefaultDice { get; private set; } = 12;
 
 
-    // TODO Methode um Health zu verringern
+    public void SetEnemyHealth(float number)
+    {
+        Health -= number;
+    }
+
+
     public void ReduceEnemyHealth(float enemyDmgInput)
     {
-        Health -= (int)enemyDmgInput;
+        Health -= enemyDmgInput;
     }
 
-    // TODO Methode um Leben vom Hero zu stehlen und 50% davon in Selbstheilung umzuwandeln
+
     public void Lifesteal()
     {
-        HeroService.Instance.Health -= 10;
+        HeroService.Instance.ReduceHeroHealth(10);
         Health += 5;
     }
+
+    // TODO Unterklassen von Enemy erstellen
+    // TODO Die einzelnen Unterklassen benötigen eine Kampfressource zb Energy oder Mana
 }

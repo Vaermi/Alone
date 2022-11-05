@@ -9,17 +9,10 @@ using UnityEngine;
 
 public class Inventory
 {
-    private int currentInventory = 0;       
-    public int CurrentInventory { get { return currentInventory; } set { currentInventory = value; } }
-
-    private int maxInventory = 10;
-    public int MaxInventory { get { return maxInventory; } set { maxInventory = value; } }
-
-    private int healPotion = 0;
-    public int HealPotion { get { return healPotion; } set { healPotion = value; } }
-
-    private int inventoryCount = 0;
-    public int InventoryCount { get { return inventoryCount; } set { inventoryCount = value; } }
+    public int CurrentInventory { get; set; } = 0;
+    public int MaxInventory { get; } = 10;
+    public int HealPotion { get; set; } = 0;
+    public int InventoryCount { get; set; } = 0;
 
 
     private Inventory() { }
@@ -31,10 +24,31 @@ public class Inventory
             if (instance == null) instance = new Inventory();
             return instance;
         }
-
     }
 
 
-    //TODO Counter für Inventory/Placeholder
-    //TODO Methode um ein HealPotion dem Inventar hinzuzufügen
+    public void InventoryPlusCounter()
+    {
+        ++InventoryCount;
+    }
+
+
+    public void InventoryMinusCounter()
+    {
+        --InventoryCount;
+    }
+
+
+    public void AddHealPotionToInventory()
+    {
+        ++HealPotion;
+        InventoryPlusCounter();
+    }
+
+
+    public void RemoveHealPotionFromInventory()
+    {
+        --HealPotion;
+        InventoryMinusCounter();
+    }
 }

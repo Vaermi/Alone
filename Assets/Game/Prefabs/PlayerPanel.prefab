@@ -498,7 +498,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d3fa6a2c47bb3c4190079c2af0f8acd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hero: {fileID: 0}
   textHeroName: {fileID: 2810956423684016556}
   textHealth: {fileID: 2810956423042668867}
   textSanity: {fileID: 2810956423570590646}
