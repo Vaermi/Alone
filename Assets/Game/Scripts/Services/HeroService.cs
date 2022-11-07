@@ -27,7 +27,7 @@ namespace Assets.Game.Scripts.GameObjects
             }
         }
 
-        //Methode zum Abfragen vom Hero Namen zu Beginn
+
         public async Task Init()
         {
             HeroName = await FirebaseService.Instance.GetHeroNameAsync();
@@ -59,16 +59,13 @@ namespace Assets.Game.Scripts.GameObjects
             return UnityEngine.Random.Range(0, 20);
         }
 
-        // TODO Methode um PlayerPosition zu speichern
-        public void CurrentPlayerPosition()
-        {
-
-        }
-
         // TODO Methode die GameOver prüft und GameOverScreen einblendet 
         public void IsDead()
         {
-
+            if (Health <= 0)
+            {
+                //GameOverScreen
+            }
         }
 
 
@@ -99,16 +96,32 @@ namespace Assets.Game.Scripts.GameObjects
             Experience += 10;
         }
 
-        // TODO Methode die ein Levelup prüft
+
         public void CheckExperiencePoints()
         {
-
+            switch (Experience)
+            {
+                case 100:
+                case 250:
+                case 450:
+                case 700:
+                case 1000:
+                case 1350:
+                case 1750:
+                case 2200:
+                case 2700:
+                case 3250:
+                    GetLevelUp();
+                    break;
+                default:
+                    break;
+            }
         }
 
-        // TODO Methode die ein Level aufstuft
+
         public void GetLevelUp()
         {
-
+            ++Level;
         }
 
 

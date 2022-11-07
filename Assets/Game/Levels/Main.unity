@@ -255,7 +255,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef131f5530bf7544892526409ce8f7c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Camera: {fileID: 188698445}
   CurrentInventory: 0
   InventoryCount: 0
 --- !u!1 &483726855
@@ -7359,6 +7358,17 @@ TilemapCollider2D:
   m_Offset: {x: 0, y: 0}
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0.00001
+--- !u!114 &1269737369 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7570570878011749874, guid: 3a9f03f470ab72640bac27f7bdef8ffa, type: 3}
+  m_PrefabInstance: {fileID: 7570570877830721835}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1291533442
 GameObject:
   m_ObjectHideFlags: 0
@@ -7593,7 +7603,6 @@ GameObject:
   - component: {fileID: 1621608411}
   - component: {fileID: 1621608414}
   - component: {fileID: 1621608413}
-  - component: {fileID: 1621608415}
   m_Layer: 3
   m_Name: Tilemap-Water
   m_TagString: Untagged
@@ -22487,21 +22496,6 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
---- !u!114 &1621608415
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1621608410}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4016a0b8da451904eb3bdacf33002ccb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  QuestText: {fileID: 0}
-  Panel: {fileID: 0}
-  QuestObj: {fileID: 0}
 --- !u!1001 &2810956423761107129
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -22509,6 +22503,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 771401360}
     m_Modifications:
+    - target: {fileID: 2810956423680087840, guid: 19eceed57fe1b6c4c9db4084c7343b71, type: 3}
+      propertyPath: hero
+      value: 
+      objectReference: {fileID: 1581232137}
     - target: {fileID: 2810956423680087852, guid: 19eceed57fe1b6c4c9db4084c7343b71, type: 3}
       propertyPath: m_Name
       value: PlayerPanel
@@ -22767,6 +22765,18 @@ PrefabInstance:
       propertyPath: questObjects
       value: 
       objectReference: {fileID: 683523600}
+    - target: {fileID: 7570570878011749872, guid: 3a9f03f470ab72640bac27f7bdef8ffa, type: 3}
+      propertyPath: Panel
+      value: 
+      objectReference: {fileID: 174112830}
+    - target: {fileID: 7570570878011749872, guid: 3a9f03f470ab72640bac27f7bdef8ffa, type: 3}
+      propertyPath: QuestObj
+      value: 
+      objectReference: {fileID: 683523600}
+    - target: {fileID: 7570570878011749872, guid: 3a9f03f470ab72640bac27f7bdef8ffa, type: 3}
+      propertyPath: QuestText
+      value: 
+      objectReference: {fileID: 1269737369}
     - target: {fileID: 7570570878011749872, guid: 3a9f03f470ab72640bac27f7bdef8ffa, type: 3}
       propertyPath: questObjects
       value: 

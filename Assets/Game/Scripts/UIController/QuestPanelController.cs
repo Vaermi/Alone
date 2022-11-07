@@ -4,7 +4,7 @@ using UnityEngine;
 /// Das QuestPanel steuert die Visuelle Anzeige der Quests.
 /// </summary>
 
-public class QuestPanel : MonoBehaviour
+public class QuestPanelController : MonoBehaviour
 {
     public void SetQuestWindowActive()
     {

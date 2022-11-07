@@ -7,6 +7,8 @@ namespace Assets.Game.Scripts.Db
 {
     public class FirebaseService
     {
+        private Hero hero;
+
         FirebaseFirestore db;
         private FirebaseService() { }
         private static FirebaseService instance;
@@ -59,7 +61,7 @@ namespace Assets.Game.Scripts.Db
 
         public async Task<string> GetHeroNameAsync()
         {
-            Task t = EstablishConnectionAsync();
+            await EstablishConnectionAsync();
             DocumentReference docRef = db.Collection("Player").Document("HeroName");
             var snapshot = await docRef.GetSnapshotAsync();
             return snapshot.GetValue<string>("name");
@@ -68,7 +70,7 @@ namespace Assets.Game.Scripts.Db
         //TODO Quest abrufen anhand der QuestNr
         public async Task<string> GetQuestWithIdAsync(string id)
         {
-            Task t = EstablishConnectionAsync();
+            await EstablishConnectionAsync();
             DocumentReference docRef = db.Collection("Quest").Document(id);
             var snapshot = await docRef.GetSnapshotAsync();
             return snapshot.GetValue<string>("text");
@@ -102,9 +104,10 @@ namespace Assets.Game.Scripts.Db
 
         //TODO Spielerposition speichern
 
-        public void UpdatePlayerPosition()
+        public string UpdatePlayerPosition()
         {
-
+            string pos = hero.CurrentPlayerPosition();
+            return pos;
         }
 
         //TODO Spielerwerte speichern 
@@ -113,10 +116,12 @@ namespace Assets.Game.Scripts.Db
 
         }
 
-        //TODO Spielstand speichern
+       
         public void UpdateSaveGame()
         {
-
+            UpdateQuestProgress();
+            UpdatePlayerPosition();
+            UpdatePlayerAttributes();
         }
 
         //DELETE

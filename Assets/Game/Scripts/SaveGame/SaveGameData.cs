@@ -16,6 +16,7 @@ public class SaveGameData : MonoBehaviour
     private async void Awake()
     {
         await HeroService.Instance.Init();
+        Debug.Log("SaveGameData");
     }
 
 

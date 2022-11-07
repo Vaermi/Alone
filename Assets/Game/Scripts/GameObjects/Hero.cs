@@ -6,11 +6,12 @@ using UnityEngine;
 /// </summary>
 public class Hero : GameObjectController
 {
+
     public QuestObjects QuestObj;
-    public QuestPanel Panel;
+    public QuestPanelController Panel;
 
     [SerializeField]
-    private string heroName = HeroService.Instance.HeroName;
+    private string heroName;
     [SerializeField]
     private float health = HeroService.Instance.Health;
     [SerializeField]
@@ -21,12 +22,12 @@ public class Hero : GameObjectController
     private int defaultDice = HeroService.Instance.DefaultDice;
     private Vector3 pos = SaveGameData.Pos;
 
-    // TODO Init() bekommt später der Scene-Controller
     private async void Start()
     {
         await HeroService.Instance.Init();
+        Debug.Log("Hero");
+        heroName = HeroService.Instance.HeroName;
     }
-
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -36,25 +37,13 @@ public class Hero : GameObjectController
     }
 
 
-    public string GetHeroName()
+    public string CurrentPlayerPosition()
     {
-        if (heroName != string.Empty)
-        {
-            Debug.Log("Player found");
-        }
-        return heroName;
-    }
-
-
-    public float GetHealth()
-    {
-        return health;
-    }
-
-
-    public int GetInsanity()
-    {
-        return insanity;
+        float x = pos.x;
+        float y = pos.y;
+        float z = pos.z;
+        string curPos = $"{x}{y}{z}";
+        return curPos;
     }
 
 }
