@@ -1,82 +1,62 @@
+using Assets.Game.Scripts.GameObjects;
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Fight : MonoBehaviour
 {
-
-    private Hero hero;
+    private HeroService heroService;
     private Enemy enemy;
 
-
-    //Fight-Methode wenn der Hero die erste Runde beginnt
-    public void FightHeroFirst(Hero attacker, Enemy defender)
+    // TODO Kampf Screen in Unity erstellen
+    // TODO Fight Methoden überarbeiten
+    public void HeroFirstTurn()
     {
-
         Console.WriteLine("Du beginnst...");
-
         int counter = 0;
 
-        while (hero.Health != 0 && enemy.Health != 0)
+        while (heroService.Health > 0 && enemy.Health > 0)
         {
-
             Console.WriteLine($"Runde {counter}");
-
-            float heroDmgOutput = hero.Attack * hero.DefaultDice;
+            float heroDmgOutput = heroService.Attack * heroService.DefaultDice;
             float enemyDmgInput = heroDmgOutput - enemy.Defence;
-            enemy.Health -= (int)enemyDmgInput;
-
+            enemy.SetEnemyHealth(enemyDmgInput);
             counter++;
 
-            if (enemy.Health <= 0) Console.WriteLine("Du hast gewonnen!");
-
-
+            if (enemy.Health <= 0) Console.WriteLine("YOU WIN!");
             Console.WriteLine($"Runde {counter}");
-
             float enemyDmgOutput = enemy.Attack * enemy.DefaultDice;
-            float heroDmgInput = enemyDmgOutput - hero.Defence;
-            hero.Health -= (int)heroDmgInput;
-
+            float heroDmgInput = enemyDmgOutput - heroService.Defence;
+            heroService.ReduceHeroHealth(heroDmgInput);
             counter++;
 
-            if (hero.Health <= 0) Console.WriteLine($"Du bist tot.\n GAME OVER");
+            if (heroService.Health <= 0) Console.WriteLine($"You are dead.\n GAME OVER");
+            //TODO GAME OVER SCREEN
         }
     }
 
 
-
-    //Fight-Methode wenn der Enemy die erste Runde beginnt
-    public void FightEnemyFirst(Enemy attacker, Hero defender)
+    public void EnemyFirstTurn()
     {
-
         Console.WriteLine("Enemy beginnt...");
-
         int counter = 0;
 
-        while (hero.Health != 0 && enemy.Health != 0)
+        while (heroService.Health > 0 && enemy.Health > 0)
         {
-            
             Console.WriteLine($"Runde {counter}");
-
             float enemyDmgOutput = enemy.Attack * enemy.DefaultDice;
-            float heroDmgInput = enemyDmgOutput - hero.Defence;
-            hero.Health -= (int)heroDmgInput;
-
+            float heroDmgInput = enemyDmgOutput - heroService.Defence;
+            heroService.ReduceHeroHealth(heroDmgInput);
             counter++;
 
-            if (hero.Health <= 0) Console.WriteLine($"Du bist tot.\n GAME OVER");
-
-
+            if (heroService.Health <= 0) Console.WriteLine($"You are dead.\n GAME OVER");
+            //TODO GAME OVER SCREEN
             Console.WriteLine($"Runde {counter}");
-
-            float heroDmgOutput = hero.Attack * hero.DefaultDice;
+            float heroDmgOutput = heroService.Attack * heroService.DefaultDice;
             float enemyDmgInput = heroDmgOutput - enemy.Defence;
-            enemy.Health -= (int)enemyDmgInput;
-
+            enemy.SetEnemyHealth(enemyDmgInput);
             counter++;
 
-            if (enemy.Health <= 0) Console.WriteLine("Du hast gewonnen!");
+            if (enemy.Health <= 0) Console.WriteLine("YOU WIN!");
         }
     }
 }

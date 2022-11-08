@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "139317059733-irbvhqhsmc0dc2mave39us04ceoglr4e.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.Vaermi.Alone",
+            "certificate_hash": "bd3cbf81c42cca2eed21a1ddbb31272ba1b6f6a0"
+          }
+        },
+        {
           "client_id": "139317059733-5devon6p14fjmaqftvsgk19g9e2iepv6.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -29,6 +37,13 @@
             {
               "client_id": "139317059733-5devon6p14fjmaqftvsgk19g9e2iepv6.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "139317059733-phssslhd446pq5ck91rqevmver63q168.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.Vaermi.Alone.IOS"
+              }
             }
           ]
         }

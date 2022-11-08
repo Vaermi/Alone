@@ -1,41 +1,47 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using Unity.VisualScripting;
+using Assets.Game.Scripts.GameObjects;
 using UnityEngine;
-using UnityEngine.Tilemaps;
 
-
-/// <summary>
-/// Helden Spezifische Funktionen
-/// </summary>
-public class Hero : TheGameObject
+public class Hero : GameObjectController
 {
-    public QuestObjects questObjects;
-    public QuestPanel panel;
-    private Enemy enemy;
+    public QuestObjects QuestObj;
+    public QuestPanelController Panel;
 
-    public string HeroName = "";
-    public int Health = 50;
-    public int Insanity = 0;
-    public int Inventory = 0;       //Counter für Inventory/Placeholder
-    public int Defence = 20;
-    public int Attack = 5;
-    public int AttackSpeed = 3;
-    public int DefaultDice = 10;
+    [SerializeField]
+    private string heroName;
+    [SerializeField]
+    private float health = HeroService.Instance.Health;
+    [SerializeField]
+    private int insanity = HeroService.Instance.Insanity;
+    private int defence = HeroService.Instance.Defence;
+    private int attack = HeroService.Instance.Attack;
+    private int attackSpeed = HeroService.Instance.AttackSpeed;
+    private int defaultDice = HeroService.Instance.DefaultDice;
+    private Vector3 pos = SaveGameData.Pos;
 
 
+    private async void Start()
+    {
+        await HeroService.Instance.Init();
+        Debug.Log("Hero");
+        heroName = HeroService.Instance.HeroName;
+    }
 
-    //Methode um Quests auszulösen, sobald der Hero den Kollider berührt
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Debug.Log("Trigger");
-        panel.SetQuestWindowActive();
-        questObjects.SwitchStatusQuestObjects();
-
+        Panel.SetQuestWindowActive();
+        QuestObj.SwitchStatusQuestObjects();
     }
 
-    
+
+    public string CurrentPlayerPosition()
+    {
+        float x = pos.x;
+        float y = pos.y;
+        float z = pos.z;
+        string curPos = $"{x}{y}{z}";
+        return curPos;
+    }
 
 }

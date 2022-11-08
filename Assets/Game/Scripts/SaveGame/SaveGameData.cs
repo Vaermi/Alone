@@ -1,15 +1,36 @@
-using System.Collections;
-using System.Collections.Generic;
+using Assets.Game.Scripts.Db;
+using Assets.Game.Scripts.GameObjects;
 using UnityEngine;
 
-/// <summary>
-/// Basis-Klasse für die Spielspeicherung
-/// </summary>
-
-public class SaveGameData
+public class SaveGameData : MonoBehaviour
 {
-    public static SaveGameData current = new SaveGameData();
+    public static Vector3 Pos { get; set; }
 
-    public Inventory inventory = new Inventory();
+    public int CurrentInventory = Inventory.Instance.CurrentInventory;
+    public int InventoryCount = Inventory.Instance.InventoryCount;
+
+
+    private async void Awake()
+    {
+        await HeroService.Instance.Init();
+    }
+
+
+    private void Start()
+    {
+        SetSaveGame("Test1");
+    }
+
+
+    private void FixedUpdate()
+    {
+        Pos = transform.position;
+    }
+
+
+    public void SetSaveGame(string name)
+    {
+        FirebaseService.Instance.SetSaveGameAsync(name);
+    }
 
 }

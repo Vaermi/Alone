@@ -240,6 +240,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4016a0b8da451904eb3bdacf33002ccb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  questText01: {fileID: 7570570878011749874}
+  questText: {fileID: 0}
   panel: {fileID: 7570570878004801813}
   questObjects: {fileID: 0}
