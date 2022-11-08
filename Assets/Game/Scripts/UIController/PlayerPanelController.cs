@@ -2,10 +2,6 @@ using Assets.Game.Scripts.GameObjects;
 using TMPro;
 using UnityEngine;
 
-/// <summary>
-/// Das PlayerPanel ist für die Visuelle Anzeige der Spielerinfos zuständig.
-/// </summary>
-
 public class PlayerPanelController : MonoBehaviour
 {
     public TextMeshProUGUI textHeroName;
@@ -28,14 +24,8 @@ public class PlayerPanelController : MonoBehaviour
         int playerSanity = heroService.Insanity;
         textSanity.text = $"Sanity: {playerSanity}/100";
 
-        //TODO Placeholder für Inventory Object
         int playerInventory = Inventory.Instance.InventoryCount;
         textInventory.text = $"Inventory: {playerInventory}";
-    }
-
-
-    private void Awake()
-    {
     }
 
 }

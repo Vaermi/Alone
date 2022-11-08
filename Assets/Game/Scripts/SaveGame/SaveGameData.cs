@@ -2,10 +2,6 @@ using Assets.Game.Scripts.Db;
 using Assets.Game.Scripts.GameObjects;
 using UnityEngine;
 
-/// <summary>
-/// Basis-Klasse für die Spielspeicherung
-/// </summary>
-
 public class SaveGameData : MonoBehaviour
 {
     public static Vector3 Pos { get; set; }
@@ -13,10 +9,10 @@ public class SaveGameData : MonoBehaviour
     public int CurrentInventory = Inventory.Instance.CurrentInventory;
     public int InventoryCount = Inventory.Instance.InventoryCount;
 
+
     private async void Awake()
     {
         await HeroService.Instance.Init();
-        Debug.Log("SaveGameData");
     }
 
 

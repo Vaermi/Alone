@@ -28,7 +28,6 @@ namespace Assets.Game.Scripts.Db
             {
                 await FirebaseApp.CheckAndFixDependenciesAsync();
                 db = FirebaseFirestore.DefaultInstance;
-
             }
         }
 
@@ -67,7 +66,7 @@ namespace Assets.Game.Scripts.Db
             return snapshot.GetValue<string>("name");
         }
 
-        //TODO Quest abrufen anhand der QuestNr
+        //TODO Quest abrufen anhand des aktuellen Queststands
         public async Task<string> GetQuestWithIdAsync(string id)
         {
             await EstablishConnectionAsync();

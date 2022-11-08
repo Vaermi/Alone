@@ -1,12 +1,8 @@
 using Assets.Game.Scripts.GameObjects;
 using UnityEngine;
 
-/// <summary>
-/// Helden Spezifische Funktionen
-/// </summary>
 public class Hero : GameObjectController
 {
-
     public QuestObjects QuestObj;
     public QuestPanelController Panel;
 
@@ -22,12 +18,14 @@ public class Hero : GameObjectController
     private int defaultDice = HeroService.Instance.DefaultDice;
     private Vector3 pos = SaveGameData.Pos;
 
+
     private async void Start()
     {
         await HeroService.Instance.Init();
         Debug.Log("Hero");
         heroName = HeroService.Instance.HeroName;
     }
+
 
     private void OnTriggerEnter2D(Collider2D collision)
     {

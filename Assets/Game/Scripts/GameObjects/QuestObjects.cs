@@ -2,15 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-/// <summary>
-/// Klasse für QuestObjects
-/// </summary>
-
 public class QuestObjects : MonoBehaviour
 {
     private SpriteRenderer spriteRenderer;
-    public int QuestId { get; set; }
-    public string QuestText { get; set; }
+    public int QuestId { get; private set; }
+    public string QuestText { get; private set; }
 
 
     public void SwitchStatusQuestObjects()

@@ -1,8 +1,5 @@
 using Assets.Game.Scripts.GameObjects;
 
-/// <summary>
-/// Enemy-Spezifische Funktionen
-/// </summary>
 public class Enemy : GameObjectController
 {
     public string EnemyName { get; private set; }
