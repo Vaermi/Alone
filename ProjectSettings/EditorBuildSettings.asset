@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Game/Levels/NameCreationScreen.unity
     guid: dd5f92d1628312e4fbe4a776f14bc1ee
+  - enabled: 1
+    path: Assets/Game/Levels/GameOverScreen.unity
+    guid: a60bb343667486b4698875b157215c3b
   m_configObjects: {}
