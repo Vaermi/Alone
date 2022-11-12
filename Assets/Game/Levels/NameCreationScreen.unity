@@ -1030,7 +1030,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1840655269}
-        m_TargetAssemblyTypeName: HeroNameScreen, Assembly-CSharp
+        m_TargetAssemblyTypeName: NameScreenController, Assembly-CSharp
         m_MethodName: CreateHeroName
         m_Mode: 1
         m_Arguments:
@@ -1038,7 +1038,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: SetActive() = true
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 1
 --- !u!114 &1294496847
