@@ -32,16 +32,37 @@ namespace Assets.Game.Scripts.Db
         }
 
         //CREATE
+
+
+        public async void SetInitialSaveGameAsync()
+        {
+            Task t = EstablishConnectionAsync();
+            Dictionary<string, object> data = new Dictionary<string, object>
+            {
+                {"HeroName", ""},
+                {"Health", 100.00},
+                {"Insanity", 0},
+                {"Defence", 20},
+                {"Attack", 5},
+                {"AttackSpeed", 3},
+                {"DefaultDice", 10},
+                {"Expirience", 0},
+                {"Level", 1}
+            };
+            await t;
+            DocumentReference docRef = db.Collection("Player").Document("NewPlayer");
+            await docRef.SetAsync(data);
+        }
         public async void SetHeroNameAsync(string name)
         {
             Task t = EstablishConnectionAsync();
-            Dictionary<string, object> heroname = new Dictionary<string, object>
+            Dictionary<string, object> updateName = new Dictionary<string, object>
         {
-            {"name", name}
+            {"HeroName", name}
         };
             await t;
-            DocumentReference docRef = db.Collection("Player").Document("HeroName");
-            await docRef.SetAsync(heroname);
+            DocumentReference docRef = db.Collection("Player").Document("NewPlayer");
+            await docRef.SetAsync(updateName, SetOptions.MergeAll);
         }
 
         //TODO Spielstand muss Spielerposition, Queststand und Spielerattrubite enthalten
