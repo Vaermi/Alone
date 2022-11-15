@@ -1,5 +1,6 @@
 ﻿using Firebase;
 using Firebase.Firestore;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -34,8 +35,9 @@ namespace Assets.Game.Scripts.Db
         //CREATE
 
 
-        public async void SetInitialSaveGameAsync()
+        public async Task<string> SetInitialSaveGameAsync()
         {
+            Dictionary<string, object> value;
             Task t = EstablishConnectionAsync();
             Dictionary<string, object> data = new Dictionary<string, object>
             {
@@ -46,22 +48,40 @@ namespace Assets.Game.Scripts.Db
                 {"Attack", 5},
                 {"AttackSpeed", 3},
                 {"DefaultDice", 10},
-                {"Expirience", 0},
-                {"Level", 1}
+                {"Experience", 0},
+                {"Level", 1},
+                {"ID", "" }
             };
             await t;
-            DocumentReference docRef = db.Collection("Player").Document("NewPlayer");
-            await docRef.SetAsync(data);
+            String result = "";
+            await db.Collection("Player").AddAsync(data).ContinueWith(task => result = task.Result.Id);
+            SetHeroIDAsync(result);
+            return result;
         }
-        public async void SetHeroNameAsync(string name)
+
+
+        public async void SetHeroIDAsync(string id)
         {
             Task t = EstablishConnectionAsync();
             Dictionary<string, object> updateName = new Dictionary<string, object>
         {
-            {"HeroName", name}
+            {"ID", id},
         };
             await t;
-            DocumentReference docRef = db.Collection("Player").Document("NewPlayer");
+            DocumentReference docRef = db.Collection("Player").Document(id);
+            await docRef.SetAsync(updateName, SetOptions.MergeAll);
+        }
+
+
+        public async void SetHeroNameAsync(string name, string id)
+        {
+            Task t = EstablishConnectionAsync();
+            Dictionary<string, object> updateName = new Dictionary<string, object>
+        {
+            {"HeroName", name},
+        };
+            await t;
+            DocumentReference docRef = db.Collection("Player").Document(id);
             await docRef.SetAsync(updateName, SetOptions.MergeAll);
         }
 
@@ -85,6 +105,15 @@ namespace Assets.Game.Scripts.Db
             DocumentReference docRef = db.Collection("Player").Document("HeroName");
             var snapshot = await docRef.GetSnapshotAsync();
             return snapshot.GetValue<string>("name");
+        }
+
+
+        public async Task<string> GetHeroIDAsync(string id)
+        {
+            await EstablishConnectionAsync();
+            DocumentReference docRef = db.Collection("Player").Document(id);
+            var snapshot = await docRef.GetSnapshotAsync();
+            return snapshot.GetValue<string>("ID");
         }
 
         //TODO Quest abrufen anhand des aktuellen Queststands
@@ -136,7 +165,7 @@ namespace Assets.Game.Scripts.Db
 
         }
 
-       
+
         public void UpdateSaveGame()
         {
             UpdateQuestProgress();

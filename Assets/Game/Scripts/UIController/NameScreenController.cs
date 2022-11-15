@@ -16,7 +16,7 @@ public class NameScreenController : MonoBehaviour
             string userInputText = userInput.text;
             Debug.Log(userInputText);
             if (userInputText != string.Empty) HeroService.Instance.SetHeroName(userInputText);
-            FirebaseService.Instance.SetHeroNameAsync(HeroService.Instance.HeroName);
+            FirebaseService.Instance.SetHeroNameAsync(HeroService.Instance.HeroName, HeroService.Instance.HeroId);
             SceneController.MainGameScreen();
         }
     }

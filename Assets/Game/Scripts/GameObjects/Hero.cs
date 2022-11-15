@@ -1,4 +1,5 @@
 using Assets.Game.Scripts.GameObjects;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class Hero : GameObjectController
@@ -8,6 +9,7 @@ public class Hero : GameObjectController
 
     [SerializeField]
     private string heroName;
+    private string heroId = HeroService.Instance.HeroId;
     [SerializeField]
     private float health = HeroService.Instance.Health;
     [SerializeField]

@@ -6,6 +6,7 @@ namespace Assets.Game.Scripts.GameObjects
     public class HeroService
     {
         public string HeroName { get; private set; }
+        public string HeroId { get; private set; }  
         public int Level { get; private set; } = 1;
         public float Health { get; private set; } = 100.00f;
         public int Insanity { get; private set; } = 0;
@@ -38,6 +39,16 @@ namespace Assets.Game.Scripts.GameObjects
         {
             HeroName = name;
         }
+
+
+        public void SetHeroID(string id)
+        {
+            HeroId = id;
+        }
+
+
+
+
 
 
         public void ReduceInsanity()

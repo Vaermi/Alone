@@ -1,11 +1,14 @@
 using Assets.Game.Scripts.Db;
+using Assets.Game.Scripts.GameObjects;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class SceneController : MonoBehaviour
 {
+    private HeroService heroService = HeroService.Instance;
 
     public static void StartScreen()
     {
@@ -13,10 +16,11 @@ public class SceneController : MonoBehaviour
     }
 
 
-    public static void NameCreationScreen()
+    public async void NameCreationScreen()
     {
-        FirebaseService.Instance.SetInitialSaveGameAsync();
         SceneManager.LoadScene("NameCreationScreen");
+        string id = await FirebaseService.Instance.SetInitialSaveGameAsync();
+        heroService.SetHeroID(id);
     }
 
 
