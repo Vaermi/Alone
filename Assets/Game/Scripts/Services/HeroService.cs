@@ -31,7 +31,7 @@ namespace Assets.Game.Scripts.GameObjects
 
         public async Task Init()
         {
-            HeroName = await FirebaseService.Instance.GetHeroNameAsync();
+            HeroName = await FirebaseService.Instance.GetHeroNameAsync(HeroId);
         }
 
 
