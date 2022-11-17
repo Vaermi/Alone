@@ -1,4 +1,6 @@
 using Assets.Game.Scripts.Db;
+using Firebase.Firestore;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
@@ -10,12 +12,19 @@ public class QuestController : MonoBehaviour
     public QuestObjects QuestObj;
 
     private string questId = "OLdU9m2J33gP89Tt8mH2";
+    private DocumentReference quest;
+    private DocumentReference subQuest;
+    private DocumentSnapshot questSnapshot;
 
 
     async void Start()
     {
         QuestText = GetComponent<TextMeshProUGUI>();
-        QuestText.text = await GetQuestWithID(questId);
+        quest = await GetQuestWithID(questId);
+        subQuest = quest;
+        questSnapshot = await subQuest.GetSnapshotAsync();
+        QuestText.text = questSnapshot.GetValue<string>("text");
+        //QuestText.text = await GetQuestWithID(questId);
     }
 
 
@@ -28,9 +37,24 @@ public class QuestController : MonoBehaviour
     }
 
 
-    private async Task<string> GetQuestWithID(string id)
+    private async Task<DocumentReference> GetQuestWithID(string id)
     {
-        return await FirebaseService.Instance.GetQuestWithIdAsync(id);
+        return await FirebaseService.Instance.GetQuestWithIdAsync(id); 
+    }
+
+
+    public void CheckCurrentQuest()
+    {
+        /*IAsyncEnumerable<CollectionReference> subcollections = subQuest.ListCollectionsAsync();
+        if (quest. )
+        {
+            LastCompletedQuest = CurrentQuest;
+            CurrentQuest = string.Empty;
+
+        }
+        else
+        {
+        }*/
     }
 
 }

@@ -5,7 +5,8 @@ using UnityEngine;
 public class QuestObjects : MonoBehaviour
 {
     private SpriteRenderer spriteRenderer;
-    public int QuestId { get; private set; }
+    [SerializeField]
+    public string QuestId;
     public string QuestText { get; private set; }
 
 

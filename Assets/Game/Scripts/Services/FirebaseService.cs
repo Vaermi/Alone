@@ -50,7 +50,9 @@ namespace Assets.Game.Scripts.Db
                 {"DefaultDice", 10},
                 {"Experience", 0},
                 {"Level", 1},
-                {"ID", "" }
+                {"ID", "" },
+                {"CurrentQuest", ""},
+                {"LastCompletedQuest", ""}
             };
             await t;
             String result = "";
@@ -221,12 +223,12 @@ namespace Assets.Game.Scripts.Db
         }
 
         //TODO Quest abrufen anhand des aktuellen Queststands
-        public async Task<string> GetQuestWithIdAsync(string id)
+        public async Task<DocumentReference> GetQuestWithIdAsync(string id)
         {
             await EstablishConnectionAsync();
             DocumentReference docRef = db.Collection("Quest").Document(id);
-            var snapshot = await docRef.GetSnapshotAsync();
-            return snapshot.GetValue<string>("text");
+            //var snapshot = await docRef.GetSnapshotAsync();
+            return docRef;
         }
 
         //TODO Spielerposition abrufen

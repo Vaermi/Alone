@@ -7,8 +7,10 @@ namespace Assets.Game.Scripts.GameObjects
     {
         public string HeroName { get; private set; }
         public string HeroId { get; private set; }  
-        public int Level { get; private set; } = 1;
+        public string CurrentQuest { get; private set; }
+        public string LastCompletedQuest { get; private set; }
         public float Health { get; private set; } = 100.00f;
+        public int Level { get; private set; } = 1;
         public int Insanity { get; private set; } = 0;
         public int Defence { get; private set; } = 20;
         public int Attack { get; private set; } = 5;
@@ -45,9 +47,6 @@ namespace Assets.Game.Scripts.GameObjects
         {
             HeroId = id;
         }
-
-
-
 
 
 
@@ -102,6 +101,12 @@ namespace Assets.Game.Scripts.GameObjects
         }
 
 
+        public void IncreaseHeroHealthOnLevelUp()
+        {
+            Health += 10;
+        }
+
+
         public void IncreaseExperience()
         {
             Experience += 10;
@@ -134,6 +139,33 @@ namespace Assets.Game.Scripts.GameObjects
         {
             ++Level;
         }
+
+
+        public void IncreaseAttackOnLevelUp()
+        {
+            Attack += 3;
+        }
+
+
+        public void IncreaseAttackSpeedOnLevelUp()
+        {
+            AttackSpeed += 2;
+        }
+
+
+        public void IncreaseDefaultDiceOnLevelUp()
+        {
+            ++DefaultDice;
+        }
+
+
+        public void IncreaseDefenceOnLevelUp()
+        {
+            Defence += 5;
+        }
+
+
+        
 
 
     }

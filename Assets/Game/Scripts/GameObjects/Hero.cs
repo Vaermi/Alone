@@ -10,6 +10,8 @@ public class Hero : GameObjectController
     [SerializeField]
     private string heroName;
     private string heroId = HeroService.Instance.HeroId;
+    private string currentQuest = HeroService.Instance.CurrentQuest;
+    private string lastCompletedQuest = HeroService.Instance.LastCompletedQuest;
     [SerializeField]
     private float health = HeroService.Instance.Health;
     [SerializeField]
