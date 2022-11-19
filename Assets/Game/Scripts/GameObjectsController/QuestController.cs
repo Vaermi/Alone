@@ -9,21 +9,12 @@ public class QuestController : MonoBehaviour
 {
     public TextMeshProUGUI QuestText;
     public QuestPanelController Panel;
-    public QuestObjects QuestObj;
-
-    private string questId = "OLdU9m2J33gP89Tt8mH2";
-    private DocumentReference quest;
-    private DocumentReference subQuest;
-    private DocumentSnapshot questSnapshot;
 
 
     async void Start()
     {
         QuestText = GetComponent<TextMeshProUGUI>();
-        quest = await GetQuestWithID(questId);
-        subQuest = quest;
-        questSnapshot = await subQuest.GetSnapshotAsync();
-        QuestText.text = questSnapshot.GetValue<string>("text");
+
         //QuestText.text = await GetQuestWithID(questId);
     }
 
@@ -36,26 +27,18 @@ public class QuestController : MonoBehaviour
         }
     }
 
-
-    private async Task<DocumentReference> GetQuestWithID(string id)
+    public async void LoadQuest(string questId)
     {
-        return await FirebaseService.Instance.GetQuestWithIdAsync(id); 
+        var data = await GetQuestWithID(questId);
+        QuestText.text = data.GetValue<string>("text");
     }
 
 
-    public void CheckCurrentQuest()
+    private async Task<DocumentSnapshot> GetQuestWithID(string id)
     {
-        /*IAsyncEnumerable<CollectionReference> subcollections = subQuest.ListCollectionsAsync();
-        if (quest. )
-        {
-            LastCompletedQuest = CurrentQuest;
-            CurrentQuest = string.Empty;
-
-        }
-        else
-        {
-        }*/
+        return await FirebaseService.Instance.GetQuestWithIdAsync(id);
     }
+
 
 }
 

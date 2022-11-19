@@ -33,15 +33,12 @@ namespace Assets.Game.Scripts.Db
         }
 
         //CREATE
-
-
-        public async Task<string> SetInitialSaveGameAsync()
+        public async Task<string> SetInitialSaveGameAsync(string name)
         {
-            Dictionary<string, object> value;
             Task t = EstablishConnectionAsync();
             Dictionary<string, object> data = new Dictionary<string, object>
             {
-                {"HeroName", ""},
+                {"HeroName", name},
                 {"Health", 100.00},
                 {"Insanity", 0},
                 {"Defence", 20},
@@ -50,41 +47,10 @@ namespace Assets.Game.Scripts.Db
                 {"DefaultDice", 10},
                 {"Experience", 0},
                 {"Level", 1},
-                {"ID", "" },
-                {"CurrentQuest", ""},
-                {"LastCompletedQuest", ""}
+                {"CurrentQuest", "Quest"}
             };
             await t;
-            String result = "";
-            await db.Collection("Player").AddAsync(data).ContinueWith(task => result = task.Result.Id);
-            SetHeroIDAsync(result);
-            return result;
-        }
-
-
-        public async void SetHeroIDAsync(string id)
-        {
-            Task t = EstablishConnectionAsync();
-            Dictionary<string, object> updateName = new Dictionary<string, object>
-        {
-            {"ID", id},
-        };
-            await t;
-            DocumentReference docRef = db.Collection("Player").Document(id);
-            await docRef.SetAsync(updateName, SetOptions.MergeAll);
-        }
-
-
-        public async void SetHeroNameAsync(string name, string heroId)
-        {
-            Task t = EstablishConnectionAsync();
-            Dictionary<string, object> updateName = new Dictionary<string, object>
-        {
-            {"HeroName", name},
-        };
-            await t;
-            DocumentReference docRef = db.Collection("Player").Document(heroId);
-            await docRef.SetAsync(updateName, SetOptions.MergeAll);
+            return (await db.Collection("Player").AddAsync(data)).Id;
         }
 
 
@@ -223,12 +189,17 @@ namespace Assets.Game.Scripts.Db
         }
 
         //TODO Quest abrufen anhand des aktuellen Queststands
-        public async Task<DocumentReference> GetQuestWithIdAsync(string id)
+        string currentQuest = "Quest";
+        public async Task<DocumentSnapshot> GetQuestWithIdAsync(string id)
         {
             await EstablishConnectionAsync();
-            DocumentReference docRef = db.Collection("Quest").Document(id);
+            //id = "Quests/fgfjdlgsl
+            //id = Quests/hfgsdgfss/Subquests/gfdjgsklfjdsalf
+            //id = Quests/fkjdsfls/Subquests/gsdlngskdl/Subquests/
+            DocumentReference docRef = db.Document($"{currentQuest}/{id}");
+            currentQuest = $"{currentQuest}/{id}/SubQuest";
             //var snapshot = await docRef.GetSnapshotAsync();
-            return docRef;
+            return await docRef.GetSnapshotAsync();
         }
 
         //TODO Spielerposition abrufen

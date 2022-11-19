@@ -8,7 +8,6 @@ namespace Assets.Game.Scripts.GameObjects
         public string HeroName { get; private set; }
         public string HeroId { get; private set; }  
         public string CurrentQuest { get; private set; }
-        public string LastCompletedQuest { get; private set; }
         public float Health { get; private set; } = 100.00f;
         public int Level { get; private set; } = 1;
         public int Insanity { get; private set; } = 0;

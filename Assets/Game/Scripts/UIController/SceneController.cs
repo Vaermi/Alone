@@ -8,25 +8,22 @@ using UnityEngine.SceneManagement;
 
 public class SceneController : MonoBehaviour
 {
-    private HeroService heroService = HeroService.Instance;
-
     public static void StartScreen()
     {
         SceneManager.LoadScene("StartScreen");
     }
 
 
-    public async void NameCreationScreen()
+    public static void NameCreationScreen()
     {
         SceneManager.LoadScene("NameCreationScreen");
-        string id = await FirebaseService.Instance.SetInitialSaveGameAsync();
-        heroService.SetHeroID(id);
     }
 
 
     public static void MainGameScreen()
     {
         SceneManager.LoadScene("Main");
+        
     }
 
 
@@ -35,4 +32,18 @@ public class SceneController : MonoBehaviour
         SceneManager.LoadScene("GameOverScreen");
     }
 
+
+    public static void PauseGame()
+    {
+        SceneManager.LoadScene("PauseScreen", LoadSceneMode.Additive);
+
+    }
+
+
+    public void ContinueGame()
+    {
+        SceneManager.UnloadScene("PauseScreen");
+    }
+    //SceneManager.LoadScene("Main", LoadSceneMode.Additive);
+    //SceneManager.UnloadScene("Main");
 }

@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 5648509807453347262}
   - component: {fileID: 5648509807453347263}
   - component: {fileID: 5648509807453347260}
-  - component: {fileID: 5648509807453347233}
   - component: {fileID: 5648509807453347232}
   m_Layer: 0
   m_Name: QuestMarkerNew01
@@ -113,18 +112,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &5648509807453347233
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5648509807453347261}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ee93ec289a4aee42aa31c00d93e831f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!50 &5648509807453347232
 Rigidbody2D:
   serializedVersion: 4

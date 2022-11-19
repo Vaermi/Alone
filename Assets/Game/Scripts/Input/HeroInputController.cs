@@ -33,6 +33,6 @@ public class HeroInputController : MonoBehaviour
 
     private void OpenMenu()
     {
-        SceneController.StartScreen();
+        SceneController.PauseGame();
     }
 }
