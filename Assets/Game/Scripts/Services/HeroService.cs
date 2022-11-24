@@ -16,6 +16,7 @@ namespace Assets.Game.Scripts.GameObjects
         public int AttackSpeed { get; private set; } = 3;
         public int DefaultDice { get; private set; } = 10;
         public int Experience { get; private set; } = 0;
+        public bool IsHerosTurn { get; set; } = false;
 
 
         private HeroService() { }
@@ -87,9 +88,9 @@ namespace Assets.Game.Scripts.GameObjects
             }
         }
 
-        public void ReduceHeroHealth(float heroDmgInput)
+        public float ReduceHeroHealth(float heroDmgInput)
         {
-            Health -= heroDmgInput;
+            return Health -= heroDmgInput;
         }
 
         // TODO Methode um Health zu erhöhen zb durch Zauber

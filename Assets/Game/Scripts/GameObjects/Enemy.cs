@@ -16,9 +16,9 @@ public class Enemy : GameObjectController
     }
 
 
-    public void ReduceEnemyHealth(float enemyDmgInput)
+    public float ReduceEnemyHealth(float enemyDmgInput)
     {
-        Health -= enemyDmgInput;
+        return Health -= enemyDmgInput;
     }
 
 
@@ -26,6 +26,12 @@ public class Enemy : GameObjectController
     {
         HeroService.Instance.ReduceHeroHealth(10);
         Health += 5;
+    }
+
+
+    public float EnemyAttack()
+    {
+        return Attack * DefaultDice;
     }
 
     // TODO Unterklassen von Enemy erstellen

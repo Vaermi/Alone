@@ -21,6 +21,7 @@ public class Hero : GameObjectController
     private int attackSpeed = HeroService.Instance.AttackSpeed;
     private int defaultDice = HeroService.Instance.DefaultDice;
     private Vector3 pos = SaveGameData.Pos;
+    private bool isHerosTurn = HeroService.Instance.IsHerosTurn;
 
 
     private async void Start()

@@ -1,62 +1,89 @@
 using Assets.Game.Scripts.GameObjects;
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Fight : MonoBehaviour
 {
     private HeroService heroService;
     private Enemy enemy;
+    private Hero hero;
+    private SceneController sceneController;
 
-    // TODO Kampf Screen in Unity erstellen
-    // TODO Fight Methoden überarbeiten
-    public void HeroFirstTurn()
+    public int Counter = 0;
+
+    public void HerosTurn()
     {
-        Console.WriteLine("Du beginnst...");
-        int counter = 0;
+        heroService.IsHerosTurn = true;
+        Console.WriteLine($"{HeroService.Instance.HeroName} ist dran...");
 
-        while (heroService.Health > 0 && enemy.Health > 0)
+        if (heroService.Health > 0 && enemy.Health > 0)
         {
-            Console.WriteLine($"Runde {counter}");
-            float heroDmgOutput = heroService.Attack * heroService.DefaultDice;
-            float enemyDmgInput = heroDmgOutput - enemy.Defence;
-            enemy.SetEnemyHealth(enemyDmgInput);
-            counter++;
+            Console.WriteLine($"Runde {Counter}:");
 
-            if (enemy.Health <= 0) Console.WriteLine("YOU WIN!");
-            Console.WriteLine($"Runde {counter}");
-            float enemyDmgOutput = enemy.Attack * enemy.DefaultDice;
-            float heroDmgInput = enemyDmgOutput - heroService.Defence;
-            heroService.ReduceHeroHealth(heroDmgInput);
-            counter++;
+            while (HeroService.Instance.IsHerosTurn is true)
+            {
+                if (GameObject.Find("AttackButton").GetComponent<Button>() == true)
+                {
+                    float heroDmgOutput = heroService.HeroAttack();
+                    float enemyDmgInput = enemy.ReduceEnemyHealth(heroDmgOutput);
+                    Debug.Log($"{HeroService.Instance.HeroName} zieht {enemy.EnemyName} {enemyDmgInput} Lebenspunkte ab.");
+                    enemy.SetEnemyHealth(enemyDmgInput);
+                    Debug.Log($"{enemy.EnemyName} hat noch {enemy.Health} Lebenspunkte.");
+                    heroService.IsHerosTurn = false;
+                }
+                else if (GameObject.Find("HealPotionButton").GetComponent<Button>() == true)
+                {
+                    Debug.Log($"{HeroService.Instance.HeroName} benutzt einen Heiltrank.");
+                    HeroService.Instance.UseHealPotion();
+                    Debug.Log($"{HeroService.Instance.HeroName} heilt sich und hat nun wieder {HeroService.Instance.Health} Lebenspunkte.");
+                    heroService.IsHerosTurn = false;
+                }
+                else if (GameObject.Find("RunButton").GetComponent<Button>() == true)
+                {
+                    Debug.Log($"{HeroService.Instance.HeroName} versucht zu fliehen...");
+                    hero.RunFromFight();
+                    Debug.Log($"Fluchtversuch gescheitert!");
+                    heroService.IsHerosTurn = false;
+                }
+            }
 
-            if (heroService.Health <= 0) Console.WriteLine($"You are dead.\n GAME OVER");
-            SceneController.GameOverScreen();
+            if (enemy.Health <= 0)
+            {
+                Debug.Log($"{HeroService.Instance.HeroName} hat gewonnen!");
+                HeroService.Instance.IncreaseExperience();
+                Counter = 0;
+                sceneController.ExitFightScreen();
+            }
+
+            Counter++;
+            EnemysTurn();
         }
     }
 
 
-    public void EnemyFirstTurn()
+    public void EnemysTurn()
     {
-        Console.WriteLine("Enemy beginnt...");
-        int counter = 0;
+        Debug.Log($"{enemy.EnemyName} ist dran ...");
 
-        while (heroService.Health > 0 && enemy.Health > 0)
+        if (heroService.Health > 0 && enemy.Health > 0)
         {
-            Console.WriteLine($"Runde {counter}");
-            float enemyDmgOutput = enemy.Attack * enemy.DefaultDice;
-            float heroDmgInput = enemyDmgOutput - heroService.Defence;
+            Debug.Log($"Runde {Counter}");
+            float enemyDmgOutput = enemy.EnemyAttack();
+            float heroDmgInput = HeroService.Instance.ReduceHeroHealth(enemyDmgOutput);
+            Debug.Log($"{enemy.EnemyName} zieht {HeroService.Instance.HeroName} {heroDmgInput} Lebenspunkte ab.");
             heroService.ReduceHeroHealth(heroDmgInput);
-            counter++;
 
-            if (heroService.Health <= 0) Console.WriteLine($"You are dead.\n GAME OVER");
-            SceneController.GameOverScreen();
-            Console.WriteLine($"Runde {counter}");
-            float heroDmgOutput = heroService.Attack * heroService.DefaultDice;
-            float enemyDmgInput = heroDmgOutput - enemy.Defence;
-            enemy.SetEnemyHealth(enemyDmgInput);
-            counter++;
+            if (heroService.Health <= 0)
+            {
+                Debug.Log($"{HeroService.Instance.HeroName} ist gestorben. Game Over!");
+                Counter = 0;
+                SceneController.GameOverScreen();
+            }
 
-            if (enemy.Health <= 0) Console.WriteLine("YOU WIN!");
+            Counter++;
+            heroService.IsHerosTurn = true;
+            HerosTurn();
         }
     }
 }
