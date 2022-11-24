@@ -18,7 +18,7 @@ public class SaveGameData : MonoBehaviour
 
     private void Start()
     {
-        SetSaveGame("Test1");
+       // SetSaveGame("Test1");
     }
 
 
@@ -28,9 +28,9 @@ public class SaveGameData : MonoBehaviour
     }
 
 
-    public void SetSaveGame(string name)
+    public void SetSaveGame(string name, string heroId)
     {
-        FirebaseService.Instance.SetSaveGameAsync(name);
+        FirebaseService.Instance.SetSaveGameAsync(name, heroId);
     }
 
 }

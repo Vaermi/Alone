@@ -9,16 +9,13 @@ public class NameScreenController : MonoBehaviour
     public TextMeshProUGUI userInput;
 
 
-    public void CreateHeroName()
+    public async void CreateHeroName()
     {
-        if (HeroService.Instance.HeroName is null)
-        {
-            string userInputText = userInput.text;
-            Debug.Log(userInputText);
-            if (userInputText != string.Empty) HeroService.Instance.SetHeroName(userInputText);
-            FirebaseService.Instance.SetHeroNameAsync(HeroService.Instance.HeroName);
-            SceneController.MainGameScreen();
-        }
+        string userInputText = userInput.text;
+        if (userInputText != string.Empty) HeroService.Instance.SetHeroName(userInputText);
+        string id = await FirebaseService.Instance.SetInitialSaveGameAsync(userInputText);
+        HeroService.Instance.SetHeroID(id);
+        SceneController.MainGameScreen();
     }
 }
 

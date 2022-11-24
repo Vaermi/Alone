@@ -1,4 +1,6 @@
 using Assets.Game.Scripts.Db;
+using Firebase.Firestore;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
@@ -7,15 +9,13 @@ public class QuestController : MonoBehaviour
 {
     public TextMeshProUGUI QuestText;
     public QuestPanelController Panel;
-    public QuestObjects QuestObj;
-
-    private string questId = "OLdU9m2J33gP89Tt8mH2";
 
 
     async void Start()
     {
         QuestText = GetComponent<TextMeshProUGUI>();
-        QuestText.text = await GetQuestWithID(questId);
+
+        //QuestText.text = await GetQuestWithID(questId);
     }
 
 
@@ -27,11 +27,18 @@ public class QuestController : MonoBehaviour
         }
     }
 
+    public async void LoadQuest(string questId)
+    {
+        var data = await GetQuestWithID(questId);
+        QuestText.text = data.GetValue<string>("text");
+    }
 
-    private async Task<string> GetQuestWithID(string id)
+
+    private async Task<DocumentSnapshot> GetQuestWithID(string id)
     {
         return await FirebaseService.Instance.GetQuestWithIdAsync(id);
     }
+
 
 }
 

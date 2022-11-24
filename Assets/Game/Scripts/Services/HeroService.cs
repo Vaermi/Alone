@@ -6,14 +6,17 @@ namespace Assets.Game.Scripts.GameObjects
     public class HeroService
     {
         public string HeroName { get; private set; }
-        public int Level { get; private set; } = 1;
+        public string HeroId { get; private set; }  
+        public string CurrentQuest { get; private set; }
         public float Health { get; private set; } = 100.00f;
+        public int Level { get; private set; } = 1;
         public int Insanity { get; private set; } = 0;
         public int Defence { get; private set; } = 20;
         public int Attack { get; private set; } = 5;
         public int AttackSpeed { get; private set; } = 3;
         public int DefaultDice { get; private set; } = 10;
         public int Experience { get; private set; } = 0;
+        public bool IsHerosTurn { get; set; } = false;
 
 
         private HeroService() { }
@@ -30,7 +33,7 @@ namespace Assets.Game.Scripts.GameObjects
 
         public async Task Init()
         {
-            HeroName = await FirebaseService.Instance.GetHeroNameAsync();
+            HeroName = await FirebaseService.Instance.GetHeroNameAsync(HeroId);
         }
 
 
@@ -38,6 +41,13 @@ namespace Assets.Game.Scripts.GameObjects
         {
             HeroName = name;
         }
+
+
+        public void SetHeroID(string id)
+        {
+            HeroId = id;
+        }
+
 
 
         public void ReduceInsanity()
@@ -78,9 +88,9 @@ namespace Assets.Game.Scripts.GameObjects
             }
         }
 
-        public void ReduceHeroHealth(float heroDmgInput)
+        public float ReduceHeroHealth(float heroDmgInput)
         {
-            Health -= heroDmgInput;
+            return Health -= heroDmgInput;
         }
 
         // TODO Methode um Health zu erhöhen zb durch Zauber
@@ -88,6 +98,12 @@ namespace Assets.Game.Scripts.GameObjects
         {
 
 
+        }
+
+
+        public void IncreaseHeroHealthOnLevelUp()
+        {
+            Health += 10;
         }
 
 
@@ -123,6 +139,46 @@ namespace Assets.Game.Scripts.GameObjects
         {
             ++Level;
         }
+
+
+        public void IncreaseAttackOnLevelUp()
+        {
+            Attack += 3;
+        }
+
+
+        public void IncreaseAttackSpeedOnLevelUp()
+        {
+            AttackSpeed += 2;
+        }
+
+
+        public void IncreaseDefaultDiceOnLevelUp()
+        {
+            ++DefaultDice;
+        }
+
+
+        public void IncreaseDefenceOnLevelUp()
+        {
+            Defence += 5;
+        }
+
+
+        public float HeroAttack()
+        {
+            float dmgOutput = Attack * DefaultDice;
+            return dmgOutput;
+        }
+
+
+        public int RunFromFight()
+        {
+            return UnityEngine.Random.Range(0, 100);
+        }
+
+
+        
 
 
     }

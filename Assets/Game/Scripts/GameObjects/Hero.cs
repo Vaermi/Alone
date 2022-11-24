@@ -1,13 +1,17 @@
 using Assets.Game.Scripts.GameObjects;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class Hero : GameObjectController
 {
     public QuestObjects QuestObj;
     public QuestPanelController Panel;
+    public SceneController SceneController;
 
     [SerializeField]
     private string heroName;
+    private string heroId = HeroService.Instance.HeroId;
+    private string currentQuest = HeroService.Instance.CurrentQuest;
     [SerializeField]
     private float health = HeroService.Instance.Health;
     [SerializeField]
@@ -17,6 +21,7 @@ public class Hero : GameObjectController
     private int attackSpeed = HeroService.Instance.AttackSpeed;
     private int defaultDice = HeroService.Instance.DefaultDice;
     private Vector3 pos = SaveGameData.Pos;
+    private bool isHerosTurn = HeroService.Instance.IsHerosTurn;
 
 
     private async void Start()
@@ -24,14 +29,6 @@ public class Hero : GameObjectController
         await HeroService.Instance.Init();
         Debug.Log("Hero");
         heroName = HeroService.Instance.HeroName;
-    }
-
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        Debug.Log("Trigger");
-        Panel.SetQuestWindowActive();
-        QuestObj.SwitchStatusQuestObjects();
     }
 
 
@@ -44,4 +41,25 @@ public class Hero : GameObjectController
         return curPos;
     }
 
+
+    public void UseHealPotion()
+    {
+        HeroService.Instance.UseHealPotion();
+    }
+
+
+    public void HeroAttack()
+    {
+        HeroService.Instance.HeroAttack();
+    }
+
+
+    public void RunFromFight()
+    {
+        int number = HeroService.Instance.RunFromFight();
+        if(number >= 70)
+        {
+            SceneController.ExitFightScreen();
+        }
+    }
 }

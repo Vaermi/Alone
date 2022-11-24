@@ -15,11 +15,11 @@ public class FightEventController : Fight
 
         if (heroService.AttackSpeed > enemy.AttackSpeed)
         {
-            HeroFirstTurn();
+            HerosTurn();
         }
         else
         {
-            EnemyFirstTurn();
+            EnemysTurn();
         }
     }
 
