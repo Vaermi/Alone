@@ -76,10 +76,10 @@ namespace Assets.Game.Scripts.Db
         }
 
         //TODO Spielerposition abrufen
-        public string? GetPlayerPosition()
+        /*public string? GetPlayerPosition()
         {
             return null;
-        }
+        }*/
 
         //TODO Spielerwerte abrufen
         public void GetPlayerAttributes()

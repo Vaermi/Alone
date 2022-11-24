@@ -5288,7 +5288,7 @@ TilemapRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1255597593}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -7358,17 +7358,6 @@ TilemapCollider2D:
   m_Offset: {x: 0, y: 0}
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0.00001
---- !u!114 &1269737369 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7570570878011749874, guid: 3a9f03f470ab72640bac27f7bdef8ffa, type: 3}
-  m_PrefabInstance: {fileID: 7570570877830721835}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1291533442
 GameObject:
   m_ObjectHideFlags: 0
@@ -22749,36 +22738,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: QuestEventPanel
       objectReference: {fileID: 0}
-    - target: {fileID: 7570570878004801813, guid: 3a9f03f470ab72640bac27f7bdef8ffa, type: 3}
-      propertyPath: Hero
-      value: 
-      objectReference: {fileID: 1581232137}
-    - target: {fileID: 7570570878004801813, guid: 3a9f03f470ab72640bac27f7bdef8ffa, type: 3}
-      propertyPath: hero
-      value: 
-      objectReference: {fileID: 1581232137}
-    - target: {fileID: 7570570878004801813, guid: 3a9f03f470ab72640bac27f7bdef8ffa, type: 3}
-      propertyPath: QuestObj
-      value: 
-      objectReference: {fileID: 683523600}
-    - target: {fileID: 7570570878004801813, guid: 3a9f03f470ab72640bac27f7bdef8ffa, type: 3}
-      propertyPath: questObjects
-      value: 
-      objectReference: {fileID: 683523600}
-    - target: {fileID: 7570570878011749872, guid: 3a9f03f470ab72640bac27f7bdef8ffa, type: 3}
-      propertyPath: Panel
-      value: 
-      objectReference: {fileID: 174112830}
     - target: {fileID: 7570570878011749872, guid: 3a9f03f470ab72640bac27f7bdef8ffa, type: 3}
       propertyPath: QuestObj
-      value: 
-      objectReference: {fileID: 683523600}
-    - target: {fileID: 7570570878011749872, guid: 3a9f03f470ab72640bac27f7bdef8ffa, type: 3}
-      propertyPath: QuestText
-      value: 
-      objectReference: {fileID: 1269737369}
-    - target: {fileID: 7570570878011749872, guid: 3a9f03f470ab72640bac27f7bdef8ffa, type: 3}
-      propertyPath: questObjects
       value: 
       objectReference: {fileID: 683523600}
     m_RemovedComponents: []

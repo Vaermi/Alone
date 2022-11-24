@@ -30,7 +30,7 @@ public class Fight : MonoBehaviour
             counter++;
 
             if (heroService.Health <= 0) Console.WriteLine($"You are dead.\n GAME OVER");
-            //TODO GAME OVER SCREEN
+            SceneController.GameOverScreen();
         }
     }
 
@@ -49,7 +49,7 @@ public class Fight : MonoBehaviour
             counter++;
 
             if (heroService.Health <= 0) Console.WriteLine($"You are dead.\n GAME OVER");
-            //TODO GAME OVER SCREEN
+            SceneController.GameOverScreen();
             Console.WriteLine($"Runde {counter}");
             float heroDmgOutput = heroService.Attack * heroService.DefaultDice;
             float enemyDmgInput = heroDmgOutput - enemy.Defence;
