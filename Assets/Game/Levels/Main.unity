@@ -1032,6 +1032,7 @@ GameObject:
   - component: {fileID: 771401359}
   - component: {fileID: 771401358}
   - component: {fileID: 771401357}
+  - component: {fileID: 771401361}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -1122,6 +1123,22 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &771401361
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 771401356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ee93ec289a4aee42aa31c00d93e831f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  QuestId: 
+  NextQuestId: 
+  isActive: 0
+  questPanel: {fileID: 174112830}
 --- !u!1001 &830789792
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -22908,6 +22925,46 @@ PrefabInstance:
     - target: {fileID: 1194594395660473085, guid: 3a9f03f470ab72640bac27f7bdef8ffa, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3180098301945818392, guid: 3a9f03f470ab72640bac27f7bdef8ffa, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3180098301945818392, guid: 3a9f03f470ab72640bac27f7bdef8ffa, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3180098301945818392, guid: 3a9f03f470ab72640bac27f7bdef8ffa, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 771401361}
+    - target: {fileID: 3180098301945818392, guid: 3a9f03f470ab72640bac27f7bdef8ffa, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 174112830}
+    - target: {fileID: 3180098301945818392, guid: 3a9f03f470ab72640bac27f7bdef8ffa, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3180098301945818392, guid: 3a9f03f470ab72640bac27f7bdef8ffa, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SwitchToNextQuest
+      objectReference: {fileID: 0}
+    - target: {fileID: 3180098301945818392, guid: 3a9f03f470ab72640bac27f7bdef8ffa, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: DeactivateQuestWindow
+      objectReference: {fileID: 0}
+    - target: {fileID: 3180098301945818392, guid: 3a9f03f470ab72640bac27f7bdef8ffa, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: QuestObjects, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 3180098301945818392, guid: 3a9f03f470ab72640bac27f7bdef8ffa, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: QuestPanelController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 3180098301945818392, guid: 3a9f03f470ab72640bac27f7bdef8ffa, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 3270774335364834438, guid: 3a9f03f470ab72640bac27f7bdef8ffa, type: 3}
       propertyPath: m_CullTransparentMesh

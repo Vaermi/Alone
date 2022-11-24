@@ -164,6 +164,19 @@ namespace Assets.Game.Scripts.GameObjects
         }
 
 
+        public float HeroAttack()
+        {
+            float dmgOutput = Attack * DefaultDice;
+            return dmgOutput;
+        }
+
+
+        public int RunFromFight()
+        {
+            return UnityEngine.Random.Range(0, 100);
+        }
+
+
         
 
 

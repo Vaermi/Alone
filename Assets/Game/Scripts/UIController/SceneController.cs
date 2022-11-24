@@ -42,8 +42,18 @@ public class SceneController : MonoBehaviour
 
     public void ContinueGame()
     {
-        SceneManager.UnloadScene("PauseScreen");
+        SceneManager.UnloadSceneAsync("PauseScreen");
     }
-    //SceneManager.LoadScene("Main", LoadSceneMode.Additive);
-    //SceneManager.UnloadScene("Main");
+    
+
+    public void EnterFightScreen()
+    {
+        SceneManager.LoadScene("FightScreen", LoadSceneMode.Additive);
+    }
+
+
+    public void ExitFightScreen()
+    {
+        SceneManager.UnloadSceneAsync("FightScreen");
+    }
 }

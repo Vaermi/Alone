@@ -6,6 +6,7 @@ public class Hero : GameObjectController
 {
     public QuestObjects QuestObj;
     public QuestPanelController Panel;
+    public SceneController SceneController;
 
     [SerializeField]
     private string heroName;
@@ -30,9 +31,6 @@ public class Hero : GameObjectController
     }
 
 
-    
-
-
     public string CurrentPlayerPosition()
     {
         float x = pos.x;
@@ -42,4 +40,25 @@ public class Hero : GameObjectController
         return curPos;
     }
 
+
+    public void UseHealPotion()
+    {
+        HeroService.Instance.UseHealPotion();
+    }
+
+
+    public void HeroAttack()
+    {
+        HeroService.Instance.HeroAttack();
+    }
+
+
+    public void RunFromFight()
+    {
+        int number = HeroService.Instance.RunFromFight();
+        if(number >= 70)
+        {
+            SceneController.ExitFightScreen();
+        }
+    }
 }
