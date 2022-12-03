@@ -110,6 +110,8 @@ public class Fight : MonoBehaviour
 
     public string FightLog(string text)
     {
-        return text;
+        var goText = GameObject.Find("Scroll View").GetComponent<Text>().text;
+        goText += text;
+        return goText;
     }
 }
