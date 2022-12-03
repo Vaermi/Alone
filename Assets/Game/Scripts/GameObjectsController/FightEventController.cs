@@ -1,13 +1,16 @@
 using Assets.Game.Scripts.GameObjects;
 using UnityEngine;
 
-public class FightEventController : Fight
+public class FightEventController
 {
-    private HeroService heroService;
-    private Enemy enemy;
+    private HeroService heroService = HeroService.Instance;
+    private Fight fight;
+    public Hero hero;
+    public Enemy enemy;
 
-    private void Start()
+    public void StartFight()
     {
+        enemy = new Enemy();
         float heroDice = Random.Range(0, heroService.DefaultDice);
         float enemyDice = Random.Range(0, enemy.DefaultDice);
 
@@ -15,11 +18,11 @@ public class FightEventController : Fight
 
         if (heroService.AttackSpeed > enemy.AttackSpeed)
         {
-            HerosTurn();
+            fight.HerosTurn();
         }
         else
         {
-            EnemysTurn();
+            fight.EnemysTurn();
         }
     }
 

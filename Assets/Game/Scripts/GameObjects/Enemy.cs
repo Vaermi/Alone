@@ -1,14 +1,17 @@
 using Assets.Game.Scripts.GameObjects;
+using Unity.VisualScripting;
+using UnityEngine;
 
 public class Enemy : GameObjectController
 {
-    public string EnemyName { get; private set; }
-    public float Health { get; private set; }
-    public int Defence { get; private set; }
-    public int Attack { get; private set; }
-    public int AttackSpeed { get; private set; }
+    public GameObject EnemySpawn;
+    public FightEventController FightEventController;
+    public string EnemyName { get; set; } = "Shog";
+    public float Health { get; private set; } = 350.00f;
+    public int Defence { get; private set; } = 25;
+    public int Attack { get; private set; } = 10;
+    public int AttackSpeed { get; private set; } = 15;
     public int DefaultDice { get; private set; } = 12;
-
 
     public void SetEnemyHealth(float number)
     {
@@ -32,6 +35,17 @@ public class Enemy : GameObjectController
     public float EnemyAttack()
     {
         return Attack * DefaultDice;
+    }
+
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.name is not "Hero") return;
+
+        Debug.Log("Trigger");
+
+        SceneController.EnterFightScreen();
+        FightEventController.StartFight();
     }
 
     // TODO Unterklassen von Enemy erstellen

@@ -11,7 +11,7 @@ public class QuestController : MonoBehaviour
     public QuestPanelController Panel;
 
 
-    async void Start()
+    public void Start()
     {
         QuestText = GetComponent<TextMeshProUGUI>();
 
