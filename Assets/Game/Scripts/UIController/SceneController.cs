@@ -8,7 +8,6 @@ using UnityEngine.SceneManagement;
 
 public class SceneController : MonoBehaviour
 {
-    public FightEventController FightEventController = new FightEventController();
     public static void StartScreen()
     {
         SceneManager.LoadScene("StartScreen");

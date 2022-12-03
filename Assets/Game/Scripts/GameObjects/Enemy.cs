@@ -5,7 +5,6 @@ using UnityEngine;
 public class Enemy : GameObjectController
 {
     public GameObject EnemySpawn;
-    public FightEventController FightEventController;
     public string EnemyName { get; set; } = "Shog";
     public float Health { get; private set; } = 350.00f;
     public int Defence { get; private set; } = 25;
@@ -45,7 +44,6 @@ public class Enemy : GameObjectController
         Debug.Log("Trigger");
 
         SceneController.EnterFightScreen();
-        FightEventController.StartFight();
     }
 
     // TODO Unterklassen von Enemy erstellen

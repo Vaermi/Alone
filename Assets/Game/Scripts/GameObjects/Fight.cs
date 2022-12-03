@@ -3,14 +3,33 @@ using System;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class Fight : MonoBehaviour
 {
     private HeroService heroService = HeroService.Instance;
-    private Enemy enemy;
+    public Enemy Enemy;
     private Hero hero;
 
     public int Counter = 0;
+
+
+    private void Start()
+    {
+        float heroDice = Random.Range(0, heroService.DefaultDice);
+        float enemyDice = Random.Range(0, Enemy.DefaultDice);
+
+        // TODO Startbedingung überarbeiten
+
+        if (heroService.AttackSpeed > Enemy.AttackSpeed)
+        {
+            HerosTurn();
+        }
+        else
+        {
+            EnemysTurn();
+        }
+    }
 
 
     public void HerosTurn()
@@ -18,7 +37,7 @@ public class Fight : MonoBehaviour
         heroService.IsHerosTurn = true;
         FightLog($"{heroService.HeroName} ist dran...");
 
-        if (heroService.Health > 0 && enemy.Health > 0)
+        if (heroService.Health > 0 && Enemy.Health > 0)
         {
             FightLog($"Runde {Counter}:");
 
@@ -30,14 +49,14 @@ public class Fight : MonoBehaviour
 
     public void EnemysTurn()
     {
-        FightLog($"{enemy.EnemyName} ist dran ...");
+        FightLog($"{Enemy.EnemyName} ist dran ...");
 
-        if (heroService.Health > 0 && enemy.Health > 0)
+        if (heroService.Health > 0 && Enemy.Health > 0)
         {
             FightLog($"Runde {Counter}");
-            float enemyDmgOutput = enemy.EnemyAttack();
+            float enemyDmgOutput = Enemy.EnemyAttack();
             float heroDmgInput = heroService.ReduceHeroHealth(enemyDmgOutput);
-            FightLog($"{enemy.EnemyName} zieht {heroService.HeroName} {heroDmgInput} Lebenspunkte ab.");
+            FightLog($"{Enemy.EnemyName} zieht {heroService.HeroName} {heroDmgInput} Lebenspunkte ab.");
             heroService.ReduceHeroHealth(heroDmgInput);
 
             if (heroService.Health <= 0)
@@ -62,10 +81,10 @@ public class Fight : MonoBehaviour
         if (heroService.IsHerosTurn)
         {
             float heroDmgOutput = heroService.HeroAttack();
-            float enemyDmgInput = enemy.ReduceEnemyHealth(heroDmgOutput);
-            FightLog($"{heroService.HeroName} zieht {enemy.EnemyName} {enemyDmgInput} Lebenspunkte ab.");
-            enemy.SetEnemyHealth(enemyDmgInput);
-            FightLog($"{enemy.EnemyName} hat noch {enemy.Health} Lebenspunkte.");
+            float enemyDmgInput = Enemy.ReduceEnemyHealth(heroDmgOutput);
+            FightLog($"{heroService.HeroName} zieht {Enemy.EnemyName} {enemyDmgInput} Lebenspunkte ab.");
+            Enemy.SetEnemyHealth(enemyDmgInput);
+            FightLog($"{Enemy.EnemyName} hat noch {Enemy.Health} Lebenspunkte.");
             AfterUserTurn();
         }
     }
@@ -98,7 +117,7 @@ public class Fight : MonoBehaviour
     public void AfterUserTurn()
     {
         heroService.IsHerosTurn = false;
-        if (enemy.Health <= 0)
+        if (Enemy.Health <= 0)
         {
             FightLog($"{heroService.HeroName} hat gewonnen!");
             heroService.IncreaseExperience();
