@@ -27,7 +27,7 @@ public class QuestController : MonoBehaviour
         }
     }
 
-    public async void LoadQuest(string questId)
+    public async Task LoadQuest(string questId)
     {
         var data = await GetQuestWithID(questId);
         QuestText.text = data.GetValue<string>("text");
@@ -37,6 +37,12 @@ public class QuestController : MonoBehaviour
     private async Task<DocumentSnapshot> GetQuestWithID(string id)
     {
         return await FirebaseService.Instance.GetQuestWithIdAsync(id);
+    }
+
+
+    public void ClearQuest()
+    {
+        QuestText.text = "";
     }
 
 

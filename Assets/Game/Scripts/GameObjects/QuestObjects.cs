@@ -1,43 +1,38 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class QuestObjects : MonoBehaviour
 {
-    private SpriteRenderer spriteRenderer;
     public string QuestId;
-    public string NextQuestId;
-    public string QuestText { get; private set; }
-    public bool isActive = false;
+    public GameObject NextQuest;
 
     public QuestPanelController questPanel;
 
 
-    public void SwitchStatusQuestObjects()
+    public async Task SwitchStatusQuestObjects()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
-        Debug.Log(spriteRenderer);
-        spriteRenderer.enabled = !spriteRenderer.enabled;
-        Debug.Log("Switch Status");
-        GameObject.Find("TextQuests").GetComponent<QuestController>().LoadQuest(QuestId);
-        isActive = false;
+        await GameObject.Find("TextQuests").GetComponent<QuestController>().LoadQuest(QuestId);
+        SwitchToNextQuest();
+        Destroy(gameObject);
     }
 
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private async void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.name is not "Hero") return;
         
         Debug.Log("Trigger");
         questPanel.SetQuestWindowActive();
-        SwitchStatusQuestObjects();
+        await SwitchStatusQuestObjects();
     }
 
 
     public void SwitchToNextQuest()
     {
-        QuestId = NextQuestId;
-        isActive = true;
+        if (NextQuest == null) return;
+        NextQuest?.SetActive(true);
     }
 
 }
