@@ -15,11 +15,11 @@ public class Fight : MonoBehaviour
     public void HerosTurn()
     {
         heroService.IsHerosTurn = true;
-        Console.WriteLine($"{HeroService.Instance.HeroName} ist dran...");
+        FightLog($"{HeroService.Instance.HeroName} ist dran...");
 
         if (heroService.Health > 0 && enemy.Health > 0)
         {
-            Console.WriteLine($"Runde {Counter}:");
+            FightLog($"Runde {Counter}:");
 
             Counter++;
         }
@@ -29,19 +29,19 @@ public class Fight : MonoBehaviour
 
     public void EnemysTurn()
     {
-        Debug.Log($"{enemy.EnemyName} ist dran ...");
+        FightLog($"{enemy.EnemyName} ist dran ...");
 
         if (heroService.Health > 0 && enemy.Health > 0)
         {
-            Debug.Log($"Runde {Counter}");
+            FightLog($"Runde {Counter}");
             float enemyDmgOutput = enemy.EnemyAttack();
             float heroDmgInput = HeroService.Instance.ReduceHeroHealth(enemyDmgOutput);
-            Debug.Log($"{enemy.EnemyName} zieht {HeroService.Instance.HeroName} {heroDmgInput} Lebenspunkte ab.");
+            FightLog($"{enemy.EnemyName} zieht {HeroService.Instance.HeroName} {heroDmgInput} Lebenspunkte ab.");
             heroService.ReduceHeroHealth(heroDmgInput);
 
             if (heroService.Health <= 0)
             {
-                Debug.Log($"{HeroService.Instance.HeroName} ist gestorben. Game Over!");
+                FightLog($"{HeroService.Instance.HeroName} ist gestorben. Game Over!");
                 Counter = 0;
                 SceneController.GameOverScreen();
             }
@@ -59,9 +59,9 @@ public class Fight : MonoBehaviour
         {
             float heroDmgOutput = heroService.HeroAttack();
             float enemyDmgInput = enemy.ReduceEnemyHealth(heroDmgOutput);
-            Debug.Log($"{HeroService.Instance.HeroName} zieht {enemy.EnemyName} {enemyDmgInput} Lebenspunkte ab.");
+            FightLog($"{HeroService.Instance.HeroName} zieht {enemy.EnemyName} {enemyDmgInput} Lebenspunkte ab.");
             enemy.SetEnemyHealth(enemyDmgInput);
-            Debug.Log($"{enemy.EnemyName} hat noch {enemy.Health} Lebenspunkte.");
+            FightLog($"{enemy.EnemyName} hat noch {enemy.Health} Lebenspunkte.");
             AfterUserTurn();
         }
     }
@@ -83,9 +83,9 @@ public class Fight : MonoBehaviour
     {
         if (heroService.IsHerosTurn)
         {
-            Debug.Log($"{HeroService.Instance.HeroName} versucht zu fliehen...");
+            FightLog($"{HeroService.Instance.HeroName} versucht zu fliehen...");
             hero.RunFromFight();
-            Debug.Log($"Fluchtversuch gescheitert!");
+            FightLog($"Fluchtversuch gescheitert!");
             AfterUserTurn();
         }
     }
@@ -96,7 +96,7 @@ public class Fight : MonoBehaviour
         heroService.IsHerosTurn = false;
         if (enemy.Health <= 0)
         {
-            Debug.Log($"{HeroService.Instance.HeroName} hat gewonnen!");
+            FightLog($"{HeroService.Instance.HeroName} hat gewonnen!");
             HeroService.Instance.IncreaseExperience();
             Counter = 0;
             sceneController.ExitFightScreen();
@@ -105,5 +105,11 @@ public class Fight : MonoBehaviour
         {
             EnemysTurn();
         }
+    }
+
+
+    public string FightLog(string text)
+    {
+        return text;
     }
 }
