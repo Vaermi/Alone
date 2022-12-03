@@ -123,6 +123,17 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &77418043 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7570570878011749872, guid: 3a9f03f470ab72640bac27f7bdef8ffa, type: 3}
+  m_PrefabInstance: {fileID: 7570570877830721835}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4016a0b8da451904eb3bdacf33002ccb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &99602326 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2810956423680087855, guid: 19eceed57fe1b6c4c9db4084c7343b71, type: 3}
@@ -1136,8 +1147,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   QuestId: 
-  NextQuestId: 
-  isActive: 0
+  NextQuest: {fileID: 0}
   questPanel: {fileID: 174112830}
 --- !u!1001 &830789792
 PrefabInstance:
@@ -1149,6 +1159,10 @@ PrefabInstance:
     - target: {fileID: 5648509807453347261, guid: 01f914054c62d4d4bb434a6b8266ab3c, type: 3}
       propertyPath: m_Name
       value: QuestMarkerNew02
+      objectReference: {fileID: 0}
+    - target: {fileID: 5648509807453347261, guid: 01f914054c62d4d4bb434a6b8266ab3c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5648509807453347262, guid: 01f914054c62d4d4bb434a6b8266ab3c, type: 3}
       propertyPath: m_RootOrder
@@ -1172,15 +1186,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5648509807453347262, guid: 01f914054c62d4d4bb434a6b8266ab3c, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5648509807453347262, guid: 01f914054c62d4d4bb434a6b8266ab3c, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5648509807453347262, guid: 01f914054c62d4d4bb434a6b8266ab3c, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5648509807453347262, guid: 01f914054c62d4d4bb434a6b8266ab3c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1212,6 +1226,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: QuestMarkerNew03
       objectReference: {fileID: 0}
+    - target: {fileID: 5648509807453347261, guid: 01f914054c62d4d4bb434a6b8266ab3c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5648509807453347262, guid: 01f914054c62d4d4bb434a6b8266ab3c, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -1234,15 +1252,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5648509807453347262, guid: 01f914054c62d4d4bb434a6b8266ab3c, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5648509807453347262, guid: 01f914054c62d4d4bb434a6b8266ab3c, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5648509807453347262, guid: 01f914054c62d4d4bb434a6b8266ab3c, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5648509807453347262, guid: 01f914054c62d4d4bb434a6b8266ab3c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1280,8 +1298,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   QuestId: 2NgZp0zlMxejR5xjOv7p
-  NextQuestId: lLVdaF5Xn5mmwn9Xfgt5
-  isActive: 0
+  NextQuest: {fileID: 2031658851}
   questPanel: {fileID: 174112830}
 --- !u!1 &1101960890
 GameObject:
@@ -22653,8 +22670,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   QuestId: H6ctTCSu97CHDJDrKBEe
-  NextQuestId: 2NgZp0zlMxejR5xjOv7p
-  isActive: 0
+  NextQuest: {fileID: 961975795}
   questPanel: {fileID: 174112830}
 --- !u!1001 &2031658850
 PrefabInstance:
@@ -22666,6 +22682,10 @@ PrefabInstance:
     - target: {fileID: 5648509807453347261, guid: 01f914054c62d4d4bb434a6b8266ab3c, type: 3}
       propertyPath: m_Name
       value: QuestMarkerNew04
+      objectReference: {fileID: 0}
+    - target: {fileID: 5648509807453347261, guid: 01f914054c62d4d4bb434a6b8266ab3c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5648509807453347262, guid: 01f914054c62d4d4bb434a6b8266ab3c, type: 3}
       propertyPath: m_RootOrder
@@ -22689,15 +22709,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5648509807453347262, guid: 01f914054c62d4d4bb434a6b8266ab3c, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5648509807453347262, guid: 01f914054c62d4d4bb434a6b8266ab3c, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5648509807453347262, guid: 01f914054c62d4d4bb434a6b8266ab3c, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5648509807453347262, guid: 01f914054c62d4d4bb434a6b8266ab3c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -22732,8 +22752,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   QuestId: lLVdaF5Xn5mmwn9Xfgt5
-  NextQuestId: 
-  isActive: 0
+  NextQuest: {fileID: 0}
   questPanel: {fileID: 174112830}
 --- !u!1001 &2810956423761107129
 PrefabInstance:
@@ -22912,8 +22931,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   QuestId: OLdU9m2J33gP89Tt8mH2
-  NextQuestId: H6ctTCSu97CHDJDrKBEe
-  isActive: 0
+  NextQuest: {fileID: 1986928246}
   questPanel: {fileID: 174112830}
 --- !u!1001 &7570570877830721835
 PrefabInstance:
@@ -22937,18 +22955,22 @@ PrefabInstance:
     - target: {fileID: 3180098301945818392, guid: 3a9f03f470ab72640bac27f7bdef8ffa, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 771401361}
+      objectReference: {fileID: 77418043}
     - target: {fileID: 3180098301945818392, guid: 3a9f03f470ab72640bac27f7bdef8ffa, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 174112830}
+    - target: {fileID: 3180098301945818392, guid: 3a9f03f470ab72640bac27f7bdef8ffa, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 3180098301945818392, guid: 3a9f03f470ab72640bac27f7bdef8ffa, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3180098301945818392, guid: 3a9f03f470ab72640bac27f7bdef8ffa, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SwitchToNextQuest
+      value: ClearQuest
       objectReference: {fileID: 0}
     - target: {fileID: 3180098301945818392, guid: 3a9f03f470ab72640bac27f7bdef8ffa, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
@@ -22956,11 +22978,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3180098301945818392, guid: 3a9f03f470ab72640bac27f7bdef8ffa, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: QuestObjects, Assembly-CSharp
+      value: QuestController, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 3180098301945818392, guid: 3a9f03f470ab72640bac27f7bdef8ffa, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
       value: QuestPanelController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 3180098301945818392, guid: 3a9f03f470ab72640bac27f7bdef8ffa, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 3180098301945818392, guid: 3a9f03f470ab72640bac27f7bdef8ffa, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -23064,6 +23090,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7570570878011749872, guid: 3a9f03f470ab72640bac27f7bdef8ffa, type: 3}
       propertyPath: QuestObj
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7570570878011749874, guid: 3a9f03f470ab72640bac27f7bdef8ffa, type: 3}
+      propertyPath: m_text
       value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
