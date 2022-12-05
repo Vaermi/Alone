@@ -16,7 +16,7 @@ public class HeroInputController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            OpenMenu();
+            SceneController.PauseGame();
         }
     }
 
@@ -31,8 +31,4 @@ public class HeroInputController : MonoBehaviour
     }
 
 
-    private void OpenMenu()
-    {
-        SceneController.PauseGame();
-    }
 }
