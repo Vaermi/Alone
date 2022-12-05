@@ -1,5 +1,6 @@
 using Assets.Game.Scripts.GameObjects;
 using System;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -131,10 +132,10 @@ public class Fight : MonoBehaviour
     }
 
 
-    public string FightLog(string text)
+    public TextMeshProUGUI FightLog(string text)
     {
-        var goText = GameObject.Find("Scroll View").GetComponent<Text>().text;
-        goText += text;
+        var goText = GameObject.Find("Scroll View").GetComponentInChildren<TextMeshProUGUI>();
+        goText.text += text;
         return goText;
     }
 }
