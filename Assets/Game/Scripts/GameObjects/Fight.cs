@@ -44,7 +44,6 @@ public class Fight : MonoBehaviour
 
             Counter++;
         }
-        EnemysTurn();
     }
 
 
@@ -122,7 +121,7 @@ public class Fight : MonoBehaviour
             FightLog($"{heroService.HeroName} hat gewonnen!\n");
             heroService.IncreaseExperience();
             Counter = 0;
-            SceneController.ExitFightScreen();
+            //SceneController.ExitFightScreen();
         }
         else
         {

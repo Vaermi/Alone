@@ -14,7 +14,7 @@ namespace Assets.Game.Scripts.GameObjects
         public int Defence { get; private set; } = 20;
         public int Attack { get; private set; } = 5;
         public int AttackSpeed { get; private set; } = 3;
-        public int DefaultDice { get; private set; } = 10;
+        public int DefaultDice { get; private set; } = 3;
         public int Experience { get; private set; } = 0;
         public bool IsHerosTurn { get; set; } = false;
 
@@ -103,7 +103,7 @@ namespace Assets.Game.Scripts.GameObjects
 
         public void IncreaseHeroHealthOnLevelUp()
         {
-            Health += 10;
+            Health += 50;
         }
 
 
@@ -143,13 +143,13 @@ namespace Assets.Game.Scripts.GameObjects
 
         public void IncreaseAttackOnLevelUp()
         {
-            Attack += 3;
+            Attack += 1;
         }
 
 
         public void IncreaseAttackSpeedOnLevelUp()
         {
-            AttackSpeed += 2;
+            AttackSpeed += 1;
         }
 
 
@@ -161,7 +161,7 @@ namespace Assets.Game.Scripts.GameObjects
 
         public void IncreaseDefenceOnLevelUp()
         {
-            Defence += 5;
+            Defence += 2;
         }
 
 
