@@ -14,7 +14,7 @@ namespace Assets.Game.Scripts.GameObjects
         public int Defence { get; private set; } = 20;
         public int Attack { get; private set; } = 5;
         public int AttackSpeed { get; private set; } = 3;
-        public int DefaultDice { get; private set; } = 3;
+        public int DefaultDice { get; private set; } = 10;
         public int Experience { get; private set; } = 0;
         public bool IsHerosTurn { get; set; } = false;
 

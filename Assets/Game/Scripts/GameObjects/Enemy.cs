@@ -6,7 +6,7 @@ public class Enemy : GameObjectController
 {
     public GameObject EnemySpawn;
     public string EnemyName { get; set; } = "Shog";
-    public float Health { get; private set; } = 350.00f;
+    public float Health { get; private set; } = 100.00f;
     public int Defence { get; private set; } = 10;
     public int Attack { get; private set; } = 5;
     public int AttackSpeed { get; private set; } = 2;
@@ -42,8 +42,6 @@ public class Enemy : GameObjectController
         if (collision.gameObject.name is not "Hero") return;
 
         Debug.Log("Trigger");
-
-        GameObject.DontDestroyOnLoad(EnemySpawn);
 
         SceneController.EnterFightScreen();
     }
