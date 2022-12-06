@@ -36,11 +36,11 @@ public class Fight : MonoBehaviour
     public void HerosTurn()
     {
         heroService.IsHerosTurn = true;
-        FightLog($"{heroService.HeroName} ist dran...");
+        FightLog($"{heroService.HeroName} ist dran...\n");
 
         if (heroService.Health > 0 && Enemy.Health > 0)
         {
-            FightLog($"Runde {Counter}:");
+            FightLog($"Runde {Counter}:\n");
 
             Counter++;
         }
@@ -50,21 +50,20 @@ public class Fight : MonoBehaviour
 
     public void EnemysTurn()
     {
-        FightLog($"{Enemy.EnemyName} ist dran ...");
+        FightLog($"{Enemy.EnemyName} ist dran ...\n");
 
         if (heroService.Health > 0 && Enemy.Health > 0)
         {
-            FightLog($"Runde {Counter}");
+            FightLog($"Runde {Counter}\n");
             float enemyDmgOutput = Enemy.EnemyAttack();
             float heroDmgInput = heroService.ReduceHeroHealth(enemyDmgOutput);
-            FightLog($"{Enemy.EnemyName} zieht {heroService.HeroName} {heroDmgInput} Lebenspunkte ab.");
-            heroService.ReduceHeroHealth(heroDmgInput);
+            FightLog($"{Enemy.EnemyName} zieht {heroService.HeroName} {heroDmgInput} Lebenspunkte ab.\n");
 
             if (heroService.Health <= 0)
             {
-                FightLog($"{heroService.HeroName} ist gestorben. Game Over!");
+                FightLog($"{heroService.HeroName} ist gestorben. Game Over!\n");
                 Counter = 0;
-                SceneController.GameOverScreen();
+                //SceneController.GameOverScreen();
             }
             else
             {
@@ -83,9 +82,9 @@ public class Fight : MonoBehaviour
         {
             float heroDmgOutput = heroService.HeroAttack();
             float enemyDmgInput = Enemy.ReduceEnemyHealth(heroDmgOutput);
-            FightLog($"{heroService.HeroName} zieht {Enemy.EnemyName} {enemyDmgInput} Lebenspunkte ab.");
+            FightLog($"{heroService.HeroName} zieht {Enemy.EnemyName} {enemyDmgInput} Lebenspunkte ab.\n");
             Enemy.SetEnemyHealth(enemyDmgInput);
-            FightLog($"{Enemy.EnemyName} hat noch {Enemy.Health} Lebenspunkte.");
+            FightLog($"{Enemy.EnemyName} hat noch {Enemy.Health} Lebenspunkte.\n");
             AfterUserTurn();
         }
     }
@@ -95,9 +94,9 @@ public class Fight : MonoBehaviour
     {
         if (heroService.IsHerosTurn)
         {
-            FightLog($"{heroService.HeroName} benutzt einen Heiltrank.");
+            FightLog($"{heroService.HeroName} benutzt einen Heiltrank.\n");
             heroService.UseHealPotion();
-            FightLog($"{heroService.HeroName} heilt sich und hat nun wieder {heroService.Health} Lebenspunkte.");
+            FightLog($"{heroService.HeroName} heilt sich und hat nun wieder {heroService.Health} Lebenspunkte.\n");
             AfterUserTurn();
         }
     }
@@ -107,9 +106,9 @@ public class Fight : MonoBehaviour
     {
         if (heroService.IsHerosTurn)
         {
-            FightLog($"{heroService.HeroName} versucht zu fliehen...");
+            FightLog($"{heroService.HeroName} versucht zu fliehen...\n");
             hero.RunFromFight();
-            FightLog($"Fluchtversuch gescheitert!");
+            FightLog($"Fluchtversuch gescheitert!\n");
             AfterUserTurn();
         }
     }
@@ -120,7 +119,7 @@ public class Fight : MonoBehaviour
         heroService.IsHerosTurn = false;
         if (Enemy.Health <= 0)
         {
-            FightLog($"{heroService.HeroName} hat gewonnen!");
+            FightLog($"{heroService.HeroName} hat gewonnen!\n");
             heroService.IncreaseExperience();
             Counter = 0;
             SceneController.ExitFightScreen();

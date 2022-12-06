@@ -2114,6 +2114,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: FightLog
       objectReference: {fileID: 0}
+    - target: {fileID: 59223538811555478, guid: 6bd1c5b69faadab498196f7442232801, type: 3}
+      propertyPath: m_text
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 59223538811555478, guid: 6bd1c5b69faadab498196f7442232801, type: 3}
+      propertyPath: m_margin.w
+      value: -217.93628
+      objectReference: {fileID: 0}
+    - target: {fileID: 59223538811555478, guid: 6bd1c5b69faadab498196f7442232801, type: 3}
+      propertyPath: m_margin.z
+      value: -268.99573
+      objectReference: {fileID: 0}
     - target: {fileID: 59223538811555479, guid: 6bd1c5b69faadab498196f7442232801, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -2180,11 +2192,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 59223538811555479, guid: 6bd1c5b69faadab498196f7442232801, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 109
+      value: 108
       objectReference: {fileID: 0}
     - target: {fileID: 59223538811555479, guid: 6bd1c5b69faadab498196f7442232801, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 28
+      value: 268
       objectReference: {fileID: 0}
     - target: {fileID: 59223538811555479, guid: 6bd1c5b69faadab498196f7442232801, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

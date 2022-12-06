@@ -10,7 +10,7 @@ public class Enemy : GameObjectController
     public int Defence { get; private set; } = 10;
     public int Attack { get; private set; } = 5;
     public int AttackSpeed { get; private set; } = 2;
-    public int DefaultDice { get; private set; } = 12;
+    public int DefaultDice { get; private set; } = 5;
 
     public void SetEnemyHealth(float number)
     {
@@ -42,6 +42,8 @@ public class Enemy : GameObjectController
         if (collision.gameObject.name is not "Hero") return;
 
         Debug.Log("Trigger");
+
+        GameObject.DontDestroyOnLoad(EnemySpawn);
 
         SceneController.EnterFightScreen();
     }
