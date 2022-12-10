@@ -7,7 +7,7 @@ public class PlayerPanelController : MonoBehaviour
     public TextMeshProUGUI textHeroName;
     public TextMeshProUGUI textHealth;
     public TextMeshProUGUI textSanity;
-    public TextMeshProUGUI textInventory;
+    public TextMeshProUGUI textLevel;
     [SerializeField]
     private HeroService heroService = HeroService.Instance;
 
@@ -19,13 +19,13 @@ public class PlayerPanelController : MonoBehaviour
         textHeroName.text = $"{playerName}";
 
         float playerHealth = heroService.Health;
-        textHealth.text = $"Health: {playerHealth}/100";
+        textHealth.text = $"Leben: {playerHealth}/100";
 
         int playerSanity = heroService.Insanity;
-        textSanity.text = $"Sanity: {playerSanity}/100";
+        textSanity.text = $"Verrückt: {playerSanity}/100";
 
-        int playerInventory = Inventory.Instance.InventoryCount;
-        textInventory.text = $"Inventory: {playerInventory}";
+        int playerLevel = heroService.Level;
+        textLevel.text = $"Level: {playerLevel}";
     }
 
 }

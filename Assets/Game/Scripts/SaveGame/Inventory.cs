@@ -3,8 +3,8 @@ public class Inventory
 {
     public int CurrentInventory { get; private set; } = 0;
     public int MaxInventory { get; } = 10;
-    public int HealPotion { get; private set; } = 0;
-    public int InventoryCount { get; private set; } = 0;
+    public int HealPotion { get; set; } = 0;
+    public int InventoryCount { get; private set; } = 5;
 
 
     private Inventory() { }

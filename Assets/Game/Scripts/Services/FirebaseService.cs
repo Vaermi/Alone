@@ -203,10 +203,10 @@ namespace Assets.Game.Scripts.Db
         }
 
         //TODO Spielerposition abrufen
-        public string? GetPlayerPosition(string heroId)
-        {
-            return null;
-        }
+        //public string? GetPlayerPosition(string heroId)
+        //{
+        //    return null;
+        //}
 
         //TODO Spielerwerte abrufen
         public async void GetPlayerAttributes(string heroId)
@@ -225,7 +225,7 @@ namespace Assets.Game.Scripts.Db
         public void GetSaveGame(string heroId)
         {
             GetPlayerAttributes(heroId);
-            GetPlayerPosition(heroId);
+            //GetPlayerPosition(heroId);
         }
 
         //UPDATE

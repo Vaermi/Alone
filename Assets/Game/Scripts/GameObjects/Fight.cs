@@ -1,89 +1,164 @@
 using Assets.Game.Scripts.GameObjects;
 using System;
+using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class Fight : MonoBehaviour
 {
-    private HeroService heroService;
-    private Enemy enemy;
+    private HeroService heroService = HeroService.Instance;
     private Hero hero;
-    private SceneController sceneController;
+    public Enemy Enemy;
+    public ExitButton exitButton;
 
-    public int Counter = 0;
+    public int Counter = 1;
 
-    public void HerosTurn()
+
+    private void Start()
     {
-        heroService.IsHerosTurn = true;
-        Console.WriteLine($"{HeroService.Instance.HeroName} ist dran...");
+        float heroDice = Random.Range(0, heroService.DefaultDice);
+        float enemyDice = Random.Range(0, Enemy.DefaultDice);
 
-        if (heroService.Health > 0 && enemy.Health > 0)
+        // TODO Startbedingung überarbeiten
+
+        if (heroService.AttackSpeed > Enemy.AttackSpeed)
         {
-            Console.WriteLine($"Runde {Counter}:");
-
-            while (HeroService.Instance.IsHerosTurn is true)
-            {
-                if (GameObject.Find("AttackButton").GetComponent<Button>() == true)
-                {
-                    float heroDmgOutput = heroService.HeroAttack();
-                    float enemyDmgInput = enemy.ReduceEnemyHealth(heroDmgOutput);
-                    Debug.Log($"{HeroService.Instance.HeroName} zieht {enemy.EnemyName} {enemyDmgInput} Lebenspunkte ab.");
-                    enemy.SetEnemyHealth(enemyDmgInput);
-                    Debug.Log($"{enemy.EnemyName} hat noch {enemy.Health} Lebenspunkte.");
-                    heroService.IsHerosTurn = false;
-                }
-                else if (GameObject.Find("HealPotionButton").GetComponent<Button>() == true)
-                {
-                    Debug.Log($"{HeroService.Instance.HeroName} benutzt einen Heiltrank.");
-                    HeroService.Instance.UseHealPotion();
-                    Debug.Log($"{HeroService.Instance.HeroName} heilt sich und hat nun wieder {HeroService.Instance.Health} Lebenspunkte.");
-                    heroService.IsHerosTurn = false;
-                }
-                else if (GameObject.Find("RunButton").GetComponent<Button>() == true)
-                {
-                    Debug.Log($"{HeroService.Instance.HeroName} versucht zu fliehen...");
-                    hero.RunFromFight();
-                    Debug.Log($"Fluchtversuch gescheitert!");
-                    heroService.IsHerosTurn = false;
-                }
-            }
-
-            if (enemy.Health <= 0)
-            {
-                Debug.Log($"{HeroService.Instance.HeroName} hat gewonnen!");
-                HeroService.Instance.IncreaseExperience();
-                Counter = 0;
-                sceneController.ExitFightScreen();
-            }
-
-            Counter++;
+            HerosTurn();
+        }
+        else
+        {
             EnemysTurn();
         }
     }
 
 
+    public void HerosTurn()
+    {
+        heroService.IsHerosTurn = true;
+        FightLog($"{heroService.HeroName} ist dran...\n");
+
+        if (heroService.Health > 0 && Enemy.Health > 0)
+        {
+            FightLog($"Runde {Counter}:\n");
+
+        }
+        Counter++;
+    }
+
+
     public void EnemysTurn()
     {
-        Debug.Log($"{enemy.EnemyName} ist dran ...");
+        FightLog($"{Enemy.EnemyName} ist dran ...\n");
 
-        if (heroService.Health > 0 && enemy.Health > 0)
+        if (heroService.Health > 0 && Enemy.Health > 0)
         {
-            Debug.Log($"Runde {Counter}");
-            float enemyDmgOutput = enemy.EnemyAttack();
-            float heroDmgInput = HeroService.Instance.ReduceHeroHealth(enemyDmgOutput);
-            Debug.Log($"{enemy.EnemyName} zieht {HeroService.Instance.HeroName} {heroDmgInput} Lebenspunkte ab.");
-            heroService.ReduceHeroHealth(heroDmgInput);
+            FightLog($"Runde {Counter}\n");
+            float enemyDmgOutput = Enemy.EnemyAttack();
+            heroService.ReduceHeroHealth(enemyDmgOutput);
+            FightLog($"{Enemy.EnemyName} zieht {heroService.HeroName} {enemyDmgOutput} Lebenspunkte ab.\n");
+            FightLog($"{heroService.HeroName} hat noch {heroService.Health} Lebenspunkte.\n");
 
             if (heroService.Health <= 0)
             {
-                Debug.Log($"{HeroService.Instance.HeroName} ist gestorben. Game Over!");
-                Counter = 0;
+                FightLog($"{heroService.HeroName} ist gestorben. Game Over!\n");
+                Counter = 1;
+                exitButton.Exit();
                 SceneController.GameOverScreen();
             }
+            else
+            {
+                Counter++;
+                heroService.IsHerosTurn = true;
+                HerosTurn();
+            }
 
-            Counter++;
-            heroService.IsHerosTurn = true;
-            HerosTurn();
         }
+    }
+
+
+    public void AttackClick()
+    {
+        if (heroService.IsHerosTurn)
+        {
+            float heroDmgOutput = heroService.HeroAttack();
+            Enemy.ReduceEnemyHealth(heroDmgOutput);
+            FightLog($"{heroService.HeroName} zieht {Enemy.EnemyName} {heroDmgOutput} Lebenspunkte ab.\n");
+            FightLog($"{Enemy.EnemyName} hat noch {Enemy.Health} Lebenspunkte.\n");
+            AfterUserTurn();
+        }
+    }
+
+
+    public void HealClick()
+    {
+        if (heroService.IsHerosTurn)
+        {
+            if(Inventory.Instance.HealPotion < 0)
+            {
+                FightLog($"{heroService.HeroName} benutzt einen Heiltrank.\n");
+                heroService.UseHealPotion();
+                FightLog($"{heroService.HeroName} heilt sich und hat nun wieder {heroService.Health} Lebenspunkte.\n");
+                AfterUserTurn();
+            } 
+            else
+            {
+                FightLog($"Kein Heiltrank im Inventar!\n");
+                HerosTurn();
+            }
+        }
+    }
+
+
+    public void RunClick()
+    {
+        if (heroService.IsHerosTurn)
+        {
+            FightLog($"{heroService.HeroName} versucht zu fliehen...\n");
+            int rndNumber = RunFromFight();
+            if (rndNumber >= 70)
+            {
+                SceneController.ExitFightScreen();
+            }
+            else
+            {
+                FightLog($"Fluchtversuch gescheitert!\n");
+                AfterUserTurn();
+            }
+        }
+    }
+
+
+    public void AfterUserTurn()
+    {
+        heroService.IsHerosTurn = false;
+        if (Enemy.Health <= 0)
+        {
+            FightLog($"{heroService.HeroName} hat gewonnen!\n");
+            heroService.IncreaseExperience();
+            Counter = 1;
+            exitButton.Exit();
+        }
+        else
+        {
+            EnemysTurn();
+        }
+    }
+
+
+    public TextMeshProUGUI FightLog(string text)
+    {
+        var goText = GameObject.Find("Scroll View").GetComponentInChildren<TextMeshProUGUI>();
+        goText.text += text;
+        return goText;
+    }
+
+
+    public int RunFromFight()
+    {
+        int number = HeroService.Instance.RunFromFight();
+        return number;
+        
     }
 }

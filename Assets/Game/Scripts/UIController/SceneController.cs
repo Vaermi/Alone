@@ -40,19 +40,19 @@ public class SceneController : MonoBehaviour
     }
 
 
-    public void ContinueGame()
+    public static void ContinueGame()
     {
         SceneManager.UnloadSceneAsync("PauseScreen");
     }
     
 
-    public void EnterFightScreen()
+    public static void EnterFightScreen()
     {
         SceneManager.LoadScene("FightScreen", LoadSceneMode.Additive);
     }
 
 
-    public void ExitFightScreen()
+    public static void ExitFightScreen()
     {
         SceneManager.UnloadSceneAsync("FightScreen");
     }
