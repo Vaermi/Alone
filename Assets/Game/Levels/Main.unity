@@ -22818,10 +22818,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 771401360}
     m_Modifications:
+    - target: {fileID: 2810956422065448322, guid: 19eceed57fe1b6c4c9db4084c7343b71, type: 3}
+      propertyPath: m_Name
+      value: TextLevel
+      objectReference: {fileID: 0}
+    - target: {fileID: 2810956422065448327, guid: 19eceed57fe1b6c4c9db4084c7343b71, type: 3}
+      propertyPath: m_text
+      value: Level
+      objectReference: {fileID: 0}
+    - target: {fileID: 2810956423570590645, guid: 19eceed57fe1b6c4c9db4084c7343b71, type: 3}
+      propertyPath: m_Name
+      value: TextInsanity
+      objectReference: {fileID: 0}
     - target: {fileID: 2810956423680087840, guid: 19eceed57fe1b6c4c9db4084c7343b71, type: 3}
       propertyPath: hero
       value: 
       objectReference: {fileID: 1581232137}
+    - target: {fileID: 2810956423680087840, guid: 19eceed57fe1b6c4c9db4084c7343b71, type: 3}
+      propertyPath: textLevel
+      value: 
+      objectReference: {fileID: 2810956423761107130}
     - target: {fileID: 2810956423680087852, guid: 19eceed57fe1b6c4c9db4084c7343b71, type: 3}
       propertyPath: m_Name
       value: PlayerPanel
@@ -22912,6 +22928,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 19eceed57fe1b6c4c9db4084c7343b71, type: 3}
+--- !u!114 &2810956423761107130 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2810956422065448327, guid: 19eceed57fe1b6c4c9db4084c7343b71, type: 3}
+  m_PrefabInstance: {fileID: 2810956423761107129}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &5648509807044109233
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -22999,6 +23026,18 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1194594395660473085, guid: 3a9f03f470ab72640bac27f7bdef8ffa, type: 3}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2813813503836278983, guid: 3a9f03f470ab72640bac27f7bdef8ffa, type: 3}
+      propertyPath: m_text
+      value: weiter
+      objectReference: {fileID: 0}
+    - target: {fileID: 2813813503836278983, guid: 3a9f03f470ab72640bac27f7bdef8ffa, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+    - target: {fileID: 2813813503836278983, guid: 3a9f03f470ab72640bac27f7bdef8ffa, type: 3}
+      propertyPath: m_hasFontAssetChanged
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3180098301945818392, guid: 3a9f03f470ab72640bac27f7bdef8ffa, type: 3}
@@ -23153,6 +23192,22 @@ PrefabInstance:
       propertyPath: m_text
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 7570570878011749874, guid: 3a9f03f470ab72640bac27f7bdef8ffa, type: 3}
+      propertyPath: m_fontSize
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7570570878011749874, guid: 3a9f03f470ab72640bac27f7bdef8ffa, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+    - target: {fileID: 7570570878011749874, guid: 3a9f03f470ab72640bac27f7bdef8ffa, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7570570878011749874, guid: 3a9f03f470ab72640bac27f7bdef8ffa, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3a9f03f470ab72640bac27f7bdef8ffa, type: 3}
 --- !u!1001 &8379601712876129563
