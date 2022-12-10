@@ -8,7 +8,7 @@ public class Enemy : GameObjectController
     public string EnemyName { get; set; } = "Shog";
     public float Health { get; private set; } = 100.00f;
     public int Defence { get; private set; } = 10;
-    public int Attack { get; private set; } = 5;
+    public int Attack { get; private set; } = 4;
     public int AttackSpeed { get; private set; } = 2;
     public int DefaultDice { get; private set; } = 5;
 
