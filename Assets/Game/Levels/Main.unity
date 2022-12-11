@@ -23024,6 +23024,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 771401360}
     m_Modifications:
+    - target: {fileID: 457793046238121763, guid: 3a9f03f470ab72640bac27f7bdef8ffa, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 457793046238121763, guid: 3a9f03f470ab72640bac27f7bdef8ffa, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 8.5
+      objectReference: {fileID: 0}
     - target: {fileID: 1194594395660473085, guid: 3a9f03f470ab72640bac27f7bdef8ffa, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -23208,6 +23216,18 @@ PrefabInstance:
       propertyPath: m_sharedMaterial
       value: 
       objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+    - target: {fileID: 7651346951899120178, guid: 3a9f03f470ab72640bac27f7bdef8ffa, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7651346951899120178, guid: 3a9f03f470ab72640bac27f7bdef8ffa, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7651346951899120178, guid: 3a9f03f470ab72640bac27f7bdef8ffa, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3a9f03f470ab72640bac27f7bdef8ffa, type: 3}
 --- !u!1001 &8379601712876129563
