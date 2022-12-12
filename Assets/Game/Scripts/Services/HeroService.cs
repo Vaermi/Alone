@@ -17,6 +17,7 @@ namespace Assets.Game.Scripts.GameObjects
         public int DefaultDice { get; private set; } = 7;
         public int Experience { get; private set; } = 0;
         public bool IsHerosTurn { get; set; } = false;
+        public string Position = "";
 
 
         private HeroService() { }
@@ -34,6 +35,7 @@ namespace Assets.Game.Scripts.GameObjects
         public async Task Init()
         {
             HeroName = await FirebaseService.Instance.GetHeroNameAsync(HeroId);
+            Health = await FirebaseService.Instance.GetHeroHealthAsync(HeroId);
         }
 
 
@@ -46,6 +48,18 @@ namespace Assets.Game.Scripts.GameObjects
         public void SetHeroID(string id)
         {
             HeroId = id;
+        }
+
+
+        public void SetHeroHealth(float health)
+        {
+            Health = health;
+        }
+
+
+        public void SetHeroAttack()
+        {
+            Attack += 1;
         }
 
 
@@ -83,27 +97,29 @@ namespace Assets.Game.Scripts.GameObjects
         {
             if (Inventory.Instance.HealPotion > 0)
             {
-                Health += 30;
+                SetHeroHealth(Health + 30);
                 Inventory.Instance.RemoveHealPotionFromInventory();
             }
         }
 
         public float ReduceHeroHealth(float heroDmgInput)
         {
-            return Health -= heroDmgInput;
+            float result = Health - heroDmgInput;
+            SetHeroHealth(result);
+            return result;
         }
 
         // TODO Methode um Health zu erhöhen zb durch Zauber
-        public void IncreaseHeroHealth()
-        {
-
-
-        }
-
 
         public void IncreaseHeroHealthOnLevelUp()
         {
             Health += 50;
+        }
+
+
+        public void IncreaseHeroAttackOnLevelUp()
+        {
+            Attack += 1;
         }
 
 
@@ -141,11 +157,11 @@ namespace Assets.Game.Scripts.GameObjects
         }
 
 
-        public void IncreaseAttackOnLevelUp()
+        public void IncreaseAttributesOnLevelUp()
         {
-            Attack += 1;
+            IncreaseHeroAttackOnLevelUp();
+            IncreaseHeroHealthOnLevelUp();
         }
-
 
         public void IncreaseAttackSpeedOnLevelUp()
         {
@@ -176,6 +192,9 @@ namespace Assets.Game.Scripts.GameObjects
         {
             return UnityEngine.Random.Range(0, 100);
         }
+
+
+        
 
 
         

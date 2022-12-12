@@ -14,7 +14,13 @@ public class PlayerPanelController : MonoBehaviour
     private async void Start()
     {
         await heroService.Init();
+        UpdatePanel();
 
+    }
+
+
+    public void UpdatePanel()
+    {
         string playerName = heroService.HeroName;
         textHeroName.text = $"{playerName}";
 
@@ -26,6 +32,7 @@ public class PlayerPanelController : MonoBehaviour
 
         int playerLevel = heroService.Level;
         textLevel.text = $"Level: {playerLevel}";
+
     }
 
 }
