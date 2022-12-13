@@ -36,6 +36,8 @@ namespace Assets.Game.Scripts.GameObjects
         {
             HeroName = await FirebaseService.Instance.GetHeroNameAsync(HeroId);
             Health = await FirebaseService.Instance.GetHeroHealthAsync(HeroId);
+            Level = await FirebaseService.Instance.GetHeroLevelAsync(HeroId);
+            Insanity = await FirebaseService.Instance.GetHeroInsanityAsync(HeroId);
         }
 
 
@@ -57,17 +59,17 @@ namespace Assets.Game.Scripts.GameObjects
         }
 
 
-        public void SetHeroAttack()
-        {
-            Attack += 1;
-        }
-
+        //public void GetCurrentQuest()
+        //{
+        //    FirebaseService.Instance.UpdateQuestProgressAsync(hero, HeroId);
+        //}
 
 
         public void ReduceInsanity()
         {
             int number = RandomizeInsanityNumber();
             Insanity -= number;
+            FirebaseService.Instance.UpdateHeroInsanityAsync(Insanity, HeroId);
         }
 
 
@@ -75,21 +77,13 @@ namespace Assets.Game.Scripts.GameObjects
         {
             int number = RandomizeInsanityNumber();
             Insanity += number;
+            FirebaseService.Instance.UpdateHeroInsanityAsync(Insanity, HeroId);
         }
 
 
         public int RandomizeInsanityNumber()
         {
             return UnityEngine.Random.Range(0, 20);
-        }
-
-        // TODO Methode die GameOver prüft und GameOverScreen einblendet 
-        public void IsDead()
-        {
-            if (Health <= 0)
-            {
-                //GameOverScreen
-            }
         }
 
 
@@ -109,23 +103,26 @@ namespace Assets.Game.Scripts.GameObjects
             return result;
         }
 
-        // TODO Methode um Health zu erhöhen zb durch Zauber
 
-        public void IncreaseHeroHealthOnLevelUp()
+        public async void IncreaseHeroHealthOnLevelUp()
         {
             Health += 50;
+            await FirebaseService.Instance.UpdateHeroHealthAsync(Health, HeroId);
         }
 
 
         public void IncreaseHeroAttackOnLevelUp()
         {
             Attack += 1;
+            FirebaseService.Instance.UpdateHeroAttackAsync(Attack, HeroId);
         }
 
 
         public void IncreaseExperience()
         {
             Experience += 10;
+            CheckExperiencePoints();
+            FirebaseService.Instance.UpdateHeroExperienceAsync(Experience, HeroId);
         }
 
 
@@ -154,30 +151,38 @@ namespace Assets.Game.Scripts.GameObjects
         public void GetLevelUp()
         {
             ++Level;
+            FirebaseService.Instance.UpdateHeroLevelAsync(Level, HeroId);
+            IncreaseAttributesOnLevelUp();
         }
 
 
         public void IncreaseAttributesOnLevelUp()
         {
-            IncreaseHeroAttackOnLevelUp();
             IncreaseHeroHealthOnLevelUp();
+            IncreaseDefenceOnLevelUp();
+            IncreaseHeroAttackOnLevelUp();
+            IncreaseAttackSpeedOnLevelUp();
+            IncreaseDefaultDiceOnLevelUp();
         }
 
         public void IncreaseAttackSpeedOnLevelUp()
         {
             AttackSpeed += 1;
+            FirebaseService.Instance.UpdateHeroAttackSpeedAsync(AttackSpeed, HeroId);
         }
 
 
         public void IncreaseDefaultDiceOnLevelUp()
         {
             ++DefaultDice;
+            FirebaseService.Instance.UpdateHeroDefaultDiceAsync(DefaultDice, HeroId);
         }
 
 
         public void IncreaseDefenceOnLevelUp()
         {
             Defence += 2;
+            FirebaseService.Instance.UpdateHeroDefenceAsync(Defence, HeroId);
         }
 
 
@@ -194,10 +199,7 @@ namespace Assets.Game.Scripts.GameObjects
         }
 
 
-        
-
-
-        
+        // TODO Methode um Health zu erhöhen zb durch Zauber
 
 
     }

@@ -1,8 +1,5 @@
 using Assets.Game.Scripts.GameObjects;
-using System.Threading.Tasks;
-using UnityEditor.SearchService;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class Hero : GameObjectController
 {

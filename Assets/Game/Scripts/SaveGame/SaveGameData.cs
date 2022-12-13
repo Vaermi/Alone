@@ -40,7 +40,7 @@ public class SaveGameData : MonoBehaviour
 
     public async void LoadSaveGame()
     {
-        DocumentSnapshot result = await FirebaseService.Instance.GetSaveGame();
+        DocumentSnapshot result = await FirebaseService.Instance.GetSaveGameAsync();
         Debug.Log(result);
         string position = result.GetValue<string>("Position");
         HeroService.Instance.Position = position;
