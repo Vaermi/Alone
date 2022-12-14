@@ -15,6 +15,8 @@ public class Fight : MonoBehaviour
     private PlayerPanelController panel;
     public Enemy Enemy;
     public ExitButton exitButton;
+    public bool FightScreenEnemy;
+    public bool FightScreenBoss;
 
 
     public int Counter = 1;
@@ -111,6 +113,7 @@ public class Fight : MonoBehaviour
             else
             {
                 FightLog($"Kein Heiltrank im Inventar!\n");
+                --Counter;
                 HerosTurn();
             }
         }
@@ -122,17 +125,21 @@ public class Fight : MonoBehaviour
         if (heroService.IsHerosTurn)
         {
             FightLog($"{heroService.HeroName} versucht zu fliehen...\n");
-            int rndNumber = RunFromFight();
+            int rndNumber = HeroService.Instance.RunFromFight();
             if (rndNumber >= 70)
             {
                 await FirebaseService.Instance.UpdateHeroHealthAsync(heroService.Health, heroService.MaxHealth, heroService.HeroId);
-                SceneController.ExitFightScreen();
+                FightLog($"Fluchtversuch erfolgreich!\n");
+                var task = heroService.IncreaseInsanityAsync();
+                int result = await task;
+                FightLog($"{heroService.HeroName} erhält {result} Verrücktheit.\n");
+                FightLog($"--KAMPFENDE--");
+                exitButton.Exit();
                 panel.UpdatePanel();
             }
             else
             {
                 FightLog($"Fluchtversuch gescheitert!\n");
-                --Counter;
                 await AfterUserTurn();
             }
         }
@@ -166,10 +173,25 @@ public class Fight : MonoBehaviour
     }
 
 
-    public int RunFromFight()
+    public void RunFromFight()
     {
         int number = HeroService.Instance.RunFromFight();
-        return number;
-        
+        if (number >= 70)
+        {
+            exitButton.Exit();
+        }
+    }
+
+
+    public void ExitScreenManager()
+    {
+        if(FightScreenEnemy == true)
+        {
+            SceneController.ExitFightScreenEnemy();
+        }
+        else if (FightScreenBoss == true)
+        {
+            SceneController.ExitFightScreenBoss();
+        }
     }
 }

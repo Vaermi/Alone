@@ -60,7 +60,7 @@ namespace Assets.Game.Scripts.Db
         public async Task<string> GetHeroNameAsync(string heroId)
         {
             await EstablishConnectionAsync();
-            DocumentReference docRef = db.Collection("Player").Document($"{heroId}");
+            DocumentReference docRef = db.Collection("Player").Document(heroId);
             var snapshot = await docRef.GetSnapshotAsync();
             return snapshot.GetValue<string>("HeroName");
         }
@@ -82,7 +82,7 @@ namespace Assets.Game.Scripts.Db
         public async Task<string> GetHeroPositionAsync(string heroId)
         {
             await EstablishConnectionAsync();
-            DocumentReference docRef = db.Collection("Player").Document($"{heroId}");
+            DocumentReference docRef = db.Collection("Player").Document(heroId);
             var snapshot = await docRef.GetSnapshotAsync();
             return snapshot.GetValue<string>("Position");
         }

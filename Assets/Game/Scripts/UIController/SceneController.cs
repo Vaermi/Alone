@@ -1,25 +1,37 @@
 using Assets.Game.Scripts.Db;
 using Assets.Game.Scripts.GameObjects;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using UnityEditor.SearchService;
 using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Scene = UnityEngine.SceneManagement.Scene;
 
 public class SceneController : MonoBehaviour
 {
+    public string NextSceneToLoad;
     public float Counter = 0;
-    private void Update()
+
+    private void Start()
     {
-        float result = CounterToSwitchScene();
-        if (result >= 5)
-        {
-            StartScreen();
+        if (NextSceneToLoad != String.Empty) 
+        { 
+            StartCoroutine(LoadNextScene());
         }
     }
-    public static void StartScreen()
+
+    private IEnumerator LoadNextScene()
     {
+        yield return new WaitForSeconds(3);
+        SceneManager.LoadScene(NextSceneToLoad);
+    }
+
+    public static IEnumerator StartScreen()
+    {
+        yield return new WaitForSeconds(3);
         SceneManager.LoadScene("StartScreen");
     }
 
@@ -68,15 +80,15 @@ public class SceneController : MonoBehaviour
     }
 
 
-    public static void ExitFightScreen()
+    public static void ExitFightScreenBoss()
     {
-        SceneManager.UnloadSceneAsync("FightScreen");
+        SceneManager.UnloadSceneAsync("FightScreenBoss");
     }
 
 
-    public float CounterToSwitchScene()
+    public static void ExitFightScreenEnemy()
     {
-        Counter += Time.deltaTime;
-        return Counter;
+        SceneManager.UnloadSceneAsync("FightScreenEnemy");
     }
+
 }

@@ -40,6 +40,8 @@ namespace Assets.Game.Scripts.GameObjects
 
         public async Task Init()
         {
+            if (HeroId is null) return;
+
             HeroName = await FirebaseService.Instance.GetHeroNameAsync(HeroId);
             Health = await FirebaseService.Instance.GetHeroHealthAsync(HeroId);
             Level = await FirebaseService.Instance.GetHeroLevelAsync(HeroId);
@@ -73,11 +75,12 @@ namespace Assets.Game.Scripts.GameObjects
         }
 
 
-        public async void IncreaseInsanityAsync()
+        public async Task<int> IncreaseInsanityAsync()
         {
             int number = RandomizeInsanityNumber();
             Insanity += number;
             await FirebaseService.Instance.UpdateHeroInsanityAsync(Insanity, HeroId);
+            return number;
         }
 
 

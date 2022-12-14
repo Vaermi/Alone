@@ -8,6 +8,7 @@ public class Hero : GameObjectController
     public QuestPanelController Panel;
     public SceneController SceneController;
     private SaveGameData saveGameData;
+    private Fight fight;
 
     [SerializeField]
     private string heroName;
@@ -76,16 +77,6 @@ public class Hero : GameObjectController
     public void HeroAttack()
     {
         HeroService.Instance.HeroAttack();
-    }
-
-
-    public void RunFromFight()
-    {
-        int number = HeroService.Instance.RunFromFight();
-        if(number >= 70)
-        {
-            SceneController.ExitFightScreen();
-        }
     }
 
 
