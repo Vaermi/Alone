@@ -9,6 +9,7 @@ namespace Assets.Game.Scripts.GameObjects
         public string HeroId { get; private set; }  
         public string CurrentQuest { get; private set; }
         public float Health { get; private set; } = 100.00f;
+        public float MaxHealth { get; private set; } = 100.00f;
         public int Level { get; private set; } = 1;
         public int Insanity { get; private set; } = 0;
         public int Defence { get; private set; } = 20;
@@ -58,9 +59,9 @@ namespace Assets.Game.Scripts.GameObjects
         }
 
 
-        public void SetHeroHealth(float health)
+        public float SetHeroHealth(float health)
         {
-            Health = health;
+            return Health = health;
         }
 
 
@@ -88,7 +89,15 @@ namespace Assets.Game.Scripts.GameObjects
 
         public void UseHealPotion()
         {
-            SetHeroHealth(Health + 30);
+            float result = SetHeroHealth(Health + 30);
+            if(result > MaxHealth)
+            {
+                Health = MaxHealth;
+            }
+            else
+            {
+                Health = result;
+            }
             RemoveHealPotionFromInventory();
         }
 
@@ -103,7 +112,8 @@ namespace Assets.Game.Scripts.GameObjects
         public async void IncreaseHeroHealthOnLevelUp()
         {
             Health += 50;
-            await FirebaseService.Instance.UpdateHeroHealthAsync(Health, HeroId);
+            MaxHealth += 50;
+            await FirebaseService.Instance.UpdateHeroHealthAsync(Health, MaxHealth, HeroId);
         }
 
 

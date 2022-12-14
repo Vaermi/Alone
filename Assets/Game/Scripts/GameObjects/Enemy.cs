@@ -5,6 +5,7 @@ using UnityEngine;
 public class Enemy : GameObjectController
 {
     public GameObject EnemySpawn;
+    public GameObject BossSpawn;
     private Hero hero;
     public string EnemyName { get; set; } = "Shog";
     public float Health { get; private set; } = 100.00f;
@@ -43,7 +44,15 @@ public class Enemy : GameObjectController
         if (collision.gameObject.name is not "Hero") return;
 
         Debug.Log("Trigger");
-        SceneController.EnterFightScreen();
+        if (gameObject == EnemySpawn)
+        {
+            SceneController.EnterFightScreenEnemy();
+        }
+        else if (gameObject == BossSpawn)
+        {
+            SceneController.EnterFightScreenBoss();
+
+        }
 
     }
 

@@ -21,8 +21,11 @@ EditorBuildSettings:
     path: Assets/Game/Levels/GameOverScreen.unity
     guid: a60bb343667486b4698875b157215c3b
   - enabled: 1
-    path: Assets/Game/Levels/FightScreen.unity
+    path: Assets/Game/Levels/FightScreenBoss.unity
     guid: b00be8284492ee24d83a94e05160f0ea
+  - enabled: 1
+    path: Assets/Game/Levels/FightScreenEnemy.unity
+    guid: 11cde28857853f6488d85623b852146b
   - enabled: 1
     path: Assets/Game/Levels/PauseScreen.unity
     guid: 58bddfaef6ed4e04c89eff86dd571a22

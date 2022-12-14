@@ -46,9 +46,15 @@ public class SceneController : MonoBehaviour
     }
     
 
-    public static void EnterFightScreen()
+    public static void EnterFightScreenBoss()
     {
-        SceneManager.LoadScene("FightScreen", LoadSceneMode.Additive);
+        SceneManager.LoadScene("FightScreenBoss", LoadSceneMode.Additive);
+    }
+
+
+    public static void EnterFightScreenEnemy()
+    {
+        SceneManager.LoadScene("FightScreenEnemy", LoadSceneMode.Additive);
     }
 
 

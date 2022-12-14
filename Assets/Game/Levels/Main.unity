@@ -7722,6 +7722,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1399298092 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 994494732165729022, guid: 59f1f189a87f82648ba6b4977c020913, type: 3}
+  m_PrefabInstance: {fileID: 8379601712876129563}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1581232137 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8385332514341720293, guid: a287505372bed3d4ab57279cfe982181, type: 3}
@@ -23222,6 +23227,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 994494732165729018, guid: 59f1f189a87f82648ba6b4977c020913, type: 3}
+      propertyPath: BossSpawn
+      value: 
+      objectReference: {fileID: 1399298092}
+    - target: {fileID: 994494732165729018, guid: 59f1f189a87f82648ba6b4977c020913, type: 3}
+      propertyPath: EnemySpawn
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 994494732165729021, guid: 59f1f189a87f82648ba6b4977c020913, type: 3}
       propertyPath: m_RootOrder
       value: 4

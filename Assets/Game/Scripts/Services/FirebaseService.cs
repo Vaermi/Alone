@@ -184,12 +184,13 @@ namespace Assets.Game.Scripts.Db
         }
 
         //UPDATE
-        public async Task UpdateHeroHealthAsync(float health, string heroId)
+        public async Task UpdateHeroHealthAsync(float health, float maxHealth, string heroId)
         {
             Task t = EstablishConnectionAsync();
             Dictionary<string, object> updateHealth = new Dictionary<string, object>
         {
             {"Health", health},
+            {"MaxHealth", maxHealth }
         };
             await t;
             DocumentReference docRef = db.Collection("Player").Document(heroId);

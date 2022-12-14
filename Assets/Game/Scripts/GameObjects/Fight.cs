@@ -125,7 +125,7 @@ public class Fight : MonoBehaviour
             int rndNumber = RunFromFight();
             if (rndNumber >= 70)
             {
-                await FirebaseService.Instance.UpdateHeroHealthAsync(heroService.Health, heroService.HeroId);
+                await FirebaseService.Instance.UpdateHeroHealthAsync(heroService.Health, heroService.MaxHealth, heroService.HeroId);
                 SceneController.ExitFightScreen();
                 panel.UpdatePanel();
             }
@@ -146,7 +146,7 @@ public class Fight : MonoBehaviour
         {
             FightLog($"{heroService.HeroName} hat gewonnen!\n");
             heroService.IncreaseExperienceAsync();
-            await FirebaseService.Instance.UpdateHeroHealthAsync(heroService.Health, heroService.HeroId);
+            await FirebaseService.Instance.UpdateHeroHealthAsync(heroService.Health, heroService.MaxHealth, heroService.HeroId);
             Counter = 1;
             exitButton.Exit();
             panel.UpdatePanel();
