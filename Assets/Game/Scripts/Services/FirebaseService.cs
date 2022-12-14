@@ -48,7 +48,9 @@ namespace Assets.Game.Scripts.Db
                 {"Experience", 0},
                 {"Level", 1},
                 {"CurrentQuest", "Quest"},
-                {"Position", "0 0 0" }
+                {"Position", "0 0 0" },
+                {"HealPotion", 5 },
+                {"InventoryCount", 5 }
             };
             await t;
             return (await db.Collection("Player").AddAsync(data)).Id;

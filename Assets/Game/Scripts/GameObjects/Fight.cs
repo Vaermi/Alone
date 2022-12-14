@@ -101,7 +101,7 @@ public class Fight : MonoBehaviour
     {
         if (heroService.IsHerosTurn)
         {
-            if(Inventory.Instance.HealPotion < 0)
+            if(HeroService.Instance.HealPotion > 0)
             {
                 FightLog($"{heroService.HeroName} benutzt einen Heiltrank.\n");
                 heroService.UseHealPotion();
@@ -117,7 +117,7 @@ public class Fight : MonoBehaviour
     }
 
 
-    public async Task RunClick()
+    public async void RunClick()
     {
         if (heroService.IsHerosTurn)
         {
@@ -132,6 +132,7 @@ public class Fight : MonoBehaviour
             else
             {
                 FightLog($"Fluchtversuch gescheitert!\n");
+                --Counter;
                 await AfterUserTurn();
             }
         }

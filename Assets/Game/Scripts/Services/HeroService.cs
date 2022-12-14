@@ -19,6 +19,11 @@ namespace Assets.Game.Scripts.GameObjects
         public bool IsHerosTurn { get; set; } = false;
         public string Position = "";
 
+        //Inventory
+        public int MaxInventory { get; } = 10;
+        public int HealPotion { get; set; } = 5;
+        public int InventoryCount { get; set; } = 5;
+
 
         private HeroService() { }
         private static HeroService instance;
@@ -83,11 +88,8 @@ namespace Assets.Game.Scripts.GameObjects
 
         public void UseHealPotion()
         {
-            if (Inventory.Instance.HealPotion > 0)
-            {
-                SetHeroHealth(Health + 30);
-                Inventory.Instance.RemoveHealPotionFromInventory();
-            }
+            SetHeroHealth(Health + 30);
+            RemoveHealPotionFromInventory();
         }
 
         public float ReduceHeroHealth(float heroDmgInput)
@@ -192,6 +194,32 @@ namespace Assets.Game.Scripts.GameObjects
             return UnityEngine.Random.Range(0, 100);
         }
 
+
+        //Inventory Methods
+        public void InventoryPlusCounter()
+        {
+            ++InventoryCount;
+        }
+
+
+        public void InventoryMinusCounter()
+        {
+            --InventoryCount;
+        }
+
+
+        public void AddHealPotionToInventory()
+        {
+            ++HealPotion;
+            InventoryPlusCounter();
+        }
+
+
+        public void RemoveHealPotionFromInventory()
+        {
+            --HealPotion;
+            InventoryMinusCounter();
+        }
 
         // TODO Methode um Health zu erhöhen zb durch Zauber
 

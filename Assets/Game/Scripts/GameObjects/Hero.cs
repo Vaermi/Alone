@@ -21,6 +21,7 @@ public class Hero : GameObjectController
     private int attack = HeroService.Instance.Attack;
     private int attackSpeed = HeroService.Instance.AttackSpeed;
     private int defaultDice = HeroService.Instance.DefaultDice;
+    private int healPotion = HeroService.Instance.HealPotion;
     private bool isHerosTurn = HeroService.Instance.IsHerosTurn;
 
 

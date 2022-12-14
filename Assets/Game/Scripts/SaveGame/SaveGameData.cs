@@ -8,11 +8,6 @@ public class SaveGameData : MonoBehaviour
 {
     private Hero hero;
 
-    public int CurrentInventory = Inventory.Instance.CurrentInventory;
-    public int InventoryCount = Inventory.Instance.InventoryCount;
-    
-
-
     private async void Awake()
     {
         await HeroService.Instance.Init();
