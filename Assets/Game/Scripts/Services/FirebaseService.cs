@@ -1,4 +1,5 @@
-﻿using Firebase;
+﻿using Assets.Game.Scripts.GameObjects;
+using Firebase;
 using Firebase.Firestore;
 using System;
 using System.Collections;
@@ -85,7 +86,7 @@ namespace Assets.Game.Scripts.Db
         }
 
 
-        public async void GetHeroAttributesAsync(string heroId)
+        public async Task GetHeroAttributesAsync(string heroId)
         {
             await GetHeroAttackAsync(heroId);
             await GetHeroAttackSpeedAsync(heroId);
@@ -194,7 +195,7 @@ namespace Assets.Game.Scripts.Db
         }
 
 
-        public async void UpdateHeroInsanityAsync(int insanity, string heroId)
+        public async Task UpdateHeroInsanityAsync(int insanity, string heroId)
         {
             Task t = EstablishConnectionAsync();
             Dictionary<string, object> updateInsanity = new Dictionary<string, object>
@@ -207,7 +208,7 @@ namespace Assets.Game.Scripts.Db
         }
 
 
-        public async void UpdateHeroDefenceAsync(int defence, string heroId)
+        public async Task UpdateHeroDefenceAsync(int defence, string heroId)
         {
             Task t = EstablishConnectionAsync();
             Dictionary<string, object> updateDefence = new Dictionary<string, object>
@@ -220,7 +221,7 @@ namespace Assets.Game.Scripts.Db
         }
 
 
-        public async void UpdateHeroAttackAsync(int attack, string heroId)
+        public async Task UpdateHeroAttackAsync(int attack, string heroId)
         {
             Task t = EstablishConnectionAsync();
             Dictionary<string, object> updateAttack = new Dictionary<string, object>
@@ -233,7 +234,7 @@ namespace Assets.Game.Scripts.Db
         }
 
 
-        public async void UpdateHeroAttackSpeedAsync(int attackSpeed, string heroId)
+        public async Task UpdateHeroAttackSpeedAsync(int attackSpeed, string heroId)
         {
             Task t = EstablishConnectionAsync();
             Dictionary<string, object> updateName = new Dictionary<string, object>
@@ -246,7 +247,7 @@ namespace Assets.Game.Scripts.Db
         }
 
 
-        public async void UpdateHeroDefaultDiceAsync(int defaultDice, string heroId)
+        public async Task UpdateHeroDefaultDiceAsync(int defaultDice, string heroId)
         {
             Task t = EstablishConnectionAsync();
             Dictionary<string, object> updateDice = new Dictionary<string, object>
@@ -259,7 +260,7 @@ namespace Assets.Game.Scripts.Db
         }
 
 
-        public async void UpdateHeroExperienceAsync(int exp, string heroId)
+        public async Task UpdateHeroExperienceAsync(int exp, string heroId)
         {
             Task t = EstablishConnectionAsync();
             Dictionary<string, object> updateExp = new Dictionary<string, object>
@@ -272,7 +273,7 @@ namespace Assets.Game.Scripts.Db
         }
 
 
-        public async void UpdateHeroLevelAsync(int level, string heroId)
+        public async Task UpdateHeroLevelAsync(int level, string heroId)
         {
             Task t = EstablishConnectionAsync();
             Dictionary<string, object> updateLevel = new Dictionary<string, object>
@@ -285,19 +286,18 @@ namespace Assets.Game.Scripts.Db
         }
 
 
-        public async void UpdateQuestProgressAsync(Hero hero, string heroId)
+        public async Task UpdateQuestProgressAsync(Hero hero, string heroId)
         {
             Task t = EstablishConnectionAsync();
             Dictionary<string, object> updateQuest = new Dictionary<string, object>
         {
-            {"CurrentQuest", hero.},
+            {"CurrentQuest", HeroService.Instance.CurrentQuest},
         };
             await t;
             DocumentReference docRef = db.Collection("Player").Document($"{heroId}");
             await docRef.SetAsync(updateQuest, SetOptions.MergeAll);
         }
 
-        //TODO Spielerposition speichern
 
         public async Task UpdatePlayerPosition(Hero hero, string heroId)
         {
@@ -314,8 +314,9 @@ namespace Assets.Game.Scripts.Db
 
         public async Task UpdateSaveGame(Hero hero, string heroId)
         {
-            await UpdateQuestProgressAsync();
+            await UpdateQuestProgressAsync(hero, heroId);
             await UpdatePlayerPosition(hero, heroId);
+            await UpdateHeroExperienceAsync(HeroService.Instance.Experience, heroId);
         }
 
         //DELETE

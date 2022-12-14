@@ -23,13 +23,6 @@ public class SaveGameData : MonoBehaviour
     {
         hero = GameObject.FindObjectOfType<Hero>();
         Debug.Log("Save Game Data");
-       // SetSaveGame("Test1");
-    }
-
-
-    public void SetSaveGame(string name, string heroId)
-    {
-        FirebaseService.Instance.SetSaveGameAsync(name, heroId);
     }
 
 

@@ -144,7 +144,7 @@ public class Fight : MonoBehaviour
         if (Enemy.Health <= 0)
         {
             FightLog($"{heroService.HeroName} hat gewonnen!\n");
-            heroService.IncreaseExperience();
+            heroService.IncreaseExperienceAsync();
             await FirebaseService.Instance.UpdateHeroHealthAsync(heroService.Health, heroService.HeroId);
             Counter = 1;
             exitButton.Exit();

@@ -59,25 +59,19 @@ namespace Assets.Game.Scripts.GameObjects
         }
 
 
-        //public void GetCurrentQuest()
-        //{
-        //    FirebaseService.Instance.UpdateQuestProgressAsync(hero, HeroId);
-        //}
-
-
-        public void ReduceInsanity()
+        public async void ReduceInsanityAsync()
         {
             int number = RandomizeInsanityNumber();
             Insanity -= number;
-            FirebaseService.Instance.UpdateHeroInsanityAsync(Insanity, HeroId);
+            await FirebaseService.Instance.UpdateHeroInsanityAsync(Insanity, HeroId);
         }
 
 
-        public void IncreaseInsanity()
+        public async void IncreaseInsanityAsync()
         {
             int number = RandomizeInsanityNumber();
             Insanity += number;
-            FirebaseService.Instance.UpdateHeroInsanityAsync(Insanity, HeroId);
+            await FirebaseService.Instance.UpdateHeroInsanityAsync(Insanity, HeroId);
         }
 
 
@@ -111,18 +105,18 @@ namespace Assets.Game.Scripts.GameObjects
         }
 
 
-        public void IncreaseHeroAttackOnLevelUp()
+        public async void IncreaseHeroAttackOnLevelUpAsync()
         {
             Attack += 1;
-            FirebaseService.Instance.UpdateHeroAttackAsync(Attack, HeroId);
+            await FirebaseService.Instance.UpdateHeroAttackAsync(Attack, HeroId);
         }
 
 
-        public void IncreaseExperience()
+        public async void IncreaseExperienceAsync()
         {
             Experience += 10;
             CheckExperiencePoints();
-            FirebaseService.Instance.UpdateHeroExperienceAsync(Experience, HeroId);
+            await FirebaseService.Instance.UpdateHeroExperienceAsync(Experience, HeroId);
         }
 
 
@@ -140,7 +134,7 @@ namespace Assets.Game.Scripts.GameObjects
                 case 2200:
                 case 2700:
                 case 3250:
-                    GetLevelUp();
+                    GetLevelUpAsync();
                     break;
                 default:
                     break;
@@ -148,10 +142,10 @@ namespace Assets.Game.Scripts.GameObjects
         }
 
 
-        public void GetLevelUp()
+        public async void GetLevelUpAsync()
         {
             ++Level;
-            FirebaseService.Instance.UpdateHeroLevelAsync(Level, HeroId);
+            await FirebaseService.Instance.UpdateHeroLevelAsync(Level, HeroId);
             IncreaseAttributesOnLevelUp();
         }
 
@@ -159,30 +153,30 @@ namespace Assets.Game.Scripts.GameObjects
         public void IncreaseAttributesOnLevelUp()
         {
             IncreaseHeroHealthOnLevelUp();
-            IncreaseDefenceOnLevelUp();
-            IncreaseHeroAttackOnLevelUp();
-            IncreaseAttackSpeedOnLevelUp();
-            IncreaseDefaultDiceOnLevelUp();
+            IncreaseDefenceOnLevelUpAsync();
+            IncreaseHeroAttackOnLevelUpAsync();
+            IncreaseAttackSpeedOnLevelUpAsync();
+            IncreaseDefaultDiceOnLevelUpAsync();
         }
 
-        public void IncreaseAttackSpeedOnLevelUp()
+        public async void IncreaseAttackSpeedOnLevelUpAsync()
         {
             AttackSpeed += 1;
-            FirebaseService.Instance.UpdateHeroAttackSpeedAsync(AttackSpeed, HeroId);
+            await FirebaseService.Instance.UpdateHeroAttackSpeedAsync(AttackSpeed, HeroId);
         }
 
 
-        public void IncreaseDefaultDiceOnLevelUp()
+        public async void IncreaseDefaultDiceOnLevelUpAsync()
         {
             ++DefaultDice;
-            FirebaseService.Instance.UpdateHeroDefaultDiceAsync(DefaultDice, HeroId);
+            await FirebaseService.Instance.UpdateHeroDefaultDiceAsync(DefaultDice, HeroId);
         }
 
 
-        public void IncreaseDefenceOnLevelUp()
+        public async void IncreaseDefenceOnLevelUpAsync()
         {
             Defence += 2;
-            FirebaseService.Instance.UpdateHeroDefenceAsync(Defence, HeroId);
+            await FirebaseService.Instance.UpdateHeroDefenceAsync(Defence, HeroId);
         }
 
 

@@ -1,3 +1,4 @@
+using Assets.Game.Scripts.Db;
 using Assets.Game.Scripts.GameObjects;
 using UnityEngine;
 
@@ -50,6 +51,18 @@ public class Hero : GameObjectController
         float z = transform.position.z;
         string curPos = $"{x} {y} {z}";
         return curPos;
+    }
+
+
+    public void GetCurrentQuest()
+    {
+
+    }
+
+
+    public async void UpdateCurrentQuestAsync()
+    {
+        await FirebaseService.Instance.UpdateQuestProgressAsync(this, heroId);
     }
 
 
