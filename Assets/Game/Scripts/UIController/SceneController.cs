@@ -3,11 +3,21 @@ using Assets.Game.Scripts.GameObjects;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class SceneController : MonoBehaviour
 {
+    public float Counter = 0;
+    private void Update()
+    {
+        float result = CounterToSwitchScene();
+        if (result >= 5)
+        {
+            StartScreen();
+        }
+    }
     public static void StartScreen()
     {
         SceneManager.LoadScene("StartScreen");
@@ -61,5 +71,12 @@ public class SceneController : MonoBehaviour
     public static void ExitFightScreen()
     {
         SceneManager.UnloadSceneAsync("FightScreen");
+    }
+
+
+    public float CounterToSwitchScene()
+    {
+        Counter += Time.deltaTime;
+        return Counter;
     }
 }
