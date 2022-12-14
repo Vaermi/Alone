@@ -11,7 +11,7 @@ namespace Assets.Game.Scripts.GameObjects
         public float Health { get; private set; } = 100.00f;
         public float MaxHealth { get; private set; } = 100.00f;
         public int Level { get; private set; } = 1;
-        public int Insanity { get; private set; } = 0;
+        public int Insanity { get; set; } = 0;
         public int Defence { get; private set; } = 20;
         public int Attack { get; private set; } = 5;
         public int AttackSpeed { get; private set; } = 3;

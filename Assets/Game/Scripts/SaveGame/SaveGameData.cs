@@ -32,6 +32,10 @@ public class SaveGameData : MonoBehaviour
         Debug.Log(result);
         string position = result.GetValue<string>("Position");
         HeroService.Instance.Position = position;
+
+        DocumentSnapshot result2 = await FirebaseService.Instance.GetSaveGameAsync();
+        int insanity = result2.GetValue<int>("Insanity");
+        HeroService.Instance.Insanity = insanity;
         
         string heroId = result.Id;
         Debug.Log(heroId);
