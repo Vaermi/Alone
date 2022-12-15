@@ -10,13 +10,13 @@ namespace Assets.Game.Scripts.GameObjects
         public string CurrentQuest { get; private set; }
         public float Health { get; private set; } = 300.00f;
         public float MaxHealth { get; private set; } = 300.00f;
-        public int Level { get; private set; } = 1;
+        public int Level { get; set; } = 1;
         public int Insanity { get; set; } = 0;
         public int Defence { get; private set; } = 20;
         public int Attack { get; private set; } = 5;
         public int AttackSpeed { get; private set; } = 3;
         public int DefaultDice { get; private set; } = 7;
-        public int Experience { get; private set; } = 0;
+        public int Experience { get; set; } = 0;
         public bool IsHerosTurn { get; set; } = false;
         public string Position = "";
 

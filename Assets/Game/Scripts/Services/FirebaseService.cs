@@ -315,9 +315,8 @@ namespace Assets.Game.Scripts.Db
         }
 
 
-        public async Task UpdateSaveGame(Hero hero, string questId, string heroId)
+        public async Task UpdateSaveGame(Hero hero, string heroId)
         {
-            await UpdateQuestProgressAsync(questId, heroId);
             await UpdatePlayerPosition(hero, heroId);
             await UpdateHeroExperienceAsync(HeroService.Instance.Experience, heroId);
         }
@@ -331,6 +330,6 @@ namespace Assets.Game.Scripts.Db
         }
 
 
-        
+
     }
 }

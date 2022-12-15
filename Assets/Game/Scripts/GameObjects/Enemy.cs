@@ -56,6 +56,12 @@ public class Enemy : GameObjectController
 
     }
 
+
+    public void DeactivateEnemy()
+    {
+        gameObject.SetActive(false);
+    }
+
     // TODO Unterklassen von Enemy erstellen
     // TODO Die einzelnen Unterklassen benötigen eine Kampfressource zb Energy oder Mana
 }

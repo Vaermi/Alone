@@ -21,9 +21,9 @@ public class SaveGameData : MonoBehaviour
     }
 
 
-    public async void UpdateSaveGame(string questId)
+    public async void UpdateSaveGame()
     {
-        await FirebaseService.Instance.UpdateSaveGame(hero, questId, HeroService.Instance.HeroId);
+        await FirebaseService.Instance.UpdateSaveGame(hero, HeroService.Instance.HeroId);
     }
 
     public async void LoadSaveGame()
@@ -36,7 +36,15 @@ public class SaveGameData : MonoBehaviour
         DocumentSnapshot result2 = await FirebaseService.Instance.GetSaveGameAsync();
         int insanity = result2.GetValue<int>("Insanity");
         HeroService.Instance.Insanity = insanity;
-        
+
+        DocumentSnapshot result3 = await FirebaseService.Instance.GetSaveGameAsync();
+        int level = result3.GetValue<int>("Level");
+        HeroService.Instance.Level = level;
+
+        DocumentSnapshot result4 = await FirebaseService.Instance.GetSaveGameAsync();
+        int exp = result4.GetValue<int>("Experience");
+        HeroService.Instance.Experience = exp;
+
         string heroId = result.Id;
         Debug.Log(heroId);
         HeroService.Instance.SetHeroID(heroId);
