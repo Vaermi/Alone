@@ -8,8 +8,8 @@ namespace Assets.Game.Scripts.GameObjects
         public string HeroName { get; private set; }
         public string HeroId { get; private set; }  
         public string CurrentQuest { get; private set; }
-        public float Health { get; private set; } = 100.00f;
-        public float MaxHealth { get; private set; } = 100.00f;
+        public float Health { get; private set; } = 300.00f;
+        public float MaxHealth { get; private set; } = 300.00f;
         public int Level { get; private set; } = 1;
         public int Insanity { get; set; } = 0;
         public int Defence { get; private set; } = 20;
@@ -92,7 +92,7 @@ namespace Assets.Game.Scripts.GameObjects
 
         public void UseHealPotion()
         {
-            float result = SetHeroHealth(Health + 30);
+            float result = SetHeroHealth(Health + 100);
             if(result > MaxHealth)
             {
                 Health = MaxHealth;

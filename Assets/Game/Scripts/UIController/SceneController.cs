@@ -22,9 +22,15 @@ public class SceneController : MonoBehaviour
         SceneManager.LoadScene(NextSceneToLoad);
     }
 
-    public static IEnumerator StartScreen()
+    public static IEnumerator NextStartScreen()
     {
         yield return new WaitForSeconds(3);
+        SceneManager.LoadScene("StartScreen");
+    }
+
+
+    public static void StartScreen()
+    {
         SceneManager.LoadScene("StartScreen");
     }
 

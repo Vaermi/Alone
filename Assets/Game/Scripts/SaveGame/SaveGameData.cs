@@ -21,9 +21,9 @@ public class SaveGameData : MonoBehaviour
     }
 
 
-    public async void UpdateSaveGame()
+    public async void UpdateSaveGame(string questId)
     {
-        await FirebaseService.Instance.UpdateSaveGame(hero, HeroService.Instance.HeroId);
+        await FirebaseService.Instance.UpdateSaveGame(hero, questId, HeroService.Instance.HeroId);
     }
 
     public async void LoadSaveGame()

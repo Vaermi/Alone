@@ -47,6 +47,15 @@ public class Hero : GameObjectController
     }
 
 
+    private void Update()
+    {
+        if (HeroService.Instance.Health <= 0)
+        {
+            Destroy(gameObject);
+        }
+    }
+
+
     public string CurrentPlayerPosition()
     {
         float x = transform.position.x;
@@ -63,9 +72,9 @@ public class Hero : GameObjectController
     }
 
 
-    public async void UpdateCurrentQuestAsync()
+    public async void UpdateCurrentQuestAsync(string questId)
     {
-        await FirebaseService.Instance.UpdateQuestProgressAsync(this, heroId);
+        await FirebaseService.Instance.UpdateQuestProgressAsync(questId, heroId);
     }
 
 
@@ -92,4 +101,5 @@ public class Hero : GameObjectController
         var renderer = GetComponent<SpriteRenderer>();
         renderer.enabled = true;
     }
+
 }

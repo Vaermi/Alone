@@ -289,12 +289,12 @@ namespace Assets.Game.Scripts.Db
         }
 
 
-        public async Task UpdateQuestProgressAsync(Hero hero, string heroId)
+        public async Task UpdateQuestProgressAsync(string questId, string heroId)
         {
             Task t = EstablishConnectionAsync();
             Dictionary<string, object> updateQuest = new Dictionary<string, object>
         {
-            {"CurrentQuest", HeroService.Instance.CurrentQuest},
+            {"CurrentQuest", questId},
         };
             await t;
             DocumentReference docRef = db.Collection("Player").Document($"{heroId}");
@@ -315,9 +315,9 @@ namespace Assets.Game.Scripts.Db
         }
 
 
-        public async Task UpdateSaveGame(Hero hero, string heroId)
+        public async Task UpdateSaveGame(Hero hero, string questId, string heroId)
         {
-            await UpdateQuestProgressAsync(hero, heroId);
+            await UpdateQuestProgressAsync(questId, heroId);
             await UpdatePlayerPosition(hero, heroId);
             await UpdateHeroExperienceAsync(HeroService.Instance.Experience, heroId);
         }

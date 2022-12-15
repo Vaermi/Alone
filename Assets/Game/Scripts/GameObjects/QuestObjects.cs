@@ -1,3 +1,5 @@
+using Assets.Game.Scripts.Db;
+using Assets.Game.Scripts.GameObjects;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -26,6 +28,7 @@ public class QuestObjects : MonoBehaviour
         Debug.Log("Trigger");
         questPanel.SetQuestWindowActive();
         await SwitchStatusQuestObjects();
+        await FirebaseService.Instance.UpdateQuestProgressAsync(QuestId, HeroService.Instance.HeroId);
     }
 
 
