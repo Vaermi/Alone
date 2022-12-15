@@ -1,14 +1,7 @@
-using Assets.Game.Scripts.Db;
-using Assets.Game.Scripts.GameObjects;
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using UnityEditor.SearchService;
-using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using Scene = UnityEngine.SceneManagement.Scene;
 
 public class SceneController : MonoBehaviour
 {

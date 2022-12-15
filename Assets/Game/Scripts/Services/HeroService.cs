@@ -21,7 +21,7 @@ namespace Assets.Game.Scripts.GameObjects
         public string Position = "";
 
         //Inventory
-        public int MaxInventory { get; } = 10;
+        public int MaxInventory { get; } = 100;
         public int HealPotion { get; set; } = 5;
         public int InventoryCount { get; set; } = 5;
 
@@ -209,9 +209,9 @@ namespace Assets.Game.Scripts.GameObjects
 
 
         //Inventory Methods
-        public void InventoryPlusCounter()
+        public void InventoryPlusCounter(int number)
         {
-            ++InventoryCount;
+            InventoryCount += number;
         }
 
 
@@ -221,10 +221,10 @@ namespace Assets.Game.Scripts.GameObjects
         }
 
 
-        public void AddHealPotionToInventory()
+        public void AddHealPotionToInventory(int number)
         {
-            ++HealPotion;
-            InventoryPlusCounter();
+            HealPotion += number;
+            InventoryPlusCounter(number);
         }
 
 

@@ -33,6 +33,7 @@ public class Hero : GameObjectController
         Debug.Log("Hero");
         heroName = HeroService.Instance.HeroName;
         health = HeroService.Instance.Health;
+        
 
         DontDestroyOnLoad(gameObject);
 
