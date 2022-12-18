@@ -1,5 +1,7 @@
+using Assets.Game.Scripts.Db;
 using Assets.Game.Scripts.GameObjects;
 using System;
+using System.Threading.Tasks;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -10,18 +12,24 @@ public class Fight : MonoBehaviour
 {
     private HeroService heroService = HeroService.Instance;
     private Hero hero;
+    private PlayerPanelController panel;
     public Enemy Enemy;
     public ExitButton exitButton;
+    public bool FightScreenEnemy;
+    public bool FightScreenBoss;
+
 
     public int Counter = 1;
 
 
-    private void Start()
+    private async void Start()
     {
         float heroDice = Random.Range(0, heroService.DefaultDice);
         float enemyDice = Random.Range(0, Enemy.DefaultDice);
 
-        // TODO Startbedingung überarbeiten
+        await HeroService.Instance.Init();
+
+        panel = GameObject.FindObjectOfType<PlayerPanelController>();
 
         if (heroService.AttackSpeed > Enemy.AttackSpeed)
         {
@@ -78,7 +86,7 @@ public class Fight : MonoBehaviour
     }
 
 
-    public void AttackClick()
+    public async void AttackClick()
     {
         if (heroService.IsHerosTurn)
         {
@@ -86,59 +94,69 @@ public class Fight : MonoBehaviour
             Enemy.ReduceEnemyHealth(heroDmgOutput);
             FightLog($"{heroService.HeroName} zieht {Enemy.EnemyName} {heroDmgOutput} Lebenspunkte ab.\n");
             FightLog($"{Enemy.EnemyName} hat noch {Enemy.Health} Lebenspunkte.\n");
-            AfterUserTurn();
+            await AfterUserTurn();
         }
     }
 
 
-    public void HealClick()
+    public async void HealClick()
     {
         if (heroService.IsHerosTurn)
         {
-            if(Inventory.Instance.HealPotion < 0)
+            if(HeroService.Instance.HealPotion > 0)
             {
                 FightLog($"{heroService.HeroName} benutzt einen Heiltrank.\n");
                 heroService.UseHealPotion();
                 FightLog($"{heroService.HeroName} heilt sich und hat nun wieder {heroService.Health} Lebenspunkte.\n");
-                AfterUserTurn();
+                await AfterUserTurn();
             } 
             else
             {
                 FightLog($"Kein Heiltrank im Inventar!\n");
+                --Counter;
                 HerosTurn();
             }
         }
     }
 
 
-    public void RunClick()
+    public async void RunClick()
     {
         if (heroService.IsHerosTurn)
         {
             FightLog($"{heroService.HeroName} versucht zu fliehen...\n");
-            int rndNumber = RunFromFight();
+            int rndNumber = HeroService.Instance.RunFromFight();
             if (rndNumber >= 70)
             {
-                SceneController.ExitFightScreen();
+                await FirebaseService.Instance.UpdateHeroHealthAsync(heroService.Health, heroService.MaxHealth, heroService.HeroId);
+                FightLog($"Fluchtversuch erfolgreich!\n");
+                var task = heroService.IncreaseInsanityAsync();
+                int result = await task;
+                FightLog($"{heroService.HeroName} erhält {result} Verrücktheit.\n");
+                FightLog($"--KAMPFENDE--");
+                exitButton.Exit();
+                panel.UpdatePanel();
             }
             else
             {
                 FightLog($"Fluchtversuch gescheitert!\n");
-                AfterUserTurn();
+                await AfterUserTurn();
             }
         }
     }
 
 
-    public void AfterUserTurn()
+    public async Task AfterUserTurn()
     {
         heroService.IsHerosTurn = false;
         if (Enemy.Health <= 0)
         {
             FightLog($"{heroService.HeroName} hat gewonnen!\n");
-            heroService.IncreaseExperience();
+            heroService.IncreaseExperienceAsync();
+            await FirebaseService.Instance.UpdateHeroHealthAsync(heroService.Health, heroService.MaxHealth, heroService.HeroId);
             Counter = 1;
             exitButton.Exit();
+            panel.UpdatePanel();
         }
         else
         {
@@ -155,10 +173,25 @@ public class Fight : MonoBehaviour
     }
 
 
-    public int RunFromFight()
+    public void RunFromFight()
     {
         int number = HeroService.Instance.RunFromFight();
-        return number;
-        
+        if (number >= 70)
+        {
+            exitButton.Exit();
+        }
+    }
+
+
+    public void ExitScreenManager()
+    {
+        if(FightScreenEnemy == true)
+        {
+            SceneController.ExitFightScreenEnemy();
+        }
+        else if (FightScreenBoss == true)
+        {
+            SceneController.ExitFightScreenBoss();
+        }
     }
 }

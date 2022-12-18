@@ -1,14 +1,12 @@
 using Assets.Game.Scripts.Db;
 using Assets.Game.Scripts.GameObjects;
+using Firebase.Firestore;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class SaveGameData : MonoBehaviour
 {
-    public static Vector3 Pos { get; set; }
-
-    public int CurrentInventory = Inventory.Instance.CurrentInventory;
-    public int InventoryCount = Inventory.Instance.InventoryCount;
-
+    private Hero hero;
 
     private async void Awake()
     {
@@ -18,19 +16,40 @@ public class SaveGameData : MonoBehaviour
 
     private void Start()
     {
-       // SetSaveGame("Test1");
+        hero = GameObject.FindObjectOfType<Hero>();
+        Debug.Log("Save Game Data");
     }
 
 
-    private void FixedUpdate()
+    public async void UpdateSaveGame()
     {
-        Pos = transform.position;
+        await FirebaseService.Instance.UpdateSaveGame(hero, HeroService.Instance.HeroId);
     }
 
-
-    public void SetSaveGame(string name, string heroId)
+    public async void LoadSaveGame()
     {
-        FirebaseService.Instance.SetSaveGameAsync(name, heroId);
+        DocumentSnapshot result = await FirebaseService.Instance.GetSaveGameAsync();
+        Debug.Log(result);
+        string position = result.GetValue<string>("Position");
+        HeroService.Instance.Position = position;
+
+        DocumentSnapshot result2 = await FirebaseService.Instance.GetSaveGameAsync();
+        int insanity = result2.GetValue<int>("Insanity");
+        HeroService.Instance.Insanity = insanity;
+
+        DocumentSnapshot result3 = await FirebaseService.Instance.GetSaveGameAsync();
+        int level = result3.GetValue<int>("Level");
+        HeroService.Instance.Level = level;
+
+        DocumentSnapshot result4 = await FirebaseService.Instance.GetSaveGameAsync();
+        int exp = result4.GetValue<int>("Experience");
+        HeroService.Instance.Experience = exp;
+
+        string heroId = result.Id;
+        Debug.Log(heroId);
+        HeroService.Instance.SetHeroID(heroId);
+        SceneController.MainGameScreen();
+        
     }
 
 }

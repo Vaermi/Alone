@@ -5,6 +5,8 @@ using UnityEngine;
 public class Enemy : GameObjectController
 {
     public GameObject EnemySpawn;
+    public GameObject BossSpawn;
+    private Hero hero;
     public string EnemyName { get; set; } = "Shog";
     public float Health { get; private set; } = 100.00f;
     public int Defence { get; private set; } = 10;
@@ -42,8 +44,22 @@ public class Enemy : GameObjectController
         if (collision.gameObject.name is not "Hero") return;
 
         Debug.Log("Trigger");
+        if (gameObject == EnemySpawn)
+        {
+            SceneController.EnterFightScreenEnemy();
+        }
+        else if (gameObject == BossSpawn)
+        {
+            SceneController.EnterFightScreenBoss();
 
-        SceneController.EnterFightScreen();
+        }
+
+    }
+
+
+    public void DeactivateEnemy()
+    {
+        gameObject.SetActive(false);
     }
 
     // TODO Unterklassen von Enemy erstellen

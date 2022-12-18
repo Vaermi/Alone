@@ -1,5 +1,5 @@
+using Assets.Game.Scripts.Db;
 using Assets.Game.Scripts.GameObjects;
-using System.Threading.Tasks;
 using UnityEngine;
 
 public class Hero : GameObjectController
@@ -7,38 +7,74 @@ public class Hero : GameObjectController
     public QuestObjects QuestObj;
     public QuestPanelController Panel;
     public SceneController SceneController;
+    private SaveGameData saveGameData;
+    private Fight fight;
 
     [SerializeField]
     private string heroName;
     private string heroId = HeroService.Instance.HeroId;
     private string currentQuest = HeroService.Instance.CurrentQuest;
     [SerializeField]
-    private float health = HeroService.Instance.Health;
+    private float health;
     [SerializeField]
     private int insanity = HeroService.Instance.Insanity;
     private int defence = HeroService.Instance.Defence;
     private int attack = HeroService.Instance.Attack;
     private int attackSpeed = HeroService.Instance.AttackSpeed;
     private int defaultDice = HeroService.Instance.DefaultDice;
-    private Vector3 pos = SaveGameData.Pos;
+    private int healPotion = HeroService.Instance.HealPotion;
     private bool isHerosTurn = HeroService.Instance.IsHerosTurn;
 
 
     private async void Start()
     {
         await HeroService.Instance.Init();
+        saveGameData = GameObject.Find("Main Camera").GetComponent<SaveGameData>();
         Debug.Log("Hero");
         heroName = HeroService.Instance.HeroName;
+        health = HeroService.Instance.Health;
+        
+
+        DontDestroyOnLoad(gameObject);
+
+        string[] positions = HeroService.Instance.Position.Split(' ');
+        
+
+        if (positions.Length is 3)
+        {
+            transform.position = new Vector3(float.Parse(positions[0]), float.Parse(positions[1]), 0);
+        }
+    }
+
+
+    private void Update()
+    {
+        if (HeroService.Instance.Health <= 0)
+        {
+            Destroy(gameObject);
+        }
     }
 
 
     public string CurrentPlayerPosition()
     {
-        float x = pos.x;
-        float y = pos.y;
-        float z = pos.z;
-        string curPos = $"{x}{y}{z}";
+        float x = transform.position.x;
+        float y = transform.position.y;
+        float z = transform.position.z;
+        string curPos = $"{x} {y} {z}";
         return curPos;
+    }
+
+
+    public void GetCurrentQuest()
+    {
+
+    }
+
+
+    public async void UpdateCurrentQuestAsync(string questId)
+    {
+        await FirebaseService.Instance.UpdateQuestProgressAsync(questId, heroId);
     }
 
 
@@ -54,12 +90,16 @@ public class Hero : GameObjectController
     }
 
 
-    public void RunFromFight()
+    public void SpriteRendererDisabled()
     {
-        int number = HeroService.Instance.RunFromFight();
-        if(number >= 70)
-        {
-            SceneController.ExitFightScreen();
-        }
+        var renderer = GetComponent<SpriteRenderer>();
+        renderer.enabled = false;
     }
+
+    public void SpriteRendererEnabled()
+    {
+        var renderer = GetComponent<SpriteRenderer>();
+        renderer.enabled = true;
+    }
+
 }

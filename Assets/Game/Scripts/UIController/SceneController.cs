@@ -1,13 +1,34 @@
-using Assets.Game.Scripts.Db;
-using Assets.Game.Scripts.GameObjects;
+using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class SceneController : MonoBehaviour
 {
+    public string NextSceneToLoad;
+    public float Counter = 0;
+
+    private void Start()
+    {
+        if (NextSceneToLoad != String.Empty) 
+        { 
+            StartCoroutine(LoadNextScene());
+        }
+    }
+
+    private IEnumerator LoadNextScene()
+    {
+        yield return new WaitForSeconds(3);
+        SceneManager.LoadScene(NextSceneToLoad);
+    }
+
+    public static IEnumerator NextStartScreen()
+    {
+        yield return new WaitForSeconds(3);
+        SceneManager.LoadScene("StartScreen");
+    }
+
+
     public static void StartScreen()
     {
         SceneManager.LoadScene("StartScreen");
@@ -46,14 +67,27 @@ public class SceneController : MonoBehaviour
     }
     
 
-    public static void EnterFightScreen()
+    public static void EnterFightScreenBoss()
     {
-        SceneManager.LoadScene("FightScreen", LoadSceneMode.Additive);
+        SceneManager.LoadScene("FightScreenBoss", LoadSceneMode.Additive);
     }
 
 
-    public static void ExitFightScreen()
+    public static void EnterFightScreenEnemy()
     {
-        SceneManager.UnloadSceneAsync("FightScreen");
+        SceneManager.LoadScene("FightScreenEnemy", LoadSceneMode.Additive);
     }
+
+
+    public static void ExitFightScreenBoss()
+    {
+        SceneManager.UnloadSceneAsync("FightScreenBoss");
+    }
+
+
+    public static void ExitFightScreenEnemy()
+    {
+        SceneManager.UnloadSceneAsync("FightScreenEnemy");
+    }
+
 }

@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8385332514341720291}
   - component: {fileID: 8385332514341720290}
   - component: {fileID: 8385332514341720289}
+  - component: {fileID: 7095477736437763126}
   m_Layer: 6
   m_Name: Hero
   m_TagString: Untagged
@@ -103,6 +104,7 @@ MonoBehaviour:
   Move: {x: 0, y: 0, z: 0}
   QuestObj: {fileID: 0}
   Panel: {fileID: 0}
+  SceneController: {fileID: 0}
   heroName: 
   health: 100
   insanity: 0
@@ -133,7 +135,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.005091682, y: 0.0025852919}
+  m_Offset: {x: 0.0030469447, y: -0.0015676618}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -144,7 +146,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.93211055, y: 0.9431231}
+  m_Size: {x: 0.83805096, y: 0.8434528}
   m_EdgeRadius: 0
 --- !u!50 &8385332514341720289
 Rigidbody2D:
@@ -167,3 +169,18 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &7095477736437763126
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8385332514341720292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef131f5530bf7544892526409ce8f7c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CurrentInventory: 0
+  InventoryCount: 5
+  HealPotion: 0

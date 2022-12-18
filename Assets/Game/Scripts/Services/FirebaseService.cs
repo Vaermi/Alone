@@ -1,6 +1,8 @@
-﻿using Firebase;
+﻿using Assets.Game.Scripts.GameObjects;
+using Firebase;
 using Firebase.Firestore;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -8,8 +10,6 @@ namespace Assets.Game.Scripts.Db
 {
     public class FirebaseService
     {
-        private Hero hero;
-
         FirebaseFirestore db;
         private FirebaseService() { }
         private static FirebaseService instance;
@@ -47,130 +47,16 @@ namespace Assets.Game.Scripts.Db
                 {"DefaultDice", 10},
                 {"Experience", 0},
                 {"Level", 1},
-                {"CurrentQuest", "Quest"}
+                {"CurrentQuest", "Quest"},
+                {"Position", "0 0 0" },
+                {"HealPotion", 5 },
+                {"InventoryCount", 5 }
             };
             await t;
             return (await db.Collection("Player").AddAsync(data)).Id;
         }
 
-
-        public async void SetHeroAttackAsync(int attack, string heroId)
-        {
-            Task t = EstablishConnectionAsync();
-            Dictionary<string, object> updateName = new Dictionary<string, object>
-        {
-            {"Attack", attack},
-        };
-            await t;
-            DocumentReference docRef = db.Collection("Player").Document(heroId);
-            await docRef.SetAsync(updateName, SetOptions.MergeAll);
-        }
-
-
-        public async void SetHeroAttackSpeedAsync(int attackSpeed, string heroId)
-        {
-            Task t = EstablishConnectionAsync();
-            Dictionary<string, object> updateName = new Dictionary<string, object>
-        {
-            {"AttackSpeed", attackSpeed},
-        };
-            await t;
-            DocumentReference docRef = db.Collection("Player").Document(heroId);
-            await docRef.SetAsync(updateName, SetOptions.MergeAll);
-        }
-
-
-        public async void SetHeroDefaultDiceAsync(int defaultDice, string heroId)
-        {
-            Task t = EstablishConnectionAsync();
-            Dictionary<string, object> updateName = new Dictionary<string, object>
-        {
-            {"DefaultDice", defaultDice},
-        };
-            await t;
-            DocumentReference docRef = db.Collection("Player").Document(heroId);
-            await docRef.SetAsync(updateName, SetOptions.MergeAll);
-        }
-
-
-        public async void SetHeroDefenceAsync(int defence, string heroId)
-        {
-            Task t = EstablishConnectionAsync();
-            Dictionary<string, object> updateName = new Dictionary<string, object>
-        {
-            {"Defence", defence},
-        };
-            await t;
-            DocumentReference docRef = db.Collection("Player").Document(heroId);
-            await docRef.SetAsync(updateName, SetOptions.MergeAll);
-        }
-
-
-        public async void SetHeroExperienceAsync(int exp, string heroId)
-        {
-            Task t = EstablishConnectionAsync();
-            Dictionary<string, object> updateName = new Dictionary<string, object>
-        {
-            {"Experience", exp},
-        };
-            await t;
-            DocumentReference docRef = db.Collection("Player").Document(heroId);
-            await docRef.SetAsync(updateName, SetOptions.MergeAll);
-        }
-
-
-        public async void SetHeroHealthAsync(float health, string heroId)
-        {
-            Task t = EstablishConnectionAsync();
-            Dictionary<string, object> updateName = new Dictionary<string, object>
-        {
-            {"Health", health},
-        };
-            await t;
-            DocumentReference docRef = db.Collection("Player").Document(heroId);
-            await docRef.SetAsync(updateName, SetOptions.MergeAll);
-        }
-
-
-        public async void SetHeroInsanityAsync(int insanity, string heroId)
-        {
-            Task t = EstablishConnectionAsync();
-            Dictionary<string, object> updateName = new Dictionary<string, object>
-        {
-            {"Insanity", insanity},
-        };
-            await t;
-            DocumentReference docRef = db.Collection("Player").Document(heroId);
-            await docRef.SetAsync(updateName, SetOptions.MergeAll);
-        }
-
-
-        public async void SetHeroLevelAsync(int level, string heroId)
-        {
-            Task t = EstablishConnectionAsync();
-            Dictionary<string, object> updateName = new Dictionary<string, object>
-        {
-            {"Level", level},
-        };
-            await t;
-            DocumentReference docRef = db.Collection("Player").Document(heroId);
-            await docRef.SetAsync(updateName, SetOptions.MergeAll);
-        }
-
-        //TODO Spielstand muss Spielerposition, Queststand und Spielerattrubite enthalten
-        public async void SetSaveGameAsync(string name, string heroId)
-        {
-            Task t = EstablishConnectionAsync();
-            Dictionary<string, object> savefile = new Dictionary<string, object>
-        {
-            {"name", name}
-        };
-            await t;
-            DocumentReference docRef = db.Collection("SaveGame").Document(heroId);
-            await docRef.SetAsync(savefile);
-        }
-
-
+        //READ
         public async Task<string> GetHeroNameAsync(string heroId)
         {
             await EstablishConnectionAsync();
@@ -180,15 +66,6 @@ namespace Assets.Game.Scripts.Db
         }
 
 
-        public async Task<string> GetHeroIDAsync(string id)
-        {
-            await EstablishConnectionAsync();
-            DocumentReference docRef = db.Collection("Player").Document(id);
-            var snapshot = await docRef.GetSnapshotAsync();
-            return snapshot.GetValue<string>("ID");
-        }
-
-        //TODO Quest abrufen anhand des aktuellen Queststands
         string currentQuest = "Quest";
         public async Task<DocumentSnapshot> GetQuestWithIdAsync(string id)
         {
@@ -198,64 +75,250 @@ namespace Assets.Game.Scripts.Db
             //id = Quests/fkjdsfls/Subquests/gsdlngskdl/Subquests/
             DocumentReference docRef = db.Document($"{currentQuest}/{id}");
             currentQuest = $"{currentQuest}/{id}/SubQuest";
-            //var snapshot = await docRef.GetSnapshotAsync();
             return await docRef.GetSnapshotAsync();
         }
 
-        //TODO Spielerposition abrufen
-        //public string? GetPlayerPosition(string heroId)
-        //{
-        //    return null;
-        //}
 
-        //TODO Spielerwerte abrufen
-        public async void GetPlayerAttributes(string heroId)
+        public async Task<string> GetHeroPositionAsync(string heroId)
         {
-            await GetPlayerAttackAsync(heroId);
-            await GetPlayerAttackSpeedAsync(heroId);
-            await GetPlayerDefaultDiceAsync(heroId);
-            await GetPlayerDefence(heroId);
-            await GetPlayerExperience(heroId);
-            await GetPlayerHealth(heroId);
-            await GetPlayerInsanity(heroId);
-            await GetPlayerLevel(heroId);
+            await EstablishConnectionAsync();
+            DocumentReference docRef = db.Collection("Player").Document(heroId);
+            var snapshot = await docRef.GetSnapshotAsync();
+            return snapshot.GetValue<string>("Position");
         }
 
-        //TODO Spielstand laden
-        public void GetSaveGame(string heroId)
+
+        public async Task GetHeroAttributesAsync(string heroId)
         {
-            GetPlayerAttributes(heroId);
-            //GetPlayerPosition(heroId);
+            await GetHeroAttackAsync(heroId);
+            await GetHeroAttackSpeedAsync(heroId);
+            await GetHeroDefaultDiceAsync(heroId);
+            await GetHeroDefenceAsync(heroId);
+            await GetHeroExperienceAsync(heroId);
+            await GetHeroHealthAsync(heroId);
+            await GetHeroInsanityAsync(heroId);
+            await GetHeroLevelAsync(heroId);
+        }
+
+
+        public async Task<DocumentSnapshot> GetSaveGameAsync()
+        {
+            await EstablishConnectionAsync();
+            QuerySnapshot query = await db.Collection("Player").Limit(1).GetSnapshotAsync();
+            IEnumerator<DocumentSnapshot> enumerator = query.Documents.GetEnumerator();
+            enumerator.MoveNext();
+            DocumentSnapshot snapshot = enumerator.Current;
+            return snapshot;
+        }
+
+
+        public async Task<int> GetHeroAttackAsync(string heroId)
+        {
+            await EstablishConnectionAsync();
+            DocumentReference docRef = db.Collection("Player").Document(heroId);
+            var snapshot = await docRef.GetSnapshotAsync();
+            return snapshot.GetValue<int>("Attack");
+        }
+
+
+        public async Task<int> GetHeroAttackSpeedAsync(string heroId)
+        {
+            await EstablishConnectionAsync();
+            DocumentReference docRef = db.Collection("Player").Document(heroId);
+            var snapshot = await docRef.GetSnapshotAsync();
+            return snapshot.GetValue<int>("AttackSpeed");
+        }
+
+
+        public async Task<int> GetHeroDefaultDiceAsync(string heroId)
+        {
+            await EstablishConnectionAsync();
+            DocumentReference docRef = db.Collection("Player").Document(heroId);
+            var snapshot = await docRef.GetSnapshotAsync();
+            return snapshot.GetValue<int>("DefaultDice");
+        }
+
+
+        public async Task<int> GetHeroDefenceAsync(string heroId)
+        {
+            await EstablishConnectionAsync();
+            DocumentReference docRef = db.Collection("Player").Document(heroId);
+            var snapshot = await docRef.GetSnapshotAsync();
+            return snapshot.GetValue<int>("Defence");
+        }
+
+
+        public async Task<int> GetHeroExperienceAsync(string heroId)
+        {
+            await EstablishConnectionAsync();
+            DocumentReference docRef = db.Collection("Player").Document(heroId);
+            var snapshot = await docRef.GetSnapshotAsync();
+            return snapshot.GetValue<int>("Experience");
+        }
+
+
+        public async Task<float> GetHeroHealthAsync(string heroId)
+        {
+            await EstablishConnectionAsync();
+            DocumentReference docRef = db.Collection("Player").Document($"{heroId}");
+            var snapshot = await docRef.GetSnapshotAsync();
+            return snapshot.GetValue<float>("Health");
+        }
+
+
+        public async Task<int> GetHeroInsanityAsync(string heroId)
+        {
+            await EstablishConnectionAsync();
+            DocumentReference docRef = db.Collection("Player").Document(heroId);
+            var snapshot = await docRef.GetSnapshotAsync();
+            return snapshot.GetValue<int>("Insanity");
+        }
+
+
+        public async Task<int> GetHeroLevelAsync(string heroId)
+        {
+            await EstablishConnectionAsync();
+            DocumentReference docRef = db.Collection("Player").Document(heroId);
+            var snapshot = await docRef.GetSnapshotAsync();
+            return snapshot.GetValue<int>("Level");
         }
 
         //UPDATE
-
-        //TODO Questfortschritt speichern
-        public void UpdateQuestProgress()
+        public async Task UpdateHeroHealthAsync(float health, float maxHealth, string heroId)
         {
-
-        }
-
-        //TODO Spielerposition speichern
-
-        public string UpdatePlayerPosition()
+            Task t = EstablishConnectionAsync();
+            Dictionary<string, object> updateHealth = new Dictionary<string, object>
         {
-            string pos = hero.CurrentPlayerPosition();
-            return pos;
-        }
-
-        //TODO Spielerwerte speichern 
-        public void UpdatePlayerAttributes()
-        {
-
+            {"Health", health},
+            {"MaxHealth", maxHealth }
+        };
+            await t;
+            DocumentReference docRef = db.Collection("Player").Document(heroId);
+            await docRef.SetAsync(updateHealth, SetOptions.MergeAll);
         }
 
 
-        public void UpdateSaveGame()
+        public async Task UpdateHeroInsanityAsync(int insanity, string heroId)
         {
-            UpdateQuestProgress();
-            UpdatePlayerPosition();
-            UpdatePlayerAttributes();
+            Task t = EstablishConnectionAsync();
+            Dictionary<string, object> updateInsanity = new Dictionary<string, object>
+        {
+            {"Insanity", insanity},
+        };
+            await t;
+            DocumentReference docRef = db.Collection("Player").Document($"{heroId}");
+            await docRef.SetAsync(updateInsanity, SetOptions.MergeAll);
+        }
+
+
+        public async Task UpdateHeroDefenceAsync(int defence, string heroId)
+        {
+            Task t = EstablishConnectionAsync();
+            Dictionary<string, object> updateDefence = new Dictionary<string, object>
+        {
+            {"Defence", defence},
+        };
+            await t;
+            DocumentReference docRef = db.Collection("Player").Document($"{heroId}");
+            await docRef.SetAsync(updateDefence, SetOptions.MergeAll);
+        }
+
+
+        public async Task UpdateHeroAttackAsync(int attack, string heroId)
+        {
+            Task t = EstablishConnectionAsync();
+            Dictionary<string, object> updateAttack = new Dictionary<string, object>
+        {
+            {"Attack", attack},
+        };
+            await t;
+            DocumentReference docRef = db.Collection("Player").Document($"{heroId}");
+            await docRef.SetAsync(updateAttack, SetOptions.MergeAll);
+        }
+
+
+        public async Task UpdateHeroAttackSpeedAsync(int attackSpeed, string heroId)
+        {
+            Task t = EstablishConnectionAsync();
+            Dictionary<string, object> updateName = new Dictionary<string, object>
+        {
+            {"AttackSpeed", attackSpeed},
+        };
+            await t;
+            DocumentReference docRef = db.Collection("Player").Document($"{heroId}");
+            await docRef.SetAsync(updateName, SetOptions.MergeAll);
+        }
+
+
+        public async Task UpdateHeroDefaultDiceAsync(int defaultDice, string heroId)
+        {
+            Task t = EstablishConnectionAsync();
+            Dictionary<string, object> updateDice = new Dictionary<string, object>
+        {
+            {"DefaultDice", defaultDice},
+        };
+            await t;
+            DocumentReference docRef = db.Collection("Player").Document($"{heroId}");
+            await docRef.SetAsync(updateDice, SetOptions.MergeAll);
+        }
+
+
+        public async Task UpdateHeroExperienceAsync(int exp, string heroId)
+        {
+            Task t = EstablishConnectionAsync();
+            Dictionary<string, object> updateExp = new Dictionary<string, object>
+        {
+            {"Experience", exp},
+        };
+            await t;
+            DocumentReference docRef = db.Collection("Player").Document($"{heroId}");
+            await docRef.SetAsync(updateExp, SetOptions.MergeAll);
+        }
+
+
+        public async Task UpdateHeroLevelAsync(int level, string heroId)
+        {
+            Task t = EstablishConnectionAsync();
+            Dictionary<string, object> updateLevel = new Dictionary<string, object>
+        {
+            {"Level", level},
+        };
+            await t;
+            DocumentReference docRef = db.Collection("Player").Document($"{heroId}");
+            await docRef.SetAsync(updateLevel, SetOptions.MergeAll);
+        }
+
+
+        public async Task UpdateQuestProgressAsync(string questId, string heroId)
+        {
+            Task t = EstablishConnectionAsync();
+            Dictionary<string, object> updateQuest = new Dictionary<string, object>
+        {
+            {"CurrentQuest", questId},
+        };
+            await t;
+            DocumentReference docRef = db.Collection("Player").Document($"{heroId}");
+            await docRef.SetAsync(updateQuest, SetOptions.MergeAll);
+        }
+
+
+        public async Task UpdatePlayerPosition(Hero hero, string heroId)
+        {
+            Task t = EstablishConnectionAsync();
+            Dictionary<string, object> updatePosition = new Dictionary<string, object>
+        {
+            {"Position", hero.CurrentPlayerPosition()},
+        };
+            await t;
+            DocumentReference docRef = db.Collection("Player").Document($"{heroId}");
+            await docRef.SetAsync(updatePosition, SetOptions.MergeAll);
+        }
+
+
+        public async Task UpdateSaveGame(Hero hero, string heroId)
+        {
+            await UpdatePlayerPosition(hero, heroId);
+            await UpdateHeroExperienceAsync(HeroService.Instance.Experience, heroId);
         }
 
         //DELETE
@@ -267,74 +330,6 @@ namespace Assets.Game.Scripts.Db
         }
 
 
-        public async Task<string> GetPlayerAttackAsync(string heroId)
-        {
-            await EstablishConnectionAsync();
-            DocumentReference docRef = db.Collection("Player").Document(heroId);
-            var snapshot = await docRef.GetSnapshotAsync();
-            return snapshot.GetValue<string>("Attack");
-        }
 
-
-        public async Task<string> GetPlayerAttackSpeedAsync(string heroId)
-        {
-            await EstablishConnectionAsync();
-            DocumentReference docRef = db.Collection("Player").Document(heroId);
-            var snapshot = await docRef.GetSnapshotAsync();
-            return snapshot.GetValue<string>("AttackSpeed");
-        }
-
-
-        public async Task<string> GetPlayerDefaultDiceAsync(string heroId)
-        {
-            await EstablishConnectionAsync();
-            DocumentReference docRef = db.Collection("Player").Document(heroId);
-            var snapshot = await docRef.GetSnapshotAsync();
-            return snapshot.GetValue<string>("DefaultDice");
-        }
-
-
-        public async Task<string> GetPlayerDefence(string heroId)
-        {
-            await EstablishConnectionAsync();
-            DocumentReference docRef = db.Collection("Player").Document(heroId);
-            var snapshot = await docRef.GetSnapshotAsync();
-            return snapshot.GetValue<string>("Defence");
-        }
-
-
-        public async Task<string> GetPlayerExperience(string heroId)
-        {
-            await EstablishConnectionAsync();
-            DocumentReference docRef = db.Collection("Player").Document(heroId);
-            var snapshot = await docRef.GetSnapshotAsync();
-            return snapshot.GetValue<string>("Experience");
-        }
-
-        public async Task<string> GetPlayerHealth(string heroId)
-        {
-            await EstablishConnectionAsync();
-            DocumentReference docRef = db.Collection("Player").Document(heroId);
-            var snapshot = await docRef.GetSnapshotAsync();
-            return snapshot.GetValue<string>("Health");
-        }
-
-
-        public async Task<string> GetPlayerInsanity(string heroId)
-        {
-            await EstablishConnectionAsync();
-            DocumentReference docRef = db.Collection("Player").Document(heroId);
-            var snapshot = await docRef.GetSnapshotAsync();
-            return snapshot.GetValue<string>("Insanity");
-        }
-
-
-        public async Task<string> GetPlayerLevel(string heroId)
-        {
-            await EstablishConnectionAsync();
-            DocumentReference docRef = db.Collection("Player").Document(heroId);
-            var snapshot = await docRef.GetSnapshotAsync();
-            return snapshot.GetValue<string>("Level");
-        }
     }
 }
